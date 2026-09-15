@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rosa I. Paula - ART 3041</title>
+
+    <!-- Connects to Google Fonts to bring in the "Cinzel" font for a sharp, gothic chic look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* CSS variables holding your exact requested color scheme */
+        :root {
+            --bg: #F8F3E8;      /* Light beige background */
+            --type: #7A1F1B;    /* Dark red text color */
+            --accent: #D97A5F;  /* Orange-red accent box */
+        }
+
+        /* Resets all default browser spacing so the layout is completely under our control */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Sets the core font style, background, and text colors for the entire page */
+        body {
+            background: var(--bg);
+            color: var(--type);
+            font-family: "Cinzel", serif;
+            min-height: 100vh;
+            padding: 24px;
+        }
+
+        /* The main container holding everything together, featuring a sleek border */
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            min-height: calc(100vh - 48px);
+            border: 2px solid var(--type);
+            padding: clamp(24px, 5vw, 72px);
+            position: relative;
+        }
+
+        /* Uses dynamic sizing to make the heading massive on desktops but readable on phones */
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+            letter-spacing: -0.01em;
+        }
+
+        /* Spacing and modern styling for the course information and email link */
+        .meta {
+            margin-bottom: 4rem;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            font-weight: 700;
+        }
+
+        /* Removes the default blue underline from links, replacing it with a sleek bottom border */
+        .meta a {
+            color: inherit;
+            text-decoration: none;
+            border-bottom: 1px solid currentColor;
+            padding-bottom: 2px;
+        }
+
+        /* Indents the work section slightly to create a sophisticated editorial layout */
+        .work {
+            margin-left: 15%;
+        }
+
+        /* Styles the section title to look modern, spaced out, and elegant */
+        .work h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            letter-spacing: 0.15em;
+        }
+
+        /* Spacing and dynamic sizing for each individual project item */
+        .item {
+            margin-bottom: 1.5rem;
+            font-size: clamp(1.2rem, 2vw, 1.6rem);
+        }
+
+        /* Ensures the project links behave smoothly when hovered over */
+        .item a {
+            color: inherit;
+            text-decoration: none;
+            display: inline-block;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        /* Fades and slightly shifts the link to the right when you hover your mouse over it */
+        .item a:hover {
+            opacity: 0.5;
+            transform: translateX(10px);
+        }
+
+        /* The decorative colored box positioned in the bottom right corner */
+        .accent {
+            position: absolute;
+            right: 6%;
+            bottom: 6%;
+            width: min(250px, 25vw);
+            height: min(150px, 15vw);
+            background: var(--accent);
+        }
+
+        /* Adjusts margins and sizes for mobile screens so it remains beautiful and readable */
+        @media (max-width: 800px) {
+            .work {
+                margin-left: 0;
+            }
+            .accent {
+                width: 120px;
+                height: 80px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <!-- Main page heading exactly as the instructions requested -->
+        <h1>A.I. FOR DESIGNERS —<br>Rosa I. Paula</h1>
+
+        <!-- Course information and email link -->
+        <div class="meta">
+            ART 3041 · Fall 2026
+            <br><br>
+            <a href="mailto:rosa.paula41@login.cuny.edu">
+                rosa.paula41@login.cuny.edu
+            </a>
+        </div>
+
+        <!-- Section holding the list of projects -->
+        <section class="work">
+            <h2>Work</h2>
+            
+            <!-- Links correctly formatted with a hashtag so they function as empty placeholders -->
+            <div class="item"><a href="#">01 Custom Instructions</a></div>
+            <div class="item"><a href="#">02 A Style Guide for Your AI</a></div>
+            <div class="item"><a href="#">03 Design a ___</a></div>
+            <div class="item"><a href="#">04 Commute Story</a></div>
+            <div class="item"><a href="#">05 Become a Crea(i)tive Director</a></div>
+            <div class="item"><a href="#">06 Experimental AI Interface</a></div>
+            <div class="item"><a href="#">07 Open</a></div>
+        </section>
+
+        <!-- The decorative orange-red box -->
+        <div class="accent"></div>
+    </main>
+</body>
+</html>
