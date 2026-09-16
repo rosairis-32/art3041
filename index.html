@@ -50,11 +50,13 @@
             min-height: 100vh;
             max-width: 1440px;
             margin: 0 auto;
-            position: relative; /* Allows mobile animations to sit behind the grid */
+            position: relative;
             z-index: 1; 
         }
 
-        /* Left Rail (Columns 1 to 3): Stays pinned to the screen as you scroll down */
+        /* ---------------------------------------------------- */
+        /* LEFT RAIL: Name, Info, & Floating Animation          */
+        /* ---------------------------------------------------- */
         .left-rail {
             grid-column: span 3;
             position: sticky;
@@ -65,6 +67,7 @@
             flex-direction: column;
             justify-content: space-between;
             border-right: 1px solid rgba(122, 31, 27, 0.2);
+            overflow: hidden; /* Keeps the floating diamonds trapped inside the left rail */
         }
 
         /* Styling for the name pinned at the top left */
@@ -74,6 +77,8 @@
             font-weight: 700;
             line-height: 1.2;
             letter-spacing: -0.01em;
+            position: relative;
+            z-index: 2; /* Keeps text above the animation */
         }
 
         /* Styling for the class and contact info at the bottom left */
@@ -81,6 +86,8 @@
             font-size: 0.85rem;
             line-height: 1.6;
             font-weight: 600;
+            position: relative;
+            z-index: 2; /* Keeps text above the animation */
         }
 
         /* Ensures links in the meta info inherit the correct color and underline */
@@ -90,28 +97,49 @@
             border-bottom: 1px solid currentColor;
         }
 
-        /* Main Canvas (Columns 4 to 11): Where the images and assignments live */
+        /* Desktop floating diamond properties for the left rail */
+        .diamond {
+            position: absolute;
+            background-color: var(--accent-orange);
+            opacity: 0.30; /* Set to 30% opacity as requested */
+            mix-blend-mode: multiply; /* Darkens text dynamically when shapes pass under it */
+            transform: rotate(45deg); 
+            bottom: -60px; 
+            animation: floatUp linear infinite; 
+            z-index: 1; /* Sits behind text, in front of background */
+        }
+
+        .d1 { width: 35px; height: 35px; left: 15%; animation-duration: 3.5s; animation-delay: 0s; }
+        .d2 { width: 25px; height: 25px; left: 60%; animation-duration: 4.5s; animation-delay: 1.2s; }
+        .d3 { width: 50px; height: 50px; left: 40%; animation-duration: 4s; animation-delay: 2.5s; }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(45deg); }
+            100% { transform: translateY(-110vh) rotate(45deg); }
+        }
+
+        /* ---------------------------------------------------- */
+        /* MAIN CANVAS (Columns 4 to 11): Content & Images      */
+        /* ---------------------------------------------------- */
         .main-canvas {
             grid-column: span 8;
             padding: 3rem 4rem;
         }
 
-        /* Creates space below the large top image */
         .hero-section {
             margin-bottom: 4rem;
         }
 
-        /* Container for the hero image; hides any part of the image that overflows */
+        /* Container for the hero image with a styled fallback background if the image file is missing */
         .hero-image-container {
             width: 100%;
             height: 380px;
             overflow: hidden;
             position: relative;
-            background-color: rgba(122, 31, 27, 0.03);
+            background-color: rgba(122, 31, 27, 0.08);
             border: 1px solid rgba(122, 31, 27, 0.15);
         }
 
-        /* The hero image itself, made slightly taller so it can move during scrolling */
         .hero-image {
             width: 100%;
             height: 120%;
@@ -119,7 +147,6 @@
             transition: transform 0.1s ease-out;
         }
 
-        /* The large text below the hero image */
         .hero-caption {
             margin-top: 1.5rem;
             font-family: var(--font-heading);
@@ -129,7 +156,6 @@
             letter-spacing: -0.01em;
         }
 
-        /* Styling for the 'Work' header that divides the page sections */
         .work-section h2 {
             font-family: var(--font-heading);
             font-size: 1.5rem;
@@ -141,14 +167,12 @@
             padding-bottom: 0.5rem;
         }
 
-        /* Stacks the individual assignment listings on top of each other */
         .work-grid {
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
         }
 
-        /* Layout for an individual assignment row, spreading the title and button apart */
         .item-card {
             display: flex;
             align-items: center;
@@ -157,14 +181,12 @@
             border-bottom: 1px solid rgba(122, 31, 27, 0.15);
         }
 
-        /* Font style for the assignment names */
         .item-title {
             font-family: var(--font-heading);
             font-size: 1.3rem;
             font-weight: 700;
         }
 
-        /* The solid square buttons linking to assignments */
         .btn-square {
             display: inline-block;
             background-color: var(--accent-orange);
@@ -181,50 +203,13 @@
             transition: text-decoration 0.2s ease;
         }
 
-        /* The simple underline effect when hovering over a button */
         .btn-square:hover {
             text-decoration: underline;
         }
 
         /* ---------------------------------------------------- */
-        /* DESKTOP ANIMATION: Right Edge Floating Diamonds      */
+        /* MOBILE ANIMATION: Full-Screen Twinkling Layer        */
         /* ---------------------------------------------------- */
-        
-        .right-edge {
-            grid-column: span 1;
-            position: sticky;
-            top: 0;
-            height: 100vh;
-            display: flex;
-            position: relative;
-            border-left: 1px solid rgba(122, 31, 27, 0.2);
-            overflow: hidden; /* Keeps the shapes from spilling out */
-        }
-
-        /* Base properties for the desktop diamond shapes */
-        .diamond {
-            position: absolute;
-            background-color: var(--accent-orange);
-            opacity: 0.10; /* Lowered to 10% for subtlety */
-            transform: rotate(45deg); 
-            bottom: -60px; /* Starts below the screen */
-            animation: floatUp linear infinite; 
-        }
-
-        .d1 { width: 30px; height: 30px; left: 20%; animation-duration: 3s; animation-delay: 0s; }
-        .d2 { width: 20px; height: 20px; left: 50%; animation-duration: 4s; animation-delay: 1.2s; }
-        .d3 { width: 45px; height: 45px; left: 30%; animation-duration: 3.5s; animation-delay: 2.5s; }
-
-        @keyframes floatUp {
-            0% { transform: translateY(0) rotate(45deg); }
-            100% { transform: translateY(-110vh) rotate(45deg); }
-        }
-
-        /* ---------------------------------------------------- */
-        /* MOBILE ANIMATION: Full-Screen Twinkling Setup        */
-        /* ---------------------------------------------------- */
-        
-        /* This container is hidden on desktop by default */
         .mobile-animation-layer {
             display: none; 
             position: fixed;
@@ -233,38 +218,35 @@
             width: 100%;
             height: 100%;
             z-index: 0;
-            pointer-events: none; /* Prevents the invisible layer from blocking button clicks */
+            pointer-events: none; 
         }
 
-        /* Base properties for mobile twinkling shapes */
         .m-diamond {
             position: absolute;
             background-color: var(--accent-orange);
-            opacity: 0; /* Starts completely invisible */
+            opacity: 0;
+            mix-blend-mode: multiply; /* Protects text legibility on mobile */
             transform: rotate(45deg);
             animation: twinkle ease-in-out infinite; 
         }
 
-        /* Positions and delays the 4 mobile diamonds to flash randomly */
-        .md1 { width: 25px; height: 25px; top: 15%; left: 20%; animation-duration: 4s; animation-delay: 0s; }
-        .md2 { width: 35px; height: 35px; top: 35%; left: 80%; animation-duration: 5s; animation-delay: 1.5s; }
-        .md3 { width: 15px; height: 15px; top: 60%; left: 15%; animation-duration: 3.5s; animation-delay: 0.7s; }
-        .md4 { width: 45px; height: 45px; top: 85%; left: 70%; animation-duration: 6s; animation-delay: 2.5s; }
+        .md1 { width: 30px; height: 30px; top: 10%; left: 15%; animation-duration: 4s; animation-delay: 0s; }
+        .md2 { width: 40px; height: 40px; top: 25%; left: 75%; animation-duration: 5s; animation-delay: 1.5s; }
+        .md3 { width: 20px; height: 20px; top: 50%; left: 20%; animation-duration: 3.5s; animation-delay: 0.7s; }
+        .md4 { width: 50px; height: 50px; top: 80%; left: 70%; animation-duration: 6s; animation-delay: 2.5s; }
 
-        /* The instructions fading the shapes from 0% up to 10% and back down */
         @keyframes twinkle {
             0% { opacity: 0; }
-            50% { opacity: 0.10; }
+            50% { opacity: 0.30; } /* Reaches 30% peak opacity */
             100% { opacity: 0; }
         }
 
         /* ---------------------------------------------------- */
         /* MOBILE LAYOUT ADJUSTMENTS (Screens under 900px)      */
         /* ---------------------------------------------------- */
-        
         @media (max-width: 900px) {
             .portfolio-grid {
-                grid-template-columns: 1fr; /* Compresses to a single column */
+                grid-template-columns: 1fr; 
             }
             .left-rail {
                 position: relative;
@@ -278,11 +260,6 @@
                 grid-column: span 1;
                 padding: 2rem 1.5rem;
             }
-            /* Hides the desktop floating right edge */
-            .right-edge {
-                display: none;
-            }
-            /* Turns on the full-screen mobile twinkling layer */
             .mobile-animation-layer {
                 display: block; 
             }
@@ -299,7 +276,7 @@
 </head>
 <body>
 
-    <!-- This invisible background layer holds the twinkling diamonds for mobile devices -->
+    <!-- Mobile background animation layer -->
     <div class="mobile-animation-layer">
         <div class="m-diamond md1"></div>
         <div class="m-diamond md2"></div>
@@ -308,8 +285,12 @@
     </div>
 
     <div class="portfolio-grid">
-        <!-- Left Rail Area -->
+        <!-- Left Rail Area with Floating Diamonds -->
         <aside class="left-rail">
+            <div class="diamond d1"></div>
+            <div class="diamond d2"></div>
+            <div class="diamond d3"></div>
+
             <div>
                 <h1 class="brand-title">Rosa I. Paula</h1>
             </div>
@@ -368,18 +349,10 @@
                 </div>
             </section>
         </main>
-
-        <!-- Right Edge Desktop Animation Area -->
-        <aside class="right-edge">
-            <div class="diamond d1"></div>
-            <div class="diamond d2"></div>
-            <div class="diamond d3"></div>
-        </aside>
     </div>
 
     <script>
         // Creates a parallax scrolling effect on the main hero image
-        // It calculates how far you have scrolled down and shifts the image down slightly 
         window.addEventListener('scroll', () => {
             const heroImg = document.getElementById('heroImg');
             const scrolled = window.scrollY;
