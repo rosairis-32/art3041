@@ -7,22 +7,21 @@
     <style>
         /* 
           1. RESET & CORE AESTHETIC 
-          This removes default spacing and sets up the paper texture background.
+          Removes default spacing and sets paper background texture.
         */
         body, html {
             margin: 0;
             padding: 0;
             width: 100%;
             height: 100%;
-            overflow-x: hidden; /* Stops horizontal scrolling */
+            overflow-x: hidden;
             font-family: sans-serif;
-            background-color: #f8f1e0; /* Creamy paper color */
+            background-color: #f8f1e0;
             color: #1a1a1a; 
         }
 
         /* 
-          2. COLOR PALETTE 
-          These are the specific pop-art colors we use throughout the page.
+          2. POP-ART COLOR PALETTE 
         */
         :root {
             --hot-pink: #ff1493;
@@ -34,9 +33,7 @@
             --black: #1a1a1a;
         }
 
-        /* 
-          This creates a faint dot pattern over the whole screen, mimicking screen printing.
-        */
+        /* Screen-printing dot pattern overlay */
         body::after {
             content: "";
             position: fixed;
@@ -47,27 +44,26 @@
             background-image: radial-gradient(var(--black) 10%, transparent 10%);
             background-size: 2px 2px;
             opacity: 0.05; 
-            pointer-events: none; /* Allows you to click through it */
+            pointer-events: none;
             z-index: 1000;
         }
 
         /* 
-          3. HEADER - Static Title Block
-          This is the new header. It sits at the top and scrolls away normally.
+          3. STATIC TITLE HEADER 
         */
         header {
-            position: relative; /* Keeps it in normal document flow */
+            position: relative;
             width: 100%;
             padding: 50px 20px;
             background-color: var(--cream);
             text-align: center;
-            border-bottom: 12px solid var(--hot-pink); /* Bold pop-art border */
+            border-bottom: 12px solid var(--hot-pink);
             box-sizing: border-box;
             z-index: 100;
         }
 
         header h1 {
-            font-size: 3vw; /* Smaller and more manageable than before */
+            font-size: 3vw;
             margin: 0;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -86,8 +82,7 @@
         }
 
         /* 
-          4. SECTIONS - The "Screaming Wall"
-          Each piece of art gets its own full-screen section.
+          4. THE WALL SECTIONS 
         */
         #shrine-wall {
             width: 100%;
@@ -96,7 +91,7 @@
         }
 
         section {
-            min-height: 100vh; /* Forces each section to be at least the height of the screen */
+            min-height: 100vh;
             width: 100%;
             display: flex;
             align-items: center;
@@ -107,7 +102,6 @@
             overflow: hidden;
         }
 
-        /* Controls how text and images sit next to each other */
         .content {
             display: grid;
             grid-template-columns: 1fr;
@@ -118,34 +112,23 @@
             z-index: 2;
         }
 
-        /* Styles the artwork images */
         .section-image {
             max-width: 100%;
             display: block;
-            mix-blend-mode: multiply; /* Blends the image into the background color */
+            mix-blend-mode: multiply;
             filter: contrast(110%) saturate(120%);
         }
 
-        /* Large, bold typography for visual impact */
         .section-text-large {
             font-size: 10vw;
             text-transform: uppercase;
             letter-spacing: -5px;
-            mix-blend-mode: difference; /* Inverts color based on what is behind it */
+            mix-blend-mode: difference;
             line-height: 0.8;
             font-family: Arial Black, sans-serif;
             font-weight: 900;
         }
-        
-        .section-text-medium {
-            font-size: 4vw;
-            text-transform: uppercase;
-            mix-blend-mode: difference;
-            letter-spacing: -1px;
-            font-weight: 700;
-        }
 
-        /* Styling for the smaller quotes */
         .section-quote {
             font-size: 1.8vw;
             color: var(--black);
@@ -156,7 +139,6 @@
             margin: 0 auto;
         }
 
-        /* Blocks of color used for decoration behind the art */
         .color-offset {
             position: absolute;
             background-color: var(--black);
@@ -165,27 +147,22 @@
             pointer-events: none;
         }
 
-        /* --- Individual Section Customizations --- */
-        
-        /* SECTION 1: Disturb Settled Ideas */
+        /* Individual Sections */
         #section-1 { background-color: var(--hot-pink); }
         #section-1 .content { grid-template-columns: 1fr 1fr; }
         #section-1 .section-image { max-width: 80%; transform: translateX(-10%); }
         #cite-genius { font-size: 6vw; mix-blend-mode: screen; color: var(--electric-yellow); }
 
-        /* SECTION 2: The King Is Dead */
         #section-2 { background-color: var(--bright-green); }
         #section-2 .content { text-align: center; }
         #cite-king-dead { font-size: 8vw; color: var(--deep-red); mix-blend-mode: multiply; }
         #section-2 .section-image { mix-blend-mode: difference; filter: invert(100%); max-width: 80%; margin: 0 auto; }
 
-        /* SECTION 3: Speak of Violence */
         #section-3 { background-color: #da1c1c22; }
         #section-3 .content { grid-template-columns: 1fr 1.5fr; }
         #section-3 .section-text-large { font-size: 14vw; letter-spacing: -10px; color: var(--royal-blue); line-height: 0.7; }
         #section-3 .section-image { mix-blend-mode: multiply; max-width: 120%; transform: translateX(10%); }
 
-        /* SECTION 4: The Cry Will Be Heard */
         #section-4 { background-color: var(--black); color: var(--cream); }
         #section-4 .content { text-align: center; }
         #cite-life { font-size: 20vw; letter-spacing: -20px; color: var(--cream); mix-blend-mode: exclusion; }
@@ -193,25 +170,28 @@
         #cite-damn { font-size: 6vw; color: var(--hot-pink); mix-blend-mode: difference; font-weight: 700; }
         #section-4 .section-image { mix-blend-mode: screen; filter: contrast(120%) saturate(80%); max-width: 60%; margin: 0 auto; }
 
-        /* SECTION 5: I Have A Dream */
         #section-5 { background-color: var(--cream); }
         #section-5 .content { text-align: center; }
         #section-5 .section-image { max-width: 80%; margin: 0 auto; border: 20px solid var(--black); mix-blend-mode: normal; }
-        #cite-dream { font-size: 3vw; color: var(--black); max-width: 1000px; }
 
-        /* SECTION 6: Think Eye Open */
         #section-6 { background-color: var(--cream); }
         #section-6 .content { text-align: center; }
         #cite-think-eye { font-size: 4vw; color: var(--black); }
         #section-6 .section-image { mix-blend-mode: multiply; max-width: 100%; }
 
-        /* SECTION 7: In The Heart */
         #section-7 { background-color: var(--electric-yellow); }
         #section-7 .content { text-align: center; }
         #cite-she-loves-me { font-size: 6vw; color: var(--black); text-transform: uppercase; letter-spacing: -1px; font-weight: 900; }
         #section-7 .section-image { max-width: 80%; margin: 0 auto; mix-blend-mode: multiply; }
 
-        /* 5. FOOTER / CONCLUSION */
+        #section-8 { background-color: var(--cream); }
+        #section-8 .content { grid-template-columns: 1fr 1fr; }
+        #section-8 .section-image { max-width: 75%; margin: 0 auto; mix-blend-mode: multiply; }
+        #cite-mlk { font-size: 5.5vw; line-height: 0.9; color: var(--deep-red); }
+
+        /* 
+          5. FOOTER 
+        */
         footer {
             height: 100vh;
             background-color: var(--black);
@@ -226,11 +206,9 @@
 
         footer .content { text-align: center; }
         #cite-act-now { font-size: 15vw; color: var(--hot-pink); mix-blend-mode: screen; line-height: 0.7; font-weight: 900; }
-        #cite-love { font-size: 6vw; color: var(--cream); mix-blend-mode: overlay; }
-        
+
         /* 
-          6. JAVASCRIPT EFFECTS
-          Styles for the dots that follow the mouse cursor.
+          6. MOUSE TRAIL EFFECT 
         */
         #ink-blot-trail {
             position: fixed;
@@ -255,27 +233,20 @@
 </head>
 <body>
 
-    <!-- Container for the mouse cursor ink blots -->
     <div id="ink-blot-trail"></div>
 
-    <!-- 
-      NEW STATIC HEADER 
-      Acts as a traditional page title without the emoji.
-    -->
     <header>
         <h1>SHRINE TO SISTER CORITA KENT</h1>
         <div id="cite-intro">“it is the property of true genius to disturb all settled ideas.”</div>
     </header>
 
-    <!-- THE SHRINE WALL -->
     <div id="shrine-wall">
 
         <!-- SECTION 1 -->
         <section id="section-1">
             <div class="color-offset" style="width: 50vw; height: 120vh; top: -10vh; right: 0; background-color: var(--black);"></div>
             <div class="content">
-                <!-- Using exact filename provided -->
-                <img src="Whitney-art.png" alt="Corita Kent - Disturb settled ideas" class="section-image">
+                <img src="WhitneyMuseum.jpg" alt="Corita Kent - Disturb settled ideas" class="section-image">
                 <div class="section-text-large" id="cite-genius">Disturb<br>settled<br>ideas</div>
             </div>
         </section>
@@ -285,7 +256,6 @@
             <div class="color-offset" style="width: 100vw; height: 100vh; top: 0; left: 0; background-color: var(--deep-red); mix-blend-mode: overlay;"></div>
             <div class="content">
                 <div class="section-text-large" id="cite-king-dead">The king<br>is dead</div>
-                <!-- Using exact filename provided -->
                 <img src="60146cf3d6cf9549ac0a6aa9_69-66-p-500.jpeg" alt="Corita Kent - The king is dead." class="section-image">
             </div>
         </section>
@@ -296,7 +266,6 @@
                 <div class="section-text-large">
                     AMERICAN<br>VIOLENCE<br>VIETNAM<br>WHY
                 </div>
-                <!-- Using exact filename provided -->
                 <img src="60146cf3ea825982fad08ca2_69-65-p-500.jpeg" alt="Corita Kent - Violence Vietnam Why" class="section-image">
             </div>
         </section>
@@ -306,7 +275,6 @@
             <div class="color-offset" style="width: 100vw; height: 120vh; top: -10vh; left: 0; background-color: var(--hot-pink); mix-blend-mode: screen;"></div>
             <div class="content">
                 <div class="section-text-large" id="cite-life">LIFE</div>
-                <!-- Using exact filename provided -->
                 <img src="60146cf394a050262949e9e2_69-62-p-500.jpeg" alt="Corita Kent - LIFE cover" class="section-image">
                 <p class="section-text-large" id="cite-damn">Why not give a damn?</p>
             </div>
@@ -318,7 +286,6 @@
             <div class="color-offset" style="width: 33vw; height: 120vh; top: -10vh; left: 33vw; background-color: var(--electric-yellow);"></div>
             <div class="color-offset" style="width: 34vw; height: 120vh; top: -10vh; left: 66vw; background-color: var(--royal-blue);"></div>
             <div class="content">
-                <!-- Using exact filename provided -->
                 <img src="Safeway-art.png" alt="Corita Kent - SAFE I Have a Dream" class="section-image">
             </div>
         </section>
@@ -327,7 +294,6 @@
         <section id="section-6">
             <div class="content">
                 <p class="section-quote" id="cite-think-eye">But if your think eye is open, which sees only the things that cannot be seen...</p>
-                <!-- Using exact filename provided -->
                 <img src="60146cf36ef3e743ac0c1b3a_69-71-p-500.jpeg" alt="Corita Kent - Think Eye Open abstract" class="section-image">
             </div>
         </section>
@@ -335,9 +301,22 @@
         <!-- SECTION 7 -->
         <section id="section-7">
             <div class="content">
-                <!-- Using exact filename provided -->
                 <img src="69-58.jpg" alt="Corita Kent - Arrow quote" class="section-image">
                 <p class="section-text-large" id="cite-she-loves-me">And in the heart<br>of the arrow...</p>
+            </div>
+        </section>
+
+        <!-- SECTION 8 -->
+        <section id="section-8">
+            <div class="color-offset" style="width: 45vw; height: 120vh; top: -10vh; left: 0; background-color: var(--royal-blue); opacity: 0.15;"></div>
+            <div class="content">
+                <img src="60146cf3d6cf9568f30a6aa8_69-70-p-500.jpeg" alt="Corita Kent - To Make Men Free Martin Luther King" class="section-image">
+                <div class="section-text-large" id="cite-mlk">
+                    TO MAKE<br>MEN FREE.<br>
+                    <span style="font-size: 2.2vw; letter-spacing: 0; color: var(--black); font-family: serif; font-style: italic; display: block; margin-top: 20px;">
+                        “Divine order radiating from Kings and Gods”
+                    </span>
+                </div>
             </div>
         </section>
 
@@ -352,21 +331,15 @@
     </div>
 
     <script>
-        // --- JAVASCRIPT: MOUSE TRAIL EFFECT ---
-        
-        // This code creates a small trail of colorful dots that follow the mouse,
-        // meant to look like ink splattering from a screen-printing squeegee.
-        
         const inkBlotTrail = document.getElementById('ink-blot-trail');
         const blots = [];
-        const blotCount = 30; // How many dots are in the trail
+        const blotCount = 30;
         const blotColors = ['#ff1493', '#fff31a', '#da1c1c', '#1c39da', '#32cd32', '#1a1a1a'];
 
-        // Build the dots and add them to the page (hidden at first)
         for (let i = 0; i < blotCount; i++) {
             const blot = document.createElement('div');
             blot.classList.add('ink-blot');
-            blot.style.width = `${Math.random() * 20 + 5}px`; // Make them different sizes
+            blot.style.width = `${Math.random() * 20 + 5}px`;
             blot.style.height = blot.style.width;
             blot.style.backgroundColor = blotColors[Math.floor(Math.random() * blotColors.length)];
             blot.style.opacity = 0;
@@ -374,19 +347,16 @@
             blots.push(blot);
         }
 
-        // When the mouse moves, put a dot at that exact spot
         let currentBlotIndex = 0;
         document.addEventListener('mousemove', (e) => {
             const blot = blots[currentBlotIndex];
             blot.style.left = `${e.clientX}px`;
             blot.style.top = `${e.clientY}px`;
-            blot.style.opacity = 0.8; // Make it visible
+            blot.style.opacity = 0.8;
             blot.style.transform = 'translate(-50%, -50%) scale(1)';
             
-            // Move to the next dot in our list
             currentBlotIndex = (currentBlotIndex + 1) % blotCount;
             
-            // Wait a fraction of a second, then fade the dot away
             setTimeout(() => {
                 blot.style.opacity = 0;
                 blot.style.transform = 'translate(-50%, -50%) scale(0.1)';
