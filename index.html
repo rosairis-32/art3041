@@ -5,156 +5,388 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rosa I. Paula - ART 3041</title>
 
-    <!-- Connects to Google Fonts to bring in the "Cinzel" font for a sharp, gothic chic look -->
+    <!-- Connects to Google Fonts to load Cinzel for headings and Inter for body text -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
-        /* CSS variables holding your exact requested color scheme */
+        /* Sets up the main color palette and fonts to be reused across the page */
         :root {
-            --bg: #F8F3E8;      /* Light beige background */
-            --type: #7A1F1B;    /* Dark red text color */
-            --accent: #D97A5F;  /* Orange-red accent box */
+            --bg-color: #F8F3E8;
+            --text-red: #7A1F1B;
+            --accent-orange: #D97A5F;
+            --font-heading: 'Cinzel', serif;
+            --font-body: 'Inter', sans-serif;
         }
 
-        /* Resets all default browser spacing so the layout is completely under our control */
+        /* Resets default browser spacing so our grid alignment is exact */
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
 
-        /* Sets the core font style, background, and text colors for the entire page */
+        /* Main page styling: applies the solid background, text color, and load animation */
         body {
-            background: var(--bg);
-            color: var(--type);
-            font-family: "Cinzel", serif;
+            background-color: var(--bg-color);
+            color: var(--text-red);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            animation: pageFadeIn 1s ease-out; /* Fades the entire page in when it opens */
+        }
+
+        /* The instructions for how the fade-in animation should behave */
+        @keyframes pageFadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 12-Column Grid Layout: This creates the structured editorial framework */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
             min-height: 100vh;
-            padding: 24px;
-        }
-
-        /* The main container holding everything together, featuring a sleek border */
-        main {
-            max-width: 1400px;
+            max-width: 1440px;
             margin: 0 auto;
-            min-height: calc(100vh - 48px);
-            border: 2px solid var(--type);
-            padding: clamp(24px, 5vw, 72px);
-            position: relative;
+            position: relative; /* Allows mobile animations to sit behind the grid */
+            z-index: 1; 
         }
 
-        /* Uses dynamic sizing to make the heading massive on desktops but readable on phones */
-        h1 {
-            font-size: clamp(2.5rem, 5vw, 4.5rem);
+        /* Left Rail (Columns 1 to 3): Stays pinned to the screen as you scroll down */
+        .left-rail {
+            grid-column: span 3;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-right: 1px solid rgba(122, 31, 27, 0.2);
+        }
+
+        /* Styling for the name pinned at the top left */
+        .brand-title {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
             font-weight: 700;
             line-height: 1.2;
-            margin-bottom: 2rem;
             letter-spacing: -0.01em;
         }
 
-        /* Spacing and modern styling for the course information and email link */
-        .meta {
-            margin-bottom: 4rem;
-            font-size: 1.2rem;
-            line-height: 1.8;
-            font-weight: 700;
+        /* Styling for the class and contact info at the bottom left */
+        .meta-info {
+            font-size: 0.85rem;
+            line-height: 1.6;
+            font-weight: 600;
         }
 
-        /* Removes the default blue underline from links, replacing it with a sleek bottom border */
-        .meta a {
+        /* Ensures links in the meta info inherit the correct color and underline */
+        .meta-info a {
             color: inherit;
             text-decoration: none;
             border-bottom: 1px solid currentColor;
-            padding-bottom: 2px;
         }
 
-        /* Indents the work section slightly to create a sophisticated editorial layout */
-        .work {
-            margin-left: 15%;
+        /* Main Canvas (Columns 4 to 11): Where the images and assignments live */
+        .main-canvas {
+            grid-column: span 8;
+            padding: 3rem 4rem;
         }
 
-        /* Styles the section title to look modern, spaced out, and elegant */
-        .work h2 {
+        /* Creates space below the large top image */
+        .hero-section {
+            margin-bottom: 4rem;
+        }
+
+        /* Container for the hero image; hides any part of the image that overflows */
+        .hero-image-container {
+            width: 100%;
+            height: 380px;
+            overflow: hidden;
+            position: relative;
+            background-color: rgba(122, 31, 27, 0.03);
+            border: 1px solid rgba(122, 31, 27, 0.15);
+        }
+
+        /* The hero image itself, made slightly taller so it can move during scrolling */
+        .hero-image {
+            width: 100%;
+            height: 120%;
+            object-fit: cover;
+            transition: transform 0.1s ease-out;
+        }
+
+        /* The large text below the hero image */
+        .hero-caption {
+            margin-top: 1.5rem;
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+        }
+
+        /* Styling for the 'Work' header that divides the page sections */
+        .work-section h2 {
+            font-family: var(--font-heading);
             font-size: 1.5rem;
             font-weight: 700;
-            margin-bottom: 2rem;
             letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--text-red);
+            padding-bottom: 0.5rem;
         }
 
-        /* Spacing and dynamic sizing for each individual project item */
-        .item {
-            margin-bottom: 1.5rem;
-            font-size: clamp(1.2rem, 2vw, 1.6rem);
+        /* Stacks the individual assignment listings on top of each other */
+        .work-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
         }
 
-        /* Ensures the project links behave smoothly when hovered over */
-        .item a {
-            color: inherit;
-            text-decoration: none;
+        /* Layout for an individual assignment row, spreading the title and button apart */
+        .item-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(122, 31, 27, 0.15);
+        }
+
+        /* Font style for the assignment names */
+        .item-title {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        /* The solid square buttons linking to assignments */
+        .btn-square {
             display: inline-block;
-            transition: opacity 0.3s ease, transform 0.3s ease;
+            background-color: var(--accent-orange);
+            color: #FFF;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 0;
+            transition: text-decoration 0.2s ease;
         }
 
-        /* Fades and slightly shifts the link to the right when you hover your mouse over it */
-        .item a:hover {
-            opacity: 0.5;
-            transform: translateX(10px);
+        /* The simple underline effect when hovering over a button */
+        .btn-square:hover {
+            text-decoration: underline;
         }
 
-        /* The decorative colored box positioned in the bottom right corner */
-        .accent {
+        /* ---------------------------------------------------- */
+        /* DESKTOP ANIMATION: Right Edge Floating Diamonds      */
+        /* ---------------------------------------------------- */
+        
+        .right-edge {
+            grid-column: span 1;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            position: relative;
+            border-left: 1px solid rgba(122, 31, 27, 0.2);
+            overflow: hidden; /* Keeps the shapes from spilling out */
+        }
+
+        /* Base properties for the desktop diamond shapes */
+        .diamond {
             position: absolute;
-            right: 6%;
-            bottom: 6%;
-            width: min(250px, 25vw);
-            height: min(150px, 15vw);
-            background: var(--accent);
+            background-color: var(--accent-orange);
+            opacity: 0.10; /* Lowered to 10% for subtlety */
+            transform: rotate(45deg); 
+            bottom: -60px; /* Starts below the screen */
+            animation: floatUp linear infinite; 
         }
 
-        /* Adjusts margins and sizes for mobile screens so it remains beautiful and readable */
-        @media (max-width: 800px) {
-            .work {
-                margin-left: 0;
+        .d1 { width: 30px; height: 30px; left: 20%; animation-duration: 3s; animation-delay: 0s; }
+        .d2 { width: 20px; height: 20px; left: 50%; animation-duration: 4s; animation-delay: 1.2s; }
+        .d3 { width: 45px; height: 45px; left: 30%; animation-duration: 3.5s; animation-delay: 2.5s; }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(45deg); }
+            100% { transform: translateY(-110vh) rotate(45deg); }
+        }
+
+        /* ---------------------------------------------------- */
+        /* MOBILE ANIMATION: Full-Screen Twinkling Setup        */
+        /* ---------------------------------------------------- */
+        
+        /* This container is hidden on desktop by default */
+        .mobile-animation-layer {
+            display: none; 
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none; /* Prevents the invisible layer from blocking button clicks */
+        }
+
+        /* Base properties for mobile twinkling shapes */
+        .m-diamond {
+            position: absolute;
+            background-color: var(--accent-orange);
+            opacity: 0; /* Starts completely invisible */
+            transform: rotate(45deg);
+            animation: twinkle ease-in-out infinite; 
+        }
+
+        /* Positions and delays the 4 mobile diamonds to flash randomly */
+        .md1 { width: 25px; height: 25px; top: 15%; left: 20%; animation-duration: 4s; animation-delay: 0s; }
+        .md2 { width: 35px; height: 35px; top: 35%; left: 80%; animation-duration: 5s; animation-delay: 1.5s; }
+        .md3 { width: 15px; height: 15px; top: 60%; left: 15%; animation-duration: 3.5s; animation-delay: 0.7s; }
+        .md4 { width: 45px; height: 45px; top: 85%; left: 70%; animation-duration: 6s; animation-delay: 2.5s; }
+
+        /* The instructions fading the shapes from 0% up to 10% and back down */
+        @keyframes twinkle {
+            0% { opacity: 0; }
+            50% { opacity: 0.10; }
+            100% { opacity: 0; }
+        }
+
+        /* ---------------------------------------------------- */
+        /* MOBILE LAYOUT ADJUSTMENTS (Screens under 900px)      */
+        /* ---------------------------------------------------- */
+        
+        @media (max-width: 900px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr; /* Compresses to a single column */
             }
-            .accent {
-                width: 120px;
-                height: 80px;
+            .left-rail {
+                position: relative;
+                height: auto;
+                grid-column: span 1;
+                border-right: none;
+                border-bottom: 1px solid rgba(122, 31, 27, 0.2);
+                padding: 2rem;
+            }
+            .main-canvas {
+                grid-column: span 1;
+                padding: 2rem 1.5rem;
+            }
+            /* Hides the desktop floating right edge */
+            .right-edge {
+                display: none;
+            }
+            /* Turns on the full-screen mobile twinkling layer */
+            .mobile-animation-layer {
+                display: block; 
+            }
+            .hero-image-container {
+                height: 240px;
+            }
+            .item-card {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
             }
         }
     </style>
 </head>
-
 <body>
-    <main>
-        <!-- Main page heading exactly as the instructions requested -->
-        <h1>A.I. FOR DESIGNERS —<br>Rosa I. Paula</h1>
 
-        <!-- Course information and email link -->
-        <div class="meta">
-            ART 3041 · Fall 2026
-            <br><br>
-            <a href="mailto:rosa.paula41@login.cuny.edu">
-                rosa.paula41@login.cuny.edu
-            </a>
-        </div>
+    <!-- This invisible background layer holds the twinkling diamonds for mobile devices -->
+    <div class="mobile-animation-layer">
+        <div class="m-diamond md1"></div>
+        <div class="m-diamond md2"></div>
+        <div class="m-diamond md3"></div>
+        <div class="m-diamond md4"></div>
+    </div>
 
-        <!-- Section holding the list of projects -->
-        <section class="work">
-            <h2>Work</h2>
-            
-            <!-- Links correctly formatted with a hashtag so they function as empty placeholders -->
-            <div class="item"><a href="#">01 Custom Instructions</a></div>
-            <div class="item"><a href="#">02 A Style Guide for Your AI</a></div>
-            <div class="item"><a href="#">03 Design a ___</a></div>
-            <div class="item"><a href="#">04 Commute Story</a></div>
-            <div class="item"><a href="#">05 Become a Crea(i)tive Director</a></div>
-            <div class="item"><a href="#">06 Experimental AI Interface</a></div>
-            <div class="item"><a href="#">07 Open</a></div>
-        </section>
+    <div class="portfolio-grid">
+        <!-- Left Rail Area -->
+        <aside class="left-rail">
+            <div>
+                <h1 class="brand-title">Rosa I. Paula</h1>
+            </div>
 
-        <!-- The decorative orange-red box -->
-        <div class="accent"></div>
-    </main>
+            <div class="meta-info">
+                ART 3041 · Fall 2026<br>
+                <a href="mailto:rosa.paula41@login.cuny.edu">rosa.paula41@login.cuny.edu</a>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-canvas">
+            <section class="hero-section">
+                <div class="hero-image-container">
+                    <img 
+                        src="20210515_103156.jpg" 
+                        alt="Hero Artwork" 
+                        class="hero-image" 
+                        id="heroImg"
+                    />
+                </div>
+                <h2 class="hero-caption">A.I. FOR DESIGNERS</h2>
+            </section>
+
+            <section id="work" class="work-section">
+                <h2>Work</h2>
+                <div class="work-grid">
+                    <div class="item-card">
+                        <span class="item-title">01 Custom Instructions</span>
+                        <a href="#" class="btn-square">View Project</a>
+                    </div>
+                    <div class="item-card">
+                        <span class="item-title">02 A Style Guide for Your AI</span>
+                        <a href="#" class="btn-square">View Project</a>
+                    </div>
+                    <div class="item-card">
+                        <span class="item-title">03 Design a ___</span>
+                        <a href="#" class="btn-square">View Project</a>
+                    </div>
+                    <div class="item-card">
+                        <span class="item-title">04 Commute Story</span>
+                        <a href="#" class="btn-square">View Project</a>
+                    </div>
+                    <div class="item-card">
+                        <span class="item-title">05 Become a Crea(i)tive Director</span>
+                        <a href="#" class="btn-square">View Project</a>
+                    </div>
+                    <div class="item-card">
+                        <span class="item-title">06 Experimental AI Interface</span>
+                        <a href="#" class="btn-square">View Project</a>
+                    </div>
+                    <div class="item-card">
+                        <span class="item-title">07 Open</span>
+                        <a href="#" class="btn-square">View Project</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Right Edge Desktop Animation Area -->
+        <aside class="right-edge">
+            <div class="diamond d1"></div>
+            <div class="diamond d2"></div>
+            <div class="diamond d3"></div>
+        </aside>
+    </div>
+
+    <script>
+        // Creates a parallax scrolling effect on the main hero image
+        // It calculates how far you have scrolled down and shifts the image down slightly 
+        window.addEventListener('scroll', () => {
+            const heroImg = document.getElementById('heroImg');
+            const scrolled = window.scrollY;
+            if (heroImg) {
+                heroImg.style.transform = `translateY(${scrolled * 0.08}px)`;
+            }
+        });
+    </script>
 </body>
 </html>
