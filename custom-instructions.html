@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>01 Custom Instructions — Rosa I. Paula</title>
+
+  <!-- Typography: Cinzel for classical display and Inter for body text -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-mortar: #ece9e3;          /* Weathered limestone mortar ground */
+      --surface-clean: #fcfbfa;       /* Fine archival paper */
+      --surface-aside: #f7f5f0;       /* Warm architectural sidebar */
+      --text-ink: #191817;           /* Stencil deep ink */
+      --text-muted: #6f6b64;         /* Weathered concrete gray */
+      --border-line: #dad5cb;        /* Hairline structural rules */
+      --mural-teal: #228280;         /* Turquoise wooden board wash */
+      --stencil-crimson: #c52929;    /* Bleeding spray heart crimson */
+      --font-display: 'Cinzel', Georgia, serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-mortar);
+      color: var(--text-ink);
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      padding: 2.5rem 1.5rem;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    /* Primary architectural container */
+    .frame-wrapper {
+      width: 100%;
+      max-width: 1260px;
+      background-color: var(--surface-clean);
+      border: 1px solid var(--border-line);
+      box-shadow: 0 24px 50px -15px rgba(25, 24, 23, 0.08);
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      min-height: calc(100vh - 5rem);
+    }
+
+    /* Sidebar containing brand name & academic metadata */
+    aside {
+      background-color: var(--surface-aside);
+      border-right: 1px solid var(--border-line);
+      padding: 3.5rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      height: 100%;
+    }
+
+    aside h1 {
+      font-family: var(--font-display);
+      font-size: 1.95rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      line-height: 1.15;
+      text-transform: uppercase;
+      color: var(--text-ink);
+    }
+
+    .sidebar-footer {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    .sidebar-footer a {
+      color: var(--text-ink);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 0.2s ease, text-decoration-color 0.2s ease;
+    }
+
+    .sidebar-footer a:hover {
+      color: var(--stencil-crimson);
+      text-decoration-color: var(--stencil-crimson);
+    }
+
+    /* Main gallery & works column */
+    main {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Works index section */
+    .work-section {
+      padding: 2.75rem 3.5rem 3.5rem 3.5rem;
+      flex-grow: 1;
+    }
+
+    .work-section h2 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-ink);
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--text-ink);
+    }
+
+    .custom-instructions-text {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--text-ink);
+      max-width: 800px;
+      margin-top: 2rem;
+    }
+
+    /* Responsive breakpoints */
+    @media (max-width: 900px) {
+      body {
+        padding: 1rem;
+      }
+      .frame-wrapper {
+        grid-template-columns: 1fr;
+      }
+      aside {
+        border-right: none;
+        border-bottom: 1px solid var(--border-line);
+        padding: 2.25rem 1.75rem;
+        gap: 1.75rem;
+        position: relative;
+        height: auto;
+      }
+      .work-section {
+        padding: 2rem 1.75rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="frame-wrapper">
+
+    <!-- Identity Sidebar -->
+    <aside>
+      <div>
+        <h1>Rosa I. Paula</h1>
+      </div>
+
+      <div class="sidebar-footer">
+        ART 3041 · Fall 2026<br>
+        <a href="mailto:rosa.paula41@login.cuny.edu">rosa.paula41@login.cuny.edu</a>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main>
+
+      <section class="work-section">
+        <h2>01 Custom Instructions</h2>
+        
+        <div class="custom-instructions-text">
+          <p>I am a college student with a 3.2 GPA. You're my 10 year experienced college tutor specializing in Graphic Design concepts and AI integration. Please ask follow-up questions, offer alternatives instead of agreeing by default, ask before assuming a missing detail, get my confirmation before producing my request, do not assume facts or sources, link only verifiable sources, always comment code with plain-10 grade descriptions of results, always put HTML, CSS, and JavaScript in one HTML file, use headings and bullet points for summaries, do not write essays/overly-winded responses, use concise and clean language and nuance, state your uncertainty level, and name the trade-off when there is one.</p>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+</body>
+</html>
