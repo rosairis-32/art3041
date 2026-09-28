@@ -1,448 +1,284 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rosa I. Paula — ART 3041</title>
-
-  <!-- Typography: Cinzel for classical display and Inter for body text -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rosa I. Paula — Studio Archive</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-mortar: #ece9e3;          /* Weathered limestone mortar ground */
-      --surface-clean: #fcfbfa;       /* Fine archival paper */
-      --surface-aside: #f7f5f0;       /* Warm architectural sidebar */
-      --text-ink: #191817;           /* Stencil deep ink */
-      --text-muted: #6f6b64;         /* Weathered concrete gray */
-      --border-line: #dad5cb;        /* Hairline structural rules */
-      --mural-teal: #228280;         /* Turquoise wooden board wash */
-      --stencil-crimson: #c52929;    /* Bleeding spray heart crimson */
-      --font-display: 'Cinzel', Georgia, serif;
-      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --bg: #eceae5;
+      --surface: #ffffff;
+      --text: #1b1c1d;
+      --border: #dcd7ce;
+      --accent: #c52828;
     }
 
-    *, *::before, *::after {
+    * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
     body {
-      background-color: var(--bg-mortar);
-      color: var(--text-ink);
-      font-family: var(--font-body);
-      font-size: 15px;
+      margin: 0;
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
       line-height: 1.5;
-      -webkit-font-smoothing: antialiased;
-      padding: 2.5rem 1.5rem;
       min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
+      background: linear-gradient(125deg, #eceae5, #e0ded9, #f4f3ef, #eceae5);
+      background-size: 300% 300%;
+      animation: wallDrift 16s ease infinite;
     }
 
-    /* Primary architectural container */
-    .frame-wrapper {
-      width: 100%;
-      max-width: 1260px;
-      background-color: var(--surface-clean);
-      border: 1px solid var(--border-line);
-      box-shadow: 0 24px 50px -15px rgba(25, 24, 23, 0.08);
+    @keyframes wallDrift {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .container {
       display: grid;
       grid-template-columns: 320px 1fr;
-      min-height: calc(100vh - 5rem);
+      min-height: 100vh;
+      max-width: 1440px;
+      margin: 0 auto;
+      border-left: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      background-color: rgba(236, 234, 229, 0.4);
+      backdrop-filter: blur(4px);
     }
 
-    /* Sidebar containing brand name & academic metadata */
+    /* Sidebar Rail */
     aside {
-      background-color: var(--surface-aside);
-      border-right: 1px solid var(--border-line);
-      padding: 3.5rem 2.5rem;
+      padding: 3rem 2.25rem;
+      border-right: 1px solid var(--border);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      position: sticky;
-      top: 0;
-      height: 100%;
+      gap: 2.5rem;
+      background-color: rgba(255, 255, 255, 0.25);
     }
 
-    aside h1 {
-      font-family: var(--font-display);
-      font-size: 1.95rem;
-      font-weight: 800;
-      letter-spacing: 0.04em;
-      line-height: 1.15;
+    .brand h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.85rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
-      color: var(--text-ink);
+      line-height: 1.2;
+      color: var(--text);
+    }
+
+    .brand p {
+      margin-top: 0.75rem;
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #555350;
     }
 
     .sidebar-footer {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      line-height: 1.65;
+      font-size: 0.82rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+      color: #555350;
     }
 
     .sidebar-footer a {
-      color: var(--text-ink);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      transition: color 0.2s ease, text-decoration-color 0.2s ease;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .sidebar-footer a:hover {
-      color: var(--stencil-crimson);
-      text-decoration-color: var(--stencil-crimson);
+      color: var(--accent);
     }
 
-    /* Main gallery & works column */
+    /* Main Content Area */
     main {
+      padding: 3rem;
       display: flex;
       flex-direction: column;
+      gap: 3.5rem;
     }
 
-    /* Hero section */
-    .hero-section {
-      padding: 3.5rem 3.5rem 2.5rem 3.5rem;
-      border-bottom: 1px solid var(--border-line);
-    }
-
-    .hero-artwork-canvas {
+    .hero-frame {
       width: 100%;
       height: 380px;
-      border: 1px solid #1a1816;
-      background-color: #24201e;
+      border: 1px solid var(--border);
+      background-color: #dfdbd3;
       overflow: hidden;
       position: relative;
     }
 
-    .hero-artwork-canvas svg {
+    .hero-frame img {
       width: 100%;
       height: 100%;
-      display: block;
       object-fit: cover;
-      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .hero-artwork-canvas:hover svg {
-      transform: scale(1.015);
+    .hero-frame:hover img {
+      transform: scale(1.03);
     }
 
-    .hero-section h2 {
-      font-family: var(--font-display);
-      font-size: 1.2rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-ink);
-      margin-top: 1.5rem;
-    }
-
-    /* Works index section */
-    .work-section {
-      padding: 2.75rem 3.5rem 3.5rem 3.5rem;
-      flex-grow: 1;
-    }
-
-    .work-section h2 {
-      font-family: var(--font-display);
+    .section-title {
+      font-family: 'Cinzel', serif;
       font-size: 1.15rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
+      font-weight: 600;
       text-transform: uppercase;
-      color: var(--text-ink);
+      letter-spacing: 0.05em;
       margin-bottom: 1.25rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid var(--text-ink);
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
     }
 
-    .project-list {
+    /* Work List */
+    .work-list {
       display: flex;
       flex-direction: column;
     }
 
-    .project-item {
-      display: flex;
-      justify-content: space-between;
+    .work-row {
+      display: grid;
+      grid-template-columns: 48px 1fr auto;
       align-items: center;
-      padding: 1.15rem 0.6rem;
-      border-bottom: 1px solid var(--border-line);
+      padding: 1.1rem 0.5rem;
+      border-bottom: 1px solid var(--border);
       text-decoration: none;
-      color: inherit;
-      transition: background-color 0.2s ease, padding 0.2s ease;
+      color: var(--text);
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+                  color 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .project-item:hover {
-      background-color: #f3efe8;
-      padding-left: 0.9rem;
-      padding-right: 0.9rem;
+    .work-row:hover {
+      color: var(--accent);
+      transform: translateX(6px);
     }
 
-    .project-title {
-      font-size: 0.95rem;
+    .work-num {
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      opacity: 0.6;
+    }
+
+    .work-title {
       font-weight: 500;
-      color: var(--text-ink);
+      letter-spacing: 0.01em;
     }
 
-    .project-action {
-      font-size: 0.8rem;
+    .work-action {
+      font-size: 0.75rem;
+      font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      font-weight: 600;
-      color: var(--text-muted);
-      transition: color 0.2s ease, transform 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.25rem;
     }
 
-    .project-item:hover .project-action {
-      color: var(--stencil-crimson);
-      transform: translateX(3px);
-    }
-
-    /* Responsive breakpoints */
+    /* Mobile Breakpoint */
     @media (max-width: 900px) {
-      body {
-        padding: 1rem;
-      }
-      .frame-wrapper {
+      .container {
         grid-template-columns: 1fr;
+        border: none;
       }
+
       aside {
         border-right: none;
-        border-bottom: 1px solid var(--border-line);
-        padding: 2.25rem 1.75rem;
-        gap: 1.75rem;
-        position: relative;
-        height: auto;
+        border-bottom: 1px solid var(--border);
+        padding: 2.25rem 1.5rem;
       }
-      .hero-section, .work-section {
-        padding: 2rem 1.75rem;
+
+      main {
+        padding: 2.25rem 1.5rem;
+        gap: 2.5rem;
       }
-      .hero-artwork-canvas {
+
+      .hero-frame {
         height: 260px;
       }
     }
   </style>
 </head>
-
 <body>
-
-  <div class="frame-wrapper">
-
-    <!-- Identity Sidebar -->
+  <div class="container">
     <aside>
-      <div>
+      <div class="brand">
         <h1>Rosa I. Paula</h1>
+        <p>Political Design &amp; Studio Archive</p>
       </div>
-
       <div class="sidebar-footer">
-        ART 3041 · Fall 2026<br>
-        <a href="mailto:rosa.paula41@login.cuny.edu">rosa.paula41@login.cuny.edu</a>
+        <div>ART 3041 / Studio Practice</div>
+        <div>New York, NY</div>
+        <div>
+          <a href="mailto:rosa.paula@baruchmail.cuny.edu">rosa.paula@baruchmail.cuny.edu</a>
+        </div>
       </div>
     </aside>
 
-    <!-- Main Content Area -->
     <main>
-
-      <section class="hero-section">
-        <div class="hero-artwork-canvas">
-          <svg viewBox="0 0 1200 480" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-            <defs>
-              <!-- Brick Wall Pattern -->
-              <pattern id="brick-pattern" width="68" height="34" patternUnits="userSpaceOnUse">
-                <rect width="68" height="34" fill="#883b32" />
-                <line x1="0" y1="0" x2="68" y2="0" stroke="#d5cdbe" stroke-width="2.5" />
-                <line x1="0" y1="17" x2="68" y2="17" stroke="#d5cdbe" stroke-width="2.5" />
-                <line x1="0" y1="34" x2="68" y2="34" stroke="#d5cdbe" stroke-width="2.5" />
-                <line x1="34" y1="0" x2="34" y2="17" stroke="#d5cdbe" stroke-width="2.5" />
-                <line x1="0" y1="17" x2="0" y2="34" stroke="#d5cdbe" stroke-width="2.5" />
-                <line x1="68" y1="17" x2="68" y2="34" stroke="#d5cdbe" stroke-width="2.5" />
-              </pattern>
-
-              <!-- Weathered whitewashed masonry gradient -->
-              <linearGradient id="wall-wash" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#461f1b" stop-opacity="0.92" />
-                <stop offset="16%" stop-color="#cfc7ba" stop-opacity="0.86" />
-                <stop offset="50%" stop-color="#eae6dd" stop-opacity="0.94" />
-                <stop offset="85%" stop-color="#cfc7ba" stop-opacity="0.9" />
-                <stop offset="100%" stop-color="#602922" stop-opacity="0.92" />
-              </linearGradient>
-
-              <!-- Turquoise wooden board gradient -->
-              <linearGradient id="panel-teal" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#2d8e8b" />
-                <stop offset="50%" stop-color="#217c79" />
-                <stop offset="100%" stop-color="#145856" />
-              </linearGradient>
-
-              <!-- Stencil heart crimson gradient -->
-              <linearGradient id="crimson-paint" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#dd2c2c" />
-                <stop offset="100%" stop-color="#9a1515" />
-              </linearGradient>
-            </defs>
-
-            <!-- Masonry Background -->
-            <rect width="1200" height="480" fill="url(#brick-pattern)" />
-            <rect width="1200" height="480" fill="url(#wall-wash)" />
-
-            <!-- Urban tag scribbles & sprays -->
-            <path d="M 40 120 Q 140 20 280 80 T 450 170 T 630 60 T 820 120 T 1120 70" stroke="#3377aa" stroke-width="3" fill="none" opacity="0.45" />
-            <path d="M 110 210 Q 290 280 510 200 T 770 270 T 1070 190" stroke="#72a33f" stroke-width="3.5" fill="none" opacity="0.4" />
-            <path d="M 270 30 Q 390 100 550 20 T 730 90" stroke="#df3d7e" stroke-width="2.5" fill="none" opacity="0.35" />
-
-            <!-- Lower wall graffiti bubble piece -->
-            <g transform="translate(310, 265) scale(0.95)" opacity="0.9">
-              <path d="M 20 80 C 10 40 50 10 90 20 C 130 5 170 30 180 70 C 210 50 260 60 270 100 C 290 85 340 90 350 130 C 330 170 280 180 240 170 C 200 180 160 170 130 160 C 90 175 40 165 20 130 Z" fill="#1b1c1d" />
-              <path d="M 25 80 C 18 45 52 18 88 26 C 125 12 162 34 172 72 C 202 54 248 64 258 102 C 278 88 322 94 332 130 C 312 164 270 172 232 164 C 196 172 158 164 130 154 C 94 168 46 160 25 80 Z" fill="#2d8fd8" />
-              <path d="M 40 70 Q 70 40 100 60" stroke="#ffffff" stroke-width="6" stroke-linecap="round" fill="none" opacity="0.8" />
-              <path d="M 190 75 Q 220 55 240 75" stroke="#ffffff" stroke-width="6" stroke-linecap="round" fill="none" opacity="0.8" />
-            </g>
-
-            <!-- LEFT BOARD: Skeleton Panel -->
-            <g transform="translate(130, 80)">
-              <rect width="250" height="270" fill="url(#panel-teal)" stroke="#0e3a39" stroke-width="4" rx="2" />
-              <line x1="0" y1="90" x2="250" y2="90" stroke="#0e3a39" stroke-width="2" opacity="0.5" />
-              <line x1="0" y1="180" x2="250" y2="180" stroke="#0e3a39" stroke-width="2" opacity="0.5" />
-
-              <!-- Dripping stencil lines -->
-              <path d="M 18 20 L 18 60 M 32 25 L 32 75 M 46 15 L 46 45" stroke="#ffffff" stroke-width="4" stroke-linecap="round" opacity="0.65" />
-
-              <!-- Skull & Ribcage -->
-              <g transform="translate(42, 15)">
-                <path d="M 40 110 C 20 80 20 30 70 20 C 120 15 145 55 140 105 C 135 125 115 135 110 145 L 60 145 C 55 135 45 120 40 110 Z" fill="#dedbd2" stroke="#1a1a1a" stroke-width="6" stroke-linejoin="round" />
-                <ellipse cx="68" cy="80" rx="13" ry="17" fill="#1a1a1a" />
-                <ellipse cx="112" cy="80" rx="13" ry="17" fill="#1a1a1a" />
-                <path d="M 85 105 L 90 98 L 95 105 Z" fill="#1a1a1a" />
-                <line x1="68" y1="135" x2="68" y2="145" stroke="#1a1a1a" stroke-width="4" />
-                <line x1="85" y1="133" x2="85" y2="145" stroke="#1a1a1a" stroke-width="4" />
-                <line x1="102" y1="135" x2="102" y2="145" stroke="#1a1a1a" stroke-width="4" />
-
-                <!-- Spine & Ribcage -->
-                <line x1="85" y1="145" x2="85" y2="245" stroke="#1a1a1a" stroke-width="8" stroke-linecap="round" />
-                <path d="M 40 175 Q 85 190 130 175" stroke="#dedbd2" stroke-width="12" fill="none" stroke-linecap="round" />
-                <path d="M 40 175 Q 85 190 130 175" stroke="#1a1a1a" stroke-width="4" fill="none" stroke-linecap="round" />
-                <path d="M 42 205 Q 85 220 128 205" stroke="#dedbd2" stroke-width="12" fill="none" stroke-linecap="round" />
-                <path d="M 42 205 Q 85 220 128 205" stroke="#1a1a1a" stroke-width="4" fill="none" stroke-linecap="round" />
-                <path d="M 48 232 Q 85 242 122 232" stroke="#dedbd2" stroke-width="10" fill="none" stroke-linecap="round" />
-                <path d="M 48 232 Q 85 242 122 232" stroke="#1a1a1a" stroke-width="3" fill="none" stroke-linecap="round" />
-              </g>
-            </g>
-
-            <!-- CENTER BOARD: Skeleton & Twin Stencil Bleeding Hearts -->
-            <g transform="translate(560, 70)">
-              <rect width="250" height="270" fill="url(#panel-teal)" stroke="#0e3a39" stroke-width="4" rx="2" />
-              <line x1="0" y1="90" x2="250" y2="90" stroke="#0e3a39" stroke-width="2" opacity="0.5" />
-              <line x1="0" y1="180" x2="250" y2="180" stroke="#0e3a39" stroke-width="2" opacity="0.5" />
-
-              <!-- Left Bleeding Stencil Heart -->
-              <g transform="translate(8, 8)">
-                <path d="M 25 15 C 10 -8 -15 8 -15 28 C -15 50 25 78 25 78 C 25 78 65 50 65 28 C 65 8 40 -8 25 15 Z" fill="url(#crimson-paint)" stroke="#680b0b" stroke-width="2" />
-                <path d="M 12 18 L 12 45 M 24 15 L 24 55 M 36 22 L 36 48" stroke="#ffffff" stroke-width="2.5" opacity="0.8" />
-              </g>
-
-              <!-- Right Bleeding Stencil Heart -->
-              <g transform="translate(172, 8)">
-                <path d="M 25 15 C 10 -8 -15 8 -15 28 C -15 50 25 78 25 78 C 25 78 65 50 65 28 C 65 8 40 -8 25 15 Z" fill="url(#crimson-paint)" stroke="#680b0b" stroke-width="2" />
-                <path d="M 14 20 L 14 50 M 26 14 L 26 56 M 38 22 L 38 46" stroke="#ffffff" stroke-width="2.5" opacity="0.8" />
-              </g>
-
-              <!-- Torso Waving Skeleton -->
-              <g transform="translate(52, 45)">
-                <path d="M 38 85 C 22 62 20 25 60 15 C 100 10 120 42 116 82 C 112 98 96 106 92 114 L 52 114 C 48 106 42 94 38 85 Z" fill="#dedbd2" stroke="#1a1a1a" stroke-width="5" stroke-linejoin="round" />
-                <ellipse cx="58" cy="62" rx="10" ry="14" fill="#1a1a1a" />
-                <ellipse cx="94" cy="62" rx="10" ry="14" fill="#1a1a1a" />
-                <line x1="58" y1="106" x2="58" y2="114" stroke="#1a1a1a" stroke-width="3" />
-                <line x1="72" y1="104" x2="72" y2="114" stroke="#1a1a1a" stroke-width="3" />
-                <line x1="86" y1="106" x2="86" y2="114" stroke="#1a1a1a" stroke-width="3" />
-
-                <!-- Spine & Ribs -->
-                <line x1="72" y1="114" x2="72" y2="195" stroke="#1a1a1a" stroke-width="6" />
-                <path d="M 38 138 Q 72 150 106 138" stroke="#dedbd2" stroke-width="10" fill="none" stroke-linecap="round" />
-                <path d="M 38 138 Q 72 150 106 138" stroke="#1a1a1a" stroke-width="3.5" fill="none" stroke-linecap="round" />
-                <path d="M 40 162 Q 72 174 104 162" stroke="#dedbd2" stroke-width="10" fill="none" stroke-linecap="round" />
-                <path d="M 40 162 Q 72 174 104 162" stroke="#1a1a1a" stroke-width="3.5" fill="none" stroke-linecap="round" />
-
-                <!-- Raised Hand -->
-                <path d="M 106 138 Q 125 130 135 150 Q 145 140 148 120" stroke="#1a1a1a" stroke-width="4.5" fill="none" stroke-linecap="round" />
-                <circle cx="148" cy="116" r="3" fill="#1a1a1a" />
-                <circle cx="142" cy="116" r="3" fill="#1a1a1a" />
-              </g>
-            </g>
-
-            <!-- RIGHT BOARD: Skeleton Silhouette -->
-            <g transform="translate(980, 70)">
-              <rect width="200" height="270" fill="url(#panel-teal)" stroke="#0e3a39" stroke-width="4" rx="2" />
-              <g transform="translate(25, 25)">
-                <path d="M 35 90 C 20 65 20 25 65 15 C 110 10 130 45 125 85 C 120 100 105 110 100 118 L 55 118 Z" fill="#dedbd2" stroke="#1a1a1a" stroke-width="5" />
-                <ellipse cx="58" cy="65" rx="11" ry="14" fill="#1a1a1a" />
-                <ellipse cx="98" cy="65" rx="11" ry="14" fill="#1a1a1a" />
-                <line x1="77" y1="118" x2="77" y2="195" stroke="#1a1a1a" stroke-width="6" />
-                <path d="M 40 145 Q 77 155 114 145" stroke="#dedbd2" stroke-width="10" fill="none" />
-                <path d="M 40 145 Q 77 155 114 145" stroke="#1a1a1a" stroke-width="3" fill="none" />
-              </g>
-            </g>
-
-            <!-- Sidewalk curb base footer -->
-            <rect x="0" y="440" width="1200" height="40" fill="#d8d4ca" />
-            <line x1="0" y1="440" x2="1200" y2="440" stroke="#aea89c" stroke-width="3" />
-            <line x1="400" y1="440" x2="400" y2="480" stroke="#aea89c" stroke-width="2" />
-            <line x1="800" y1="440" x2="800" y2="480" stroke="#aea89c" stroke-width="2" />
-          </svg>
-        </div>
-
-        <h2>A.I. FOR DESIGNERS</h2>
-      </section>
-
-      <section class="work-section">
-        <h2>Work</h2>
-        <div class="project-list">
-
-          <a href="#" class="project-item">
-            <span class="project-title">01 Custom Instructions</span>
-            <span class="project-action">View Project</span>
-          </a>
-
-          <a href="#" class="project-item">
-            <span class="project-title">02 A Style Guide for Your AI</span>
-            <span class="project-action">View Project</span>
-          </a>
-
-          <a href="design-a.html" class="project-item">
-            <span class="project-title">03 Design a ___</span>
-            <span class="project-action">View Project</span>
-          </a>
-
-          <a href="#" class="project-item">
-            <span class="project-title">04 Commute Story</span>
-            <span class="project-action">View Project</span>
-          </a>
-
-          <a href="#" class="project-item">
-            <span class="project-title">05 Become a Crea(i)tive Director</span>
-            <span class="project-action">View Project</span>
-          </a>
-
-          <a href="#" class="project-item">
-            <span class="project-title">06 Experimental AI Interface</span>
-            <span class="project-action">View Project</span>
-          </a>
-
-          <a href="#" class="project-item">
-            <span class="project-title">07 Open</span>
-            <span class="project-action">View Project</span>
-          </a>
-
+      <section>
+        <div class="hero-frame">
+          <img src="hero.jpg" alt="Featured Work Archive Frame">
         </div>
       </section>
 
+      <section>
+        <h2 class="section-title">Selected Projects</h2>
+        <div class="work-list">
+          <a class="work-row" href="design-a.html">
+            <span class="work-num">01</span>
+            <span class="work-title">Design Exercise A — Typographic System</span>
+            <span class="work-action">VIEW PROJECT &rarr;</span>
+          </a>
+          <a class="work-row" href="#">
+            <span class="work-num">02</span>
+            <span class="work-title">Editorial Identity &amp; Digital Collateral</span>
+            <span class="work-action">VIEW PROJECT &rarr;</span>
+          </a>
+          <a class="work-row" href="#">
+            <span class="work-num">03</span>
+            <span class="work-title">Political Discourse &amp; Public Sphere Interface</span>
+            <span class="work-action">VIEW PROJECT &rarr;</span>
+          </a>
+          <a class="work-row" href="#">
+            <span class="work-num">04</span>
+            <span class="work-title">Institutional Rhetoric Visual Analysis</span>
+            <span class="work-action">VIEW PROJECT &rarr;</span>
+          </a>
+          <a class="work-row" href="#">
+            <span class="work-num">05</span>
+            <span class="work-title">Archival Print &amp; Materiality Experiment</span>
+            <span class="work-action">VIEW PROJECT &rarr;</span>
+          </a>
+          <a class="work-row" href="#">
+            <span class="work-num">06</span>
+            <span class="work-title">Communication Systems Case Study</span>
+            <span class="work-action">VIEW PROJECT &rarr;</span>
+          </a>
+          <a class="work-row" href="#">
+            <span class="work-num">07</span>
+            <span class="work-title">Interactive Typographic Structure</span>
+            <span class="work-action">VIEW PROJECT &rarr;</span>
+          </a>
+        </div>
+      </section>
     </main>
-
   </div>
-
 </body>
 </html>
