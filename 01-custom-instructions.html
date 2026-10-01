@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rosa I. Paula — 01 Custom Instructions</title>
+
+  <!-- Google Fonts: Cinzel & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #eceae5;
+      --surface: #ffffff;
+      --text: #1b1c1d;
+      --border: #dcd7ce;
+      --accent: #c52828;
+      --muted: #78756f;
+      --code-bg: #f4f2ee;
+      --code-border: #dcd7ce;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      background: linear-gradient(135deg, #eceae5, #e4e1db, #f3f1ec, #eceae5);
+      background-size: 400% 400%;
+      animation: ambientShift 24s ease infinite;
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    @keyframes ambientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      min-height: 100vh;
+      max-width: 1440px;
+      margin: 0 auto;
+      border-left: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+    }
+
+    /* Left Sidebar: Pinned & Proportional */
+    aside.sidebar {
+      padding: 2.5rem 1.5rem;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100vh;
+      position: sticky;
+      top: 0;
+      background-color: rgba(236, 234, 229, 0.5);
+      backdrop-filter: blur(8px);
+      z-index: 10;
+    }
+
+    .sidebar-top h1 {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      line-height: 1.15;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .sidebar-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 1.25rem;
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text);
+    }
+
+    .sidebar-bottom a {
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .sidebar-bottom a:hover {
+      color: var(--accent);
+    }
+
+    main.main-content {
+      padding: 2.5rem 2.5rem 5rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+    }
+
+    /* Page Header matching 02 AI Style Guide */
+    .page-header {
+      width: 100%;
+      padding-bottom: 0.65rem;
+      border-bottom: 1px solid var(--text);
+    }
+
+    .page-title {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    /* Card container matching style guide specifications */
+    .styleguide-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 2.25rem 2.5rem;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.02);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .custom-instructions-text {
+      font-size: 14px;
+      line-height: 1.75;
+      color: #313233;
+    }
+
+    @media (max-width: 900px) {
+      .container {
+        grid-template-columns: 1fr;
+        border-left: none;
+        border-right: none;
+      }
+
+      aside.sidebar {
+        position: static;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 2.25rem 1.5rem;
+        gap: 2rem;
+      }
+
+      .sidebar-top h1 {
+        white-space: normal;
+      }
+
+      main.main-content {
+        padding: 2rem 1.5rem 4rem 1.5rem;
+      }
+
+      .styleguide-card {
+        padding: 1.75rem 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- Left Rail: Static / Sticky Info -->
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <h1>ROSA I. PAULA</h1>
+      </div>
+
+      <div class="sidebar-bottom">
+        <div>ART 3041 · Fall 2026</div>
+        <div><a href="mailto:rosa.paula41@login.cuny.edu">rosa.paula41@login.cuny.edu</a></div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      
+      <!-- Top Underlined Heading -->
+      <header class="page-header">
+        <h2 class="page-title">01 CUSTOM INSTRUCTIONS</h2>
+      </header>
+
+      <!-- White Surface Card -->
+      <section class="styleguide-card" aria-label="Custom Instructions">
+        <div class="custom-instructions-text">
+          <p>I am a college student with a 3.2 GPA. You're my 10 year experienced college tutor specializing in Graphic Design concepts and AI integration. Please ask follow-up questions, offer alternatives instead of agreeing by default, ask before assuming a missing detail, get my confirmation before producing my request, do not assume facts or sources, link only verifiable sources, always comment code with plain-10 grade descriptions of results, always put HTML, CSS, and JavaScript in one HTML file, use headings and bullet points for summaries, do not write essays/overly-winded responses, use concise and clean language and nuance, state your uncertainty level, and name the trade-off when there is one.</p>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+</body>
+</html>

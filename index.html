@@ -12,14 +12,14 @@
 
   <style>
     :root {
-      --bg-mortar: #ece9e3;          /* Weathered limestone mortar ground */
-      --surface-clean: #fcfbfa;       /* Fine archival paper */
-      --surface-aside: #f7f5f0;       /* Warm architectural sidebar */
-      --text-ink: #191817;           /* Stencil deep ink */
-      --text-muted: #6f6b64;         /* Weathered concrete gray */
-      --border-line: #dad5cb;        /* Hairline structural rules */
-      --mural-teal: #228280;         /* Turquoise wooden board wash */
-      --stencil-crimson: #c52929;    /* Bleeding spray heart crimson */
+      --bg: #eceae5;
+      --surface: #ffffff;
+      --text: #1b1c1d;
+      --border: #dcd7ce;
+      --accent: #c52828;
+      --muted: #78756f;
+      --code-bg: #f4f2ee;
+      --code-border: #dcd7ce;
       --font-display: 'Cinzel', Georgia, serif;
       --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     }
@@ -31,88 +31,95 @@
     }
 
     body {
-      background-color: var(--bg-mortar);
-      color: var(--text-ink);
+      background-color: var(--bg);
+      background: linear-gradient(135deg, #eceae5, #e4e1db, #f3f1ec, #eceae5);
+      background-size: 400% 400%;
+      animation: ambientShift 24s ease infinite;
+      color: var(--text);
       font-family: var(--font-body);
-      font-size: 15px;
+      font-size: 14px;
       line-height: 1.5;
       -webkit-font-smoothing: antialiased;
-      padding: 2.5rem 1.5rem;
       min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
     }
 
-    /* Primary architectural container */
-    .frame-wrapper {
-      width: 100%;
-      max-width: 1260px;
-      background-color: var(--surface-clean);
-      border: 1px solid var(--border-line);
-      box-shadow: 0 24px 50px -15px rgba(25, 24, 23, 0.08);
+    @keyframes ambientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Primary architectural container matching 280px sidebar */
+    .container {
       display: grid;
-      grid-template-columns: 320px 1fr;
-      min-height: calc(100vh - 5rem);
+      grid-template-columns: 280px 1fr;
+      min-height: 100vh;
+      max-width: 1440px;
+      margin: 0 auto;
+      border-left: 1px solid var(--border);
+      border-right: 1px solid var(--border);
     }
 
-    /* Sidebar containing brand name & academic metadata */
-    aside {
-      background-color: var(--surface-aside);
-      border-right: 1px solid var(--border-line);
-      padding: 3.5rem 2.5rem;
+    /* Left Sidebar: Pinned & Proportional */
+    aside.sidebar {
+      padding: 2.5rem 1.5rem;
+      border-right: 1px solid var(--border);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      height: 100vh;
       position: sticky;
       top: 0;
-      height: 100%;
+      background-color: rgba(236, 234, 229, 0.5);
+      backdrop-filter: blur(8px);
+      z-index: 10;
     }
 
-    aside h1 {
+    .sidebar-top h1 {
       font-family: var(--font-display);
-      font-size: 1.95rem;
-      font-weight: 800;
-      letter-spacing: 0.04em;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
       line-height: 1.15;
       text-transform: uppercase;
-      color: var(--text-ink);
+      color: var(--text);
+      white-space: nowrap;
     }
 
-    .sidebar-footer {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      line-height: 1.65;
+    .sidebar-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 1.25rem;
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text);
     }
 
-    .sidebar-footer a {
-      color: var(--text-ink);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      transition: color 0.2s ease, text-decoration-color 0.2s ease;
+    .sidebar-bottom a {
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.2s cubic-bezier(0.25, 1, 0.5, 1);
     }
 
-    .sidebar-footer a:hover {
-      color: var(--stencil-crimson);
-      text-decoration-color: var(--stencil-crimson);
+    .sidebar-bottom a:hover {
+      color: var(--accent);
     }
 
     /* Main gallery & works column */
-    main {
+    main.main-content {
       display: flex;
       flex-direction: column;
     }
 
     /* Hero section */
     .hero-section {
-      padding: 3.5rem 3.5rem 2.5rem 3.5rem;
-      border-bottom: 1px solid var(--border-line);
+      padding: 2.5rem 2.5rem 2rem 2.5rem;
+      border-bottom: 1px solid var(--border);
     }
 
     .hero-artwork-canvas {
       width: 100%;
       height: 380px;
-      border: 1px solid #1a1816;
+      border: 1px solid var(--border);
       background-color: #24201e;
       overflow: hidden;
       position: relative;
@@ -123,7 +130,7 @@
       height: 100%;
       display: block;
       object-fit: cover;
-      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
     }
 
     .hero-artwork-canvas:hover svg {
@@ -132,30 +139,18 @@
 
     .hero-section h2 {
       font-family: var(--font-display);
-      font-size: 1.2rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-ink);
-      margin-top: 1.5rem;
-    }
-
-    /* Works index section */
-    .work-section {
-      padding: 2.75rem 3.5rem 3.5rem 3.5rem;
-      flex-grow: 1;
-    }
-
-    .work-section h2 {
-      font-family: var(--font-display);
       font-size: 1.15rem;
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--text-ink);
-      margin-bottom: 1.25rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid var(--text-ink);
+      color: var(--text);
+      margin-top: 1.5rem;
+    }
+
+    /* Works index section: Direct list flow */
+    .work-section {
+      padding: 1.5rem 2.5rem 5rem 2.5rem;
+      flex-grow: 1;
     }
 
     .project-list {
@@ -167,23 +162,32 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.15rem 0.6rem;
-      border-bottom: 1px solid var(--border-line);
+      padding: 1.2rem 0.5rem;
+      border-bottom: 1px solid var(--border);
       text-decoration: none;
-      color: inherit;
-      transition: background-color 0.2s ease, padding 0.2s ease;
+      color: var(--text);
+      transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .project-item:first-child {
+      border-top: 1px solid var(--border);
     }
 
     .project-item:hover {
-      background-color: #f3efe8;
       padding-left: 0.9rem;
       padding-right: 0.9rem;
+      color: var(--accent);
     }
 
     .project-title {
       font-size: 0.95rem;
       font-weight: 500;
-      color: var(--text-ink);
+      letter-spacing: -0.01em;
+      transition: color 0.2s ease;
+    }
+
+    .project-item:hover .project-title {
+      color: var(--accent);
     }
 
     .project-action {
@@ -191,36 +195,40 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
       font-weight: 600;
-      color: var(--text-muted);
+      color: var(--muted);
       transition: color 0.2s ease, transform 0.2s ease;
       display: inline-flex;
       align-items: center;
-      gap: 0.25rem;
     }
 
     .project-item:hover .project-action {
-      color: var(--stencil-crimson);
-      transform: translateX(3px);
+      color: var(--accent);
+      transform: translateX(4px);
     }
 
     /* Responsive breakpoints */
     @media (max-width: 900px) {
-      body {
-        padding: 1rem;
-      }
-      .frame-wrapper {
+      .container {
         grid-template-columns: 1fr;
-      }
-      aside {
+        border-left: none;
         border-right: none;
-        border-bottom: 1px solid var(--border-line);
-        padding: 2.25rem 1.75rem;
-        gap: 1.75rem;
-        position: relative;
-        height: auto;
       }
-      .hero-section, .work-section {
-        padding: 2rem 1.75rem;
+      aside.sidebar {
+        position: static;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 2.25rem 1.5rem;
+        gap: 2rem;
+      }
+      .sidebar-top h1 {
+        white-space: normal;
+      }
+      .hero-section {
+        padding: 2rem 1.5rem 1.5rem 1.5rem;
+      }
+      .work-section {
+        padding: 1.5rem 1.5rem 4rem 1.5rem;
       }
       .hero-artwork-canvas {
         height: 260px;
@@ -231,22 +239,22 @@
 
 <body>
 
-  <div class="frame-wrapper">
+  <div class="container">
 
-    <!-- Identity Sidebar -->
-    <aside>
-      <div>
-        <h1>Rosa I. Paula</h1>
+    <!-- Left Rail: Static / Sticky Info -->
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <h1>ROSA I. PAULA</h1>
       </div>
 
-      <div class="sidebar-footer">
-        ART 3041 · Fall 2026<br>
-        <a href="mailto:rosa.paula41@login.cuny.edu">rosa.paula41@login.cuny.edu</a>
+      <div class="sidebar-bottom">
+        <div>ART 3041 · Fall 2026</div>
+        <div><a href="mailto:rosa.paula41@login.cuny.edu">rosa.paula41@login.cuny.edu</a></div>
       </div>
     </aside>
 
     <!-- Main Content Area -->
-    <main>
+    <main class="main-content">
 
       <section class="hero-section">
         <div class="hero-artwork-canvas">
@@ -309,10 +317,8 @@
               <line x1="0" y1="90" x2="250" y2="90" stroke="#0e3a39" stroke-width="2" opacity="0.5" />
               <line x1="0" y1="180" x2="250" y2="180" stroke="#0e3a39" stroke-width="2" opacity="0.5" />
 
-              <!-- Dripping stencil lines -->
               <path d="M 18 20 L 18 60 M 32 25 L 32 75 M 46 15 L 46 45" stroke="#ffffff" stroke-width="4" stroke-linecap="round" opacity="0.65" />
 
-              <!-- Skull & Ribcage -->
               <g transform="translate(42, 15)">
                 <path d="M 40 110 C 20 80 20 30 70 20 C 120 15 145 55 140 105 C 135 125 115 135 110 145 L 60 145 C 55 135 45 120 40 110 Z" fill="#dedbd2" stroke="#1a1a1a" stroke-width="6" stroke-linejoin="round" />
                 <ellipse cx="68" cy="80" rx="13" ry="17" fill="#1a1a1a" />
@@ -322,7 +328,6 @@
                 <line x1="85" y1="133" x2="85" y2="145" stroke="#1a1a1a" stroke-width="4" />
                 <line x1="102" y1="135" x2="102" y2="145" stroke="#1a1a1a" stroke-width="4" />
 
-                <!-- Spine & Ribcage -->
                 <line x1="85" y1="145" x2="85" y2="245" stroke="#1a1a1a" stroke-width="8" stroke-linecap="round" />
                 <path d="M 40 175 Q 85 190 130 175" stroke="#dedbd2" stroke-width="12" fill="none" stroke-linecap="round" />
                 <path d="M 40 175 Q 85 190 130 175" stroke="#1a1a1a" stroke-width="4" fill="none" stroke-linecap="round" />
@@ -339,19 +344,16 @@
               <line x1="0" y1="90" x2="250" y2="90" stroke="#0e3a39" stroke-width="2" opacity="0.5" />
               <line x1="0" y1="180" x2="250" y2="180" stroke="#0e3a39" stroke-width="2" opacity="0.5" />
 
-              <!-- Left Bleeding Stencil Heart -->
               <g transform="translate(8, 8)">
                 <path d="M 25 15 C 10 -8 -15 8 -15 28 C -15 50 25 78 25 78 C 25 78 65 50 65 28 C 65 8 40 -8 25 15 Z" fill="url(#crimson-paint)" stroke="#680b0b" stroke-width="2" />
                 <path d="M 12 18 L 12 45 M 24 15 L 24 55 M 36 22 L 36 48" stroke="#ffffff" stroke-width="2.5" opacity="0.8" />
               </g>
 
-              <!-- Right Bleeding Stencil Heart -->
               <g transform="translate(172, 8)">
                 <path d="M 25 15 C 10 -8 -15 8 -15 28 C -15 50 25 78 25 78 C 25 78 65 50 65 28 C 65 8 40 -8 25 15 Z" fill="url(#crimson-paint)" stroke="#680b0b" stroke-width="2" />
                 <path d="M 14 20 L 14 50 M 26 14 L 26 56 M 38 22 L 38 46" stroke="#ffffff" stroke-width="2.5" opacity="0.8" />
               </g>
 
-              <!-- Torso Waving Skeleton -->
               <g transform="translate(52, 45)">
                 <path d="M 38 85 C 22 62 20 25 60 15 C 100 10 120 42 116 82 C 112 98 96 106 92 114 L 52 114 C 48 106 42 94 38 85 Z" fill="#dedbd2" stroke="#1a1a1a" stroke-width="5" stroke-linejoin="round" />
                 <ellipse cx="58" cy="62" rx="10" ry="14" fill="#1a1a1a" />
@@ -360,14 +362,12 @@
                 <line x1="72" y1="104" x2="72" y2="114" stroke="#1a1a1a" stroke-width="3" />
                 <line x1="86" y1="106" x2="86" y2="114" stroke="#1a1a1a" stroke-width="3" />
 
-                <!-- Spine & Ribs -->
                 <line x1="72" y1="114" x2="72" y2="195" stroke="#1a1a1a" stroke-width="6" />
                 <path d="M 38 138 Q 72 150 106 138" stroke="#dedbd2" stroke-width="10" fill="none" stroke-linecap="round" />
                 <path d="M 38 138 Q 72 150 106 138" stroke="#1a1a1a" stroke-width="3.5" fill="none" stroke-linecap="round" />
                 <path d="M 40 162 Q 72 174 104 162" stroke="#dedbd2" stroke-width="10" fill="none" stroke-linecap="round" />
                 <path d="M 40 162 Q 72 174 104 162" stroke="#1a1a1a" stroke-width="3.5" fill="none" stroke-linecap="round" />
 
-                <!-- Raised Hand -->
                 <path d="M 106 138 Q 125 130 135 150 Q 145 140 148 120" stroke="#1a1a1a" stroke-width="4.5" fill="none" stroke-linecap="round" />
                 <circle cx="148" cy="116" r="3" fill="#1a1a1a" />
                 <circle cx="142" cy="116" r="3" fill="#1a1a1a" />
@@ -398,8 +398,8 @@
         <h2>A.I. FOR DESIGNERS</h2>
       </section>
 
+      <!-- Direct List Flow (No WORK Header/Divider) -->
       <section class="work-section">
-        <h2>Work</h2>
         <div class="project-list">
 
           <!-- 01 Custom Instructions -->
@@ -414,29 +414,45 @@
             <span class="project-action">View Project</span>
           </a>
 
-          <!-- 03 Design a ___ -->
-          <a href="design-a.html" class="project-item">
-            <span class="project-title">03 Design a ___</span>
+          <!-- 03 Design a Shrine -->
+          <a href="03-design-a-shrine.html" class="project-item">
+            <span class="project-title">03 Design a Shrine</span>
             <span class="project-action">View Project</span>
           </a>
 
-          <a href="#" class="project-item">
-            <span class="project-title">04 Commute Story</span>
+          <!-- 04 Chair Sequence -->
+          <a href="04-chair-sequence.html" class="project-item">
+            <span class="project-title">04 Chair Sequence</span>
             <span class="project-action">View Project</span>
           </a>
 
-          <a href="#" class="project-item">
-            <span class="project-title">05 Become a Crea(i)tive Director</span>
+          <!-- 05 Commute Story -->
+          <a href="05-commute-story.html" class="project-item">
+            <span class="project-title">05 Commute Story</span>
             <span class="project-action">View Project</span>
           </a>
 
-          <a href="#" class="project-item">
-            <span class="project-title">06 Experimental AI Interface</span>
+          <!-- 06 Concert Tour Poster -->
+          <a href="06-concert-tour-poster.html" class="project-item">
+            <span class="project-title">06 Concert Tour Poster</span>
             <span class="project-action">View Project</span>
           </a>
 
-          <a href="#" class="project-item">
-            <span class="project-title">07 Open</span>
+          <!-- 07 Poster Generator -->
+          <a href="07-poster-generator.html" class="project-item">
+            <span class="project-title">07 Poster Generator</span>
+            <span class="project-action">View Project</span>
+          </a>
+
+          <!-- 08 Experimental AI Interface -->
+          <a href="08-experimental-ai-interface.html" class="project-item">
+            <span class="project-title">08 Experimental AI Interface</span>
+            <span class="project-action">View Project</span>
+          </a>
+
+          <!-- 09 Open -->
+          <a href="09-open.html" class="project-item">
+            <span class="project-title">09 Open</span>
             <span class="project-action">View Project</span>
           </a>
 

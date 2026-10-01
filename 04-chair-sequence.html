@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rosa I. Paula — 04 Chair Sequence</title>
+
+  <!-- Google Fonts: Cinzel & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+
+  <style>
+    /* Global design variables matching style guide */
+    :root {
+      --bg: #eceae5;
+      --surface: #ffffff;
+      --text: #1b1c1d;
+      --border: #dcd7ce;
+      --accent: #c52828;
+      --muted: #78756f;
+      --placeholder-bg: #ece9e3;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Ambient animated gradient background */
+    body {
+      background-color: var(--bg);
+      background: linear-gradient(135deg, #eceae5, #e4e1db, #f3f1ec, #eceae5);
+      background-size: 400% 400%;
+      animation: ambientShift 24s ease infinite;
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    @keyframes ambientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Primary 2-column container */
+    .container {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      min-height: 100vh;
+      max-width: 1440px;
+      margin: 0 auto;
+      border-left: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+    }
+
+    /* Left Sidebar: Pinned & Proportional */
+    aside.sidebar {
+      padding: 2.5rem 1.5rem;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100vh;
+      position: sticky;
+      top: 0;
+      background-color: rgba(236, 234, 229, 0.5);
+      backdrop-filter: blur(8px);
+      z-index: 10;
+    }
+
+    .sidebar-top h1 {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      line-height: 1.15;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .sidebar-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 1.25rem;
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text);
+    }
+
+    .sidebar-bottom a {
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .sidebar-bottom a:hover {
+      color: var(--accent);
+    }
+
+    /* Main Content Area */
+    main.main-content {
+      padding: 2.5rem 2.5rem 5rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    /* Page Header matching 02 AI Style Guide */
+    .page-header {
+      width: 100%;
+      padding-bottom: 0.65rem;
+      border-bottom: 1px solid var(--text);
+    }
+
+    .page-title {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    /* Responsive grid for image cards */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+
+    /* Card Item Style */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 1rem;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.02);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    .image-placeholder {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background-color: var(--placeholder-bg);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      margin-bottom: 0.85rem;
+      user-select: none;
+    }
+
+    /* Clean label text without number prefix */
+    .label-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      padding: 0.15rem 0.25rem 0.25rem 0.25rem;
+      transition: color 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .card:hover .label-title {
+      color: var(--accent);
+    }
+
+    @media (max-width: 900px) {
+      .container {
+        grid-template-columns: 1fr;
+        border-left: none;
+        border-right: none;
+      }
+
+      aside.sidebar {
+        position: static;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 2.25rem 1.5rem;
+        gap: 2rem;
+      }
+
+      .sidebar-top h1 {
+        white-space: normal;
+      }
+
+      main.main-content {
+        padding: 2rem 1.5rem 4rem 1.5rem;
+      }
+
+      .grid-container {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- Sticky Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <h1>ROSA I. PAULA</h1>
+      </div>
+
+      <div class="sidebar-bottom">
+        <div>ART 3041 · Fall 2026</div>
+        <div><a href="mailto:rosa.paula41@login.cuny.edu">rosa.paula41@login.cuny.edu</a></div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      
+      <!-- Underlined Page Title -->
+      <header class="page-header">
+        <h2 class="page-title">04 CHAIR SEQUENCE</h2>
+      </header>
+
+      <!-- Grid Cards -->
+      <section class="grid-container" aria-label="Chair Sequence Cards">
+        
+        <!-- Chair 1 -->
+        <div class="card">
+          <div class="image-placeholder">Image 1</div>
+          <span class="label-title">chair 1</span>
+        </div>
+        
+        <!-- Chair 2 -->
+        <div class="card">
+          <div class="image-placeholder">Image 2</div>
+          <span class="label-title">chair 2</span>
+        </div>
+
+        <!-- Chair 3 -->
+        <div class="card">
+          <div class="image-placeholder">Image 3</div>
+          <span class="label-title">chair 3</span>
+        </div>
+
+        <!-- Chair 4 -->
+        <div class="card">
+          <div class="image-placeholder">Image 4</div>
+          <span class="label-title">chair 4</span>
+        </div>
+
+        <!-- Chair 5 -->
+        <div class="card">
+          <div class="image-placeholder">Image 5</div>
+          <span class="label-title">chair 5</span>
+        </div>
+
+        <!-- Chair 6 -->
+        <div class="card">
+          <div class="image-placeholder">Image 6</div>
+          <span class="label-title">chair 6</span>
+        </div>
+
+        <!-- Chair 7 -->
+        <div class="card">
+          <div class="image-placeholder">Image 7</div>
+          <span class="label-title">chair 7</span>
+        </div>
+
+        <!-- Prompt 1 -->
+        <div class="card">
+          <div class="image-placeholder">Image 8</div>
+          <span class="label-title">prompt 1</span>
+        </div>
+
+        <!-- ChatGPT 1 -->
+        <div class="card">
+          <div class="image-placeholder">Image 9</div>
+          <span class="label-title">chatGPT 1</span>
+        </div>
+
+        <!-- ChatGPT 2 -->
+        <div class="card">
+          <div class="image-placeholder">Image 10</div>
+          <span class="label-title">chatGPT 2</span>
+        </div>
+
+        <!-- ChatGPT 3 -->
+        <div class="card">
+          <div class="image-placeholder">Image 11</div>
+          <span class="label-title">chatGPT 3</span>
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+</body>
+</html>
