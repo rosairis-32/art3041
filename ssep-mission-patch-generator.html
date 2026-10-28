@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ART 3041 · Fall 2026 · ROSA I. PAULA · A.I. FOR DESIGNERS — SSEP MISSION PATCH GENERATOR</title>
+
+  <!-- Typography: Cinzel, Plus Jakarta Sans, Anton, Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* Warm, feminine, and high-contrast tactile palette */
+      --bg-cream: #FAF6F0;
+      --bg-card: #FFFFFF;
+      --bg-sidebar: #FFFDF9;
+      --text-main: #2D2323;
+      --text-muted: #6E5F5E;
+      --text-subtle: #988887;
+      --rose-accent: #D96B6B;
+      --rose-hover: #C55656;
+      --rose-soft: #FCEEEE;
+      --terracotta: #B85D43;
+      --border-warm: #EBDED6;
+      --border-focus: #D96B6B;
+      --shadow-soft: 0 4px 20px rgba(184, 93, 67, 0.08);
+      --shadow-hover: 0 10px 32px rgba(184, 93, 67, 0.16);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-cream);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(217, 107, 107, 0.08) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(184, 93, 67, 0.09) 0px, transparent 50%);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Academic Header Banner */
+    header.app-header {
+      background: rgba(255, 253, 249, 0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-warm);
+      padding: 0.9rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(184, 93, 67, 0.05);
+    }
+
+    .brand-title {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-kicker {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+    }
+
+    .brand-title h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      color: var(--text-main);
+      margin: 1px 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .brand-title h1 span.badge {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      background: var(--rose-soft);
+      color: var(--rose-accent);
+      padding: 2px 8px;
+      border-radius: 999px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .brand-subtitle {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    /* Main Workspace Layout */
+    .app-workspace {
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      flex: 1;
+      max-width: 1650px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /* Left Control Sidebar */
+    aside.control-panel {
+      background: var(--bg-sidebar);
+      border-right: 1px solid var(--border-warm);
+      padding: 1.5rem 1.6rem;
+      overflow-y: auto;
+      max-height: calc(100vh - 75px);
+      display: flex;
+      flex-direction: column;
+      gap: 1.35rem;
+    }
+
+    .control-group {
+      background: var(--bg-card);
+      border: 1px solid var(--border-warm);
+      border-radius: var(--radius-md);
+      padding: 1.15rem;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      transition: box-shadow 0.2s ease;
+    }
+
+    .control-group:hover {
+      box-shadow: var(--shadow-hover);
+    }
+
+    .group-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-warm);
+      padding-bottom: 0.5rem;
+    }
+
+    .group-title {
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--terracotta);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .group-title::before {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--rose-accent);
+    }
+
+    .field-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .field-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .field-label .sub {
+      font-weight: 500;
+      color: var(--rose-accent);
+      font-size: 0.75rem;
+      font-family: 'Space Grotesk', monospace;
+    }
+
+    /* Small-Scale Recognizability Component */
+    .mini-check-card {
+      background: #FFFDF9;
+      border: 1px dashed var(--rose-accent);
+      border-radius: var(--radius-md);
+      padding: 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .mini-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .mini-scale-btns {
+      display: flex;
+      gap: 4px;
+    }
+
+    .mini-btn {
+      font-size: 0.7rem;
+      font-family: 'Space Grotesk', monospace;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 6px;
+      border: 1px solid var(--border-warm);
+      background: #FFFFFF;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .mini-btn.active {
+      background: var(--rose-accent);
+      color: #FFFFFF;
+      border-color: var(--rose-accent);
+    }
+
+    .mini-viewport-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem;
+      background: radial-gradient(circle, #FAF6F0 0%, #F5ECE3 100%);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-warm);
+      min-height: 125px;
+    }
+
+    .mini-frame {
+      width: 96px;
+      height: 96px;
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.12));
+    }
+
+    .mini-frame svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* Form Inputs */
+    select, input[type="text"] {
+      width: 100%;
+      background: #FFFDF9;
+      border: 1px solid var(--border-warm);
+      border-radius: var(--radius-sm);
+      padding: 0.6rem 0.8rem;
+      font-size: 0.85rem;
+      font-family: inherit;
+      color: var(--text-main);
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    select:focus, input[type="text"]:focus {
+      border-color: var(--rose-accent);
+      box-shadow: 0 0 0 3px rgba(217, 107, 107, 0.15);
+      background: #FFFFFF;
+    }
+
+    /* Range Sliders */
+    input[type="range"] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--border-warm);
+      outline: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--rose-accent);
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(217, 107, 107, 0.4);
+      border: 2px solid #FFFFFF;
+      transition: transform 0.1s ease;
+    }
+
+    input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+    }
+
+    /* Toggles */
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.2rem 0;
+    }
+
+    .toggle-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 42px;
+      height: 22px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: var(--border-warm);
+      transition: .25s;
+      border-radius: 34px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .25s;
+      border-radius: 50%;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    }
+
+    input:checked + .slider {
+      background-color: var(--rose-accent);
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(20px);
+    }
+
+    /* Button Styles */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.68rem 1.15rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--rose-accent), var(--terracotta));
+      color: #FFFFFF;
+      box-shadow: 0 4px 14px rgba(217, 107, 107, 0.3);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 6px 20px rgba(217, 107, 107, 0.45);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: #FFFFFF;
+      color: var(--text-main);
+      border: 1px solid var(--border-warm);
+    }
+
+    .btn-secondary:hover {
+      background: var(--rose-soft);
+      border-color: var(--rose-accent);
+      color: var(--rose-accent);
+    }
+
+    /* Right Preview Stage */
+    main.preview-stage {
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .stage-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      width: 100%;
+    }
+
+    /* 3.5in x 3.5in Card Frame */
+    .patch-frame-container {
+      position: relative;
+      background: #FFFFFF;
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-warm);
+      box-shadow: 0 14px 44px rgba(184, 93, 67, 0.12);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .dimension-badge {
+      position: absolute;
+      top: -12px;
+      background: var(--text-main);
+      color: #FFF;
+      font-size: 0.68rem;
+      font-family: 'Space Grotesk', monospace;
+      font-weight: 700;
+      padding: 3px 12px;
+      border-radius: 999px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    .patch-view {
+      width: 480px;
+      height: 480px;
+      max-width: 80vw;
+      max-height: 80vw;
+      border-radius: var(--radius-md);
+      transition: width 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), height 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+    }
+
+    .patch-view.physical-size {
+      width: 3.5in !important;
+      height: 3.5in !important;
+    }
+
+    .patch-view svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      filter: drop-shadow(0 8px 24px rgba(0,0,0,0.18));
+    }
+
+    .stage-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: #FFFFFF;
+      padding: 0.5rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-warm);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .mode-pill {
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: all 0.2s ease;
+    }
+
+    .mode-pill.active {
+      background: var(--rose-accent);
+      color: #FFFFFF;
+    }
+
+    .export-note {
+      font-size: 0.76rem;
+      color: var(--text-subtle);
+      text-align: center;
+      font-family: 'Space Grotesk', monospace;
+    }
+
+    /* Toast Notification */
+    .toast-msg {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--text-main);
+      color: #FFFFFF;
+      padding: 10px 20px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toast-msg.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    @media (max-width: 992px) {
+      .app-workspace {
+        grid-template-columns: 1fr;
+      }
+      aside.control-panel {
+        max-height: none;
+        border-right: none;
+        border-bottom: 1px solid var(--border-warm);
+      }
+      .patch-view {
+        width: 340px;
+        height: 340px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Academic Top Banner with Requested Title -->
+  <header class="app-header">
+    <div class="brand-title">
+      <div class="brand-kicker">ART 3041 · Fall 2026</div>
+      <h1>
+        ROSA I. PAULA 
+        <span class="badge">A.I. For Designers</span>
+      </h1>
+      <div class="brand-subtitle">A.I. FOR DESIGNERS — SSEP MISSION PATCH GENERATOR</div>
+    </div>
+    
+    <div class="header-actions">
+      <button id="btnRandomize" class="btn btn-secondary" title="Randomize Patch Parameters">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.19"/></svg>
+        Randomize
+      </button>
+      <button id="btnExportPNG" class="btn btn-primary" title="Export 1400x1400 PNG">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Export PNG (1400&times;1400)
+      </button>
+    </div>
+  </header>
+
+  <!-- Workspace Container -->
+  <div class="app-workspace">
+
+    <!-- Left Controls Sidebar -->
+    <aside class="control-panel">
+
+      <!-- Small-Scale Recognizability Check (From ssep_mission_patch_generator) -->
+      <div class="mini-check-card">
+        <div class="mini-header">
+          <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; color:var(--terracotta);">Small-Scale Recognizability</span>
+          <div class="mini-scale-btns">
+            <button class="mini-btn" data-size="72">0.75″</button>
+            <button class="mini-btn active" data-size="96">1.0″</button>
+            <button class="mini-btn" data-size="120">1.25″</button>
+          </div>
+        </div>
+        <div class="mini-viewport-container">
+          <div id="miniPatchView" class="mini-frame">
+            <!-- Synced clone rendered here -->
+          </div>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:0.72rem; color:var(--text-subtle); font-family:'Space Grotesk', monospace;">
+          <span>Spacesuit Distance Check</span>
+          <span id="miniSizeLabel">1.0″ (96px)</span>
+        </div>
+      </div>
+
+      <!-- 1. Emblem Shape & Architecture -->
+      <div class="control-group">
+        <div class="group-header">
+          <span class="group-title">1. Emblem Frame &amp; Mascot Motif</span>
+        </div>
+        
+        <div class="field-row">
+          <label class="field-label" for="motifSelect">Mascot &amp; Centerpiece Composition</label>
+          <select id="motifSelect">
+            <option value="bearcat_jetpack" selected>Bearcat Mascot in Astronaut Suit &amp; Jetpack</option>
+            <option value="apollo_crest">Apollo SSEP Bearcat Crest</option>
+            <option value="telescope_array">155 Solar Mast &amp; Space Telescope</option>
+          </select>
+        </div>
+
+        <div class="field-row">
+          <label class="field-label" for="frameShapeSelect">Patch Outer Frame Shape</label>
+          <select id="frameShapeSelect">
+            <option value="flight_shield" selected>Starbase Flight Shield (Hexagon)</option>
+            <option value="circular">Circular Flight Crest (Apollo Style)</option>
+            <option value="octagon">Octagonal Mission Seal</option>
+            <option value="square_border">Classic 3.5″ Square Patch Border</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- 2. Typography Rules (BARUCH COLLEGE and strictly SSEP) -->
+      <div class="control-group">
+        <div class="group-header">
+          <span class="group-title">2. Flight Nomenclature (Strict)</span>
+          <span class="sub" style="font-size:0.72rem; color:var(--rose-accent); font-weight:700;">Zero Microgravity Text</span>
+        </div>
+
+        <div class="field-row">
+          <label class="field-label" for="inputTopText">Top Arch Nomenclature</label>
+          <input type="text" id="inputTopText" value="BARUCH COLLEGE" placeholder="Top text">
+        </div>
+
+        <div class="field-row">
+          <label class="field-label" for="inputBottomText">Bottom Arch / Emblem Text</label>
+          <input type="text" id="inputBottomText" value="SSEP" placeholder="Strictly SSEP">
+        </div>
+
+        <div class="field-row">
+          <label class="field-label" for="sliderLetterSpacing">Arch Letter Spacing <span id="valLetterSpacing" class="sub">4px</span></label>
+          <input type="range" id="sliderLetterSpacing" min="1" max="10" value="4" step="0.5">
+        </div>
+
+        <div class="field-row">
+          <label class="field-label" for="sliderISSPosY">ISS Orbital Height Clearance <span id="valISSPosY" class="sub">Safe / High</span></label>
+          <input type="range" id="sliderISSPosY" min="90" max="175" value="115" step="1">
+        </div>
+      </div>
+
+      <!-- 3. Parametric Geometry & Spacecraft Coordinates -->
+      <div class="control-group">
+        <div class="group-header">
+          <span class="group-title">3. Parametric Geometry</span>
+        </div>
+
+        <div class="field-row">
+          <label class="field-label" for="sliderMotifScale">Bearcat Astronaut Scale <span id="valMotifScale" class="sub">100%</span></label>
+          <input type="range" id="sliderMotifScale" min="75" max="135" value="100" step="1">
+        </div>
+
+        <div class="field-row">
+          <label class="field-label" for="sliderJetpackAngle">Jetpack Ascent Drift Angle <span id="valJetpackAngle" class="sub">0°</span></label>
+          <input type="range" id="sliderJetpackAngle" min="-30" max="30" value="0" step="1">
+        </div>
+
+        <div class="field-row">
+          <label class="field-label" for="sliderEarthSize">Earth Horizon Elevation <span id="valEarthSize" class="sub">Balanced</span></label>
+          <input type="range" id="sliderEarthSize" min="70" max="130" value="95" step="2">
+        </div>
+
+        <div class="field-row">
+          <label class="field-label" for="sliderStarDensity">Cosmic Starfield Density <span id="valStarDensity" class="sub">75 Stars</span></label>
+          <input type="range" id="sliderStarDensity" min="20" max="180" value="75" step="5">
+        </div>
+
+        <div class="toggle-row">
+          <span class="toggle-label">Include NYC Skyline (WTC &amp; ESB)</span>
+          <label class="switch">
+            <input type="checkbox" id="toggleSkyline" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="toggle-row">
+          <span class="toggle-label">Include Orbiting ISS (Unblocked)</span>
+          <label class="switch">
+            <input type="checkbox" id="toggleISS" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- 4. Embroidery Fabric & Palettes -->
+      <div class="control-group">
+        <div class="group-header">
+          <span class="group-title">4. Spacesuit Palette &amp; Embroidery</span>
+        </div>
+
+        <div class="field-row">
+          <label class="field-label" for="paletteSelect">Embroidery Thread Palette</label>
+          <select id="paletteSelect">
+            <option value="baruch_navy" selected>Classic Baruch Deep Navy &amp; Gold</option>
+            <option value="warm_terracotta">Warm Blush &amp; Flight Terracotta</option>
+            <option value="space_black">Constructivist Twilight Charcoal</option>
+            <option value="nasa_retro">Apollo Flight Blue, White &amp; Crimson</option>
+          </select>
+        </div>
+
+        <div class="field-row">
+          <label class="field-label" for="sliderStitchRelief">Fabric Stitch Thread Relief <span id="valStitchRelief" class="sub">Realistic</span></label>
+          <input type="range" id="sliderStitchRelief" min="0" max="100" value="65" step="5">
+        </div>
+
+        <div class="toggle-row">
+          <span class="toggle-label">Textured Merrowed Border (Outer Thread)</span>
+          <label class="switch">
+            <input type="checkbox" id="toggleMerrowed" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- Right Preview Stage -->
+    <main class="preview-stage">
+      <div class="stage-wrapper">
+
+        <div class="patch-frame-container">
+          <div class="dimension-badge">3.5″ &times; 3.5″ Flight Emblem</div>
+          
+          <div id="patchDisplay" class="patch-view">
+            <!-- Dynamic SVG injected here -->
+          </div>
+        </div>
+
+        <div class="stage-toolbar">
+          <span class="mode-pill active" id="btnViewZoomed">Detailed View</span>
+          <span class="mode-pill" id="btnViewPhysical">1:1 Physical Scale (3.5″)</span>
+        </div>
+
+        <div class="export-note">
+          Vector Embroidery with Twill Fabric Texture · Export Clean 1400×1400 px PNG (400 DPI)
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Hidden off-screen canvas for rendering 1400x1400 PNG -->
+  <canvas id="exportCanvas" width="1400" height="1400" style="display:none;"></canvas>
+
+  <!-- Interactive Toast Notification -->
+  <div id="toast" class="toast-msg">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#68D391" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    <span id="toastText">Patch updated</span>
+  </div>
+
+  <script>
+    // Palettes configuration
+    const PALETTES = {
+      baruch_navy: {
+        bg: '#0F1A2C',
+        spaceDark: '#070C15',
+        merrow: '#C8A251',
+        borderInner: '#FFFFFF',
+        accentGold: '#E6BC65',
+        earthOcean: '#1B3B6F',
+        earthLand: '#3A6351',
+        skyline: '#D2D8E4',
+        suitBody: '#F5F7FA',
+        suitAccents: '#002D62',
+        suitGloves: '#B82626',
+        visor: '#FFB703',
+        flame: '#F48C06',
+        text: '#FFFFFF'
+      },
+      warm_terracotta: {
+        bg: '#251B1D',
+        spaceDark: '#171112',
+        merrow: '#D96B6B',
+        borderInner: '#FAF6F0',
+        accentGold: '#F3C58B',
+        earthOcean: '#412C38',
+        earthLand: '#8F584C',
+        skyline: '#E7D5CD',
+        suitBody: '#FFFDF9',
+        suitAccents: '#B85D43',
+        suitGloves: '#D96B6B',
+        visor: '#F3C58B',
+        flame: '#E87A5D',
+        text: '#FFFDF9'
+      },
+      space_black: {
+        bg: '#141416',
+        spaceDark: '#0A0A0C',
+        merrow: '#E2E2E6',
+        borderInner: '#C52828',
+        accentGold: '#DFAC46',
+        earthOcean: '#202838',
+        earthLand: '#3F4E4F',
+        skyline: '#D6D8DE',
+        suitBody: '#EAEAEA',
+        suitAccents: '#C52828',
+        suitGloves: '#333338',
+        visor: '#DFAC46',
+        flame: '#E85D04',
+        text: '#FFFFFF'
+      },
+      nasa_retro: {
+        bg: '#0B2046',
+        spaceDark: '#050F22',
+        merrow: '#C8102E',
+        borderInner: '#FFFFFF',
+        accentGold: '#FFC72C',
+        earthOcean: '#184E77',
+        earthLand: '#52B788',
+        skyline: '#E0E7EE',
+        suitBody: '#FFFFFF',
+        suitAccents: '#002D62',
+        suitGloves: '#C8102E',
+        visor: '#00A3E0',
+        flame: '#FF6B35',
+        text: '#FFFFFF'
+      }
+    };
+
+    // State management
+    const state = {
+      seed: 512,
+      motif: 'bearcat_jetpack',
+      frameShape: 'flight_shield',
+      paletteKey: 'baruch_navy',
+      topText: 'BARUCH COLLEGE',
+      bottomText: 'SSEP',
+      letterSpacing: 4,
+      issPosY: 115,
+      motifScale: 100,
+      jetpackAngle: 0,
+      earthSize: 95,
+      starDensity: 75,
+      showSkyline: true,
+      showISS: true,
+      stitchRelief: 65,
+      merrowedBorder: true,
+      physicalScale: false,
+      miniSize: 96
+    };
+
+    // Deterministic random generator
+    function mulberry32(a) {
+      return function() {
+        let t = a += 0x6D2B79F5;
+        t = Math.imul(t ^ t >>> 15, t | 1);
+        t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+        return ((t ^ t >>> 14) >>> 0) / 4294967296;
+      }
+    }
+
+    // Build SVG Patch Document
+    function renderPatchSVG() {
+      const p = PALETTES[state.paletteKey];
+      const rand = mulberry32(state.seed);
+      const stitchFilterScale = (state.stitchRelief / 100) * 2.6;
+
+      // 1. Frame Shape definitions (Centered at 300, 300)
+      let borderClipPath = '';
+      let outerBorderPath = '';
+
+      if (state.frameShape === 'circular') {
+        borderClipPath = `<circle cx="300" cy="300" r="275" />`;
+        outerBorderPath = `<circle cx="300" cy="300" r="275" fill="none" stroke="${p.merrow}" stroke-width="${state.merrowedBorder ? 18 : 6}" stroke-dasharray="${state.merrowedBorder ? '2.5,1.5' : 'none'}" />`;
+      } else if (state.frameShape === 'octagon') {
+        const pts = "190,26 410,26 574,190 574,410 410,574 190,574 26,410 26,190";
+        borderClipPath = `<polygon points="${pts}" />`;
+        outerBorderPath = `<polygon points="${pts}" fill="none" stroke="${p.merrow}" stroke-width="${state.merrowedBorder ? 18 : 6}" stroke-linejoin="round" />`;
+      } else if (state.frameShape === 'square_border') {
+        borderClipPath = `<rect x="25" y="25" width="550" height="550" rx="30" />`;
+        outerBorderPath = `<rect x="25" y="25" width="550" height="550" rx="30" fill="none" stroke="${p.merrow}" stroke-width="${state.merrowedBorder ? 20 : 6}" />`;
+      } else {
+        // Hexagon flight shield
+        const pts = "300,22 560,150 560,450 300,578 40,450 40,150";
+        borderClipPath = `<polygon points="${pts}" />`;
+        outerBorderPath = `<polygon points="${pts}" fill="none" stroke="${p.merrow}" stroke-width="${state.merrowedBorder ? 18 : 6}" stroke-linejoin="round" stroke-linecap="round" />`;
+      }
+
+      // 2. Cosmic Starfield
+      let starsSVG = '';
+      for (let i = 0; i < state.starDensity; i++) {
+        const sx = 35 + rand() * 530;
+        const sy = 35 + rand() * 410;
+        const sr = 0.8 + rand() * 2.1;
+        const opacity = 0.35 + rand() * 0.65;
+        if (i % 6 === 0) {
+          // 4-point sparkle star
+          starsSVG += `
+            <g transform="translate(${sx}, ${sy})" opacity="${opacity}">
+              <path d="M-6,0 Q0,0 0,-6 Q0,0 6,0 Q0,0 0,6 Q0,0 -6,0 Z" fill="${p.accentGold}" />
+              <circle cx="0" cy="0" r="1.2" fill="#FFFFFF" />
+            </g>`;
+        } else {
+          starsSVG += `<circle cx="${sx}" cy="${sy}" r="${sr}" fill="#FFFFFF" opacity="${opacity}" />`;
+        }
+      }
+
+      // 3. Earth Horizon & NYC Skyline (Empire State & WTC)
+      const earthHorizonY = 610 - (state.earthSize * 0.95);
+      const earthRadius = 380 + (state.earthSize * 1.8);
+      let skylineSVG = '';
+      if (state.showSkyline) {
+        skylineSVG = `
+          <g transform="translate(300, ${earthHorizonY + 6}) scale(0.95) translate(-300, 0)">
+            <!-- One World Trade Center & Empire State silhouette -->
+            <path d="M 80,0 
+                     L 125,0 L 125,-35 L 142,-35 L 142,-50 L 150,-50 L 150,-95 L 153,-95 L 153,-145 L 155,-145 L 155,-170 L 156,-170 L 156,-95 L 162,-95 L 162,-50 L 176,-50 L 176,-30 L 200,-30 
+                     L 220,-30 L 220,-75 L 240,-75 L 240,-110 L 255,-110 L 255,-40 L 275,-40
+                     L 290,-40 L 290,-65 L 320,-65 L 320,-115 L 330,-115 L 330,-140 L 338,-140 L 338,-190 L 340,-190 L 340,-225 L 342,-225 L 342,-190 L 345,-190 L 345,-140 L 355,-140 L 355,-115 L 365,-115 L 365,-60 L 390,-60
+                     L 410,-60 L 410,-45 L 435,-45 L 435,-85 L 450,-85 L 450,-35 L 480,-35 L 520,0 Z" 
+                  fill="${p.skyline}" stroke="${p.spaceDark}" stroke-width="2.2" opacity="0.95" />
+            <line x1="154" y1="-140" x2="154" y2="-55" stroke="${p.spaceDark}" stroke-width="1.8" />
+            <line x1="341" y1="-185" x2="341" y2="-65" stroke="${p.spaceDark}" stroke-width="1.8" />
+          </g>
+        `;
+      }
+
+      const earthSVG = `
+        <g id="earthHorizonGroup">
+          <circle cx="300" cy="${earthHorizonY + earthRadius}" r="${earthRadius}" fill="${p.earthOcean}" stroke="${p.borderInner}" stroke-width="3.5" />
+          <path d="M 120,${earthHorizonY + 30} Q 220,${earthHorizonY - 10} 340,${earthHorizonY + 25} Q 460,${earthHorizonY + 40} 500,${earthHorizonY + 90} Q 300,${earthHorizonY + 120} 120,${earthHorizonY + 30} Z" fill="${p.earthLand}" opacity="0.8" />
+          <circle cx="300" cy="${earthHorizonY + earthRadius}" r="${earthRadius + 3}" fill="none" stroke="#64DFDF" stroke-width="4.5" opacity="0.45" />
+          ${skylineSVG}
+        </g>
+      `;
+
+      // 4. International Space Station (ISS)
+      // Placed with clear vertical clearance from BARUCH COLLEGE top text arch (Y is adjustable)
+      let issSVG = '';
+      if (state.showISS) {
+        issSVG = `
+          <!-- ISS Positioned to NOT block the Baruch College text -->
+          <g id="issOrbitalStation" transform="translate(300, ${state.issPosY}) scale(0.85)">
+            <!-- Central Truss -->
+            <rect x="-42" y="-3" width="84" height="6" fill="${p.suitBody}" stroke="${p.spaceDark}" stroke-width="1.5" />
+            <!-- Node module -->
+            <rect x="-12" y="-9" width="24" height="18" rx="3" fill="${p.borderInner}" stroke="${p.spaceDark}" stroke-width="1.5" />
+            <circle cx="0" cy="0" r="4" fill="${p.accentGold}" />
+            <line x1="0" y1="-9" x2="0" y2="-17" stroke="${p.suitBody}" stroke-width="2" />
+            <circle cx="0" cy="-18" r="2.5" fill="${p.merrow}" />
+            
+            <!-- Left Solar Wings -->
+            <g transform="translate(-36, 0)">
+              <rect x="-24" y="-20" width="22" height="40" fill="${p.accentGold}" stroke="${p.spaceDark}" stroke-width="1.5" rx="1.5" />
+              <line x1="-24" y1="-10" x2="-2" y2="-10" stroke="${p.spaceDark}" stroke-width="1" />
+              <line x1="-24" y1="0" x2="-2" y2="0" stroke="${p.spaceDark}" stroke-width="1" />
+              <line x1="-24" y1="10" x2="-2" y2="10" stroke="${p.spaceDark}" stroke-width="1" />
+              <line x1="-13" y1="-20" x2="-13" y2="20" stroke="${p.spaceDark}" stroke-width="1" />
+            </g>
+            <!-- Right Solar Wings -->
+            <g transform="translate(38, 0)">
+              <rect x="2" y="-20" width="22" height="40" fill="${p.accentGold}" stroke="${p.spaceDark}" stroke-width="1.5" rx="1.5" />
+              <line x1="2" y1="-10" x2="24" y2="-10" stroke="${p.spaceDark}" stroke-width="1" />
+              <line x1="2" y1="0" x2="24" y2="0" stroke="${p.spaceDark}" stroke-width="1" />
+              <line x1="2" y1="10" x2="24" y2="10" stroke="${p.spaceDark}" stroke-width="1" />
+              <line x1="13" y1="-20" x2="13" y2="20" stroke="${p.spaceDark}" stroke-width="1" />
+            </g>
+            <!-- Callout badge -->
+            <text x="0" y="22" fill="${p.text}" font-family="'Space Grotesk', sans-serif" font-size="9" font-weight="700" letter-spacing="1.5" text-anchor="middle">ISS</text>
+          </g>
+        `;
+      }
+
+      // 5. Mascot Artwork: Baruch Bearcat in Flight Astronaut Suit with Jetpack
+      let motifContentSVG = '';
+      const motifScaleFactor = state.motifScale / 100;
+
+      if (state.motif === 'bearcat_jetpack') {
+        motifContentSVG = `
+          <!-- Ascent Plume Trajectory -->
+          <path d="M 230,${earthHorizonY} C 210,380 230,280 280,210" fill="none" stroke="${p.flame}" stroke-width="4" stroke-dasharray="8,6" opacity="0.85" />
+          <path d="M 230,${earthHorizonY} C 210,380 230,280 280,210" fill="none" stroke="#FFF" stroke-width="1.5" opacity="0.9" />
+
+          <!-- BEARCAT MASCOT IN SPACESUIT WITH JETPACK -->
+          <g id="bearcatAstronaut" transform="translate(300, 275) rotate(${state.jetpackAngle}) scale(${motifScaleFactor}) translate(-300, -275)">
+
+            <!-- Compact Astronaut Jetpack (Backpack unit) -->
+            <g id="jetpackUnit" transform="translate(242, 260)">
+              <!-- Thruster Nozzles -->
+              <polygon points="4,32 -2,44 10,44" fill="${p.suitAccents}" stroke="${p.spaceDark}" stroke-width="1.5" />
+              <polygon points="26,32 20,44 32,44" fill="${p.suitAccents}" stroke="${p.spaceDark}" stroke-width="1.5" />
+              
+              <!-- Exhaust Thruster Flames -->
+              <path d="M -2,44 Q 4,68 4,80 Q 4,68 10,44 Z" fill="${p.flame}" />
+              <path d="M 0,44 Q 4,58 4,68 Q 4,58 8,44 Z" fill="#FFE066" />
+              <path d="M 20,44 Q 26,68 26,80 Q 26,68 32,44 Z" fill="${p.flame}" />
+              <path d="M 22,44 Q 26,58 26,68 Q 26,58 30,44 Z" fill="#FFE066" />
+
+              <!-- Jetpack Body Tanks -->
+              <rect x="0" y="0" width="30" height="34" rx="6" fill="${p.suitAccents}" stroke="${p.spaceDark}" stroke-width="2.5" />
+              <rect x="4" y="4" width="9" height="26" rx="3" fill="${p.suitBody}" stroke="${p.spaceDark}" stroke-width="1.5" />
+              <rect x="17" y="4" width="9" height="26" rx="3" fill="${p.suitBody}" stroke="${p.spaceDark}" stroke-width="1.5" />
+              <!-- Status LED -->
+              <circle cx="15" cy="17" r="2.5" fill="${p.accentGold}" />
+            </g>
+
+            <!-- Bearcat Astronaut Tail (Space suited tail ring) -->
+            <g id="spacesuitTail">
+              <path d="M 260,315 Q 220,335 210,290 Q 205,270 218,265 Q 226,275 228,295 Q 235,320 265,305 Z" fill="${p.suitBody}" stroke="${p.spaceDark}" stroke-width="2.5" stroke-linejoin="round" />
+              <!-- Blue ring segments on tail -->
+              <path d="M 214,295 Q 225,290 226,303" stroke="${p.suitAccents}" stroke-width="3" fill="none" />
+              <path d="M 225,315 Q 235,310 240,320" stroke="${p.suitAccents}" stroke-width="3" fill="none" />
+            </g>
+
+            <!-- Astronaut Flight Suit Body -->
+            <g id="suitBodyGroup">
+              <!-- Legs & Boots -->
+              <!-- Left Leg -->
+              <path d="M 270,305 L 260,345 L 285,355 L 290,315 Z" fill="${p.suitBody}" stroke="${p.spaceDark}" stroke-width="2.5" stroke-linejoin="round" />
+              <ellipse cx="272" cy="350" rx="14" ry="7" fill="${p.suitAccents}" stroke="${p.spaceDark}" stroke-width="2" />
+              <!-- Right Leg -->
+              <path d="M 305,310 L 315,350 L 340,340 L 325,305 Z" fill="${p.suitBody}" stroke="${p.spaceDark}" stroke-width="2.5" stroke-linejoin="round" />
+              <ellipse cx="328" cy="345" rx="14" ry="7" fill="${p.suitAccents}" stroke="${p.spaceDark}" stroke-width="2" />
+
+              <!-- Main Torso -->
+              <path d="M 265,250 C 260,285 270,320 300,320 C 330,320 340,285 335,250 Z" fill="${p.suitBody}" stroke="${p.spaceDark}" stroke-width="3" stroke-linejoin="round" />
+
+              <!-- Chest Flight Control Pack & Baruch "B" Mission Patch -->
+              <rect x="282" y="260" width="36" height="34" rx="4" fill="${p.suitAccents}" stroke="${p.spaceDark}" stroke-width="2" />
+              <rect x="286" y="264" width="28" height="20" rx="2" fill="${p.bg}" />
+              <!-- Baruch "B" Monogram on Chest -->
+              <text x="300" y="280" font-family="'Cinzel', serif" font-weight="900" font-size="14" fill="${p.accentGold}" text-anchor="middle">B</text>
+              <!-- Chest telemetry indicator buttons -->
+              <circle cx="289" cy="289" r="2" fill="#E63946" />
+              <circle cx="295" cy="289" r="2" fill="${p.accentGold}" />
+              <circle cx="301" cy="289" r="2" fill="#52B788" />
+
+              <!-- Utility Life Support Ribbed Harness -->
+              <path d="M 272,255 L 282,265 M 328,255 L 318,265" stroke="${p.suitAccents}" stroke-width="3" />
+              <path d="M 282,294 L 275,312 M 318,294 L 325,312" stroke="${p.suitAccents}" stroke-width="3" />
+
+              <!-- Left Arm & Claw Glove (Raised in greeting / wave) -->
+              <g id="leftArmWave">
+                <path d="M 266,252 Q 240,240 235,215 Q 245,210 255,225 Q 262,235 275,255 Z" fill="${p.suitBody}" stroke="${p.spaceDark}" stroke-width="2.5" />
+                <!-- Glove with Bearcat Claws -->
+                <circle cx="236" cy="214" r="11" fill="${p.suitGloves}" stroke="${p.spaceDark}" stroke-width="2" />
+                <path d="M 230,205 L 232,209 M 235,203 L 236,208 M 241,205 L 240,210" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+              </g>
+
+              <!-- Right Arm & Glove (Guiding Jetpack throttle) -->
+              <g id="rightArmThrottle">
+                <path d="M 334,252 Q 355,265 360,285 Q 348,292 342,280 Q 338,270 330,262 Z" fill="${p.suitBody}" stroke="${p.spaceDark}" stroke-width="2.5" />
+                <circle cx="358" cy="286" r="10" fill="${p.suitGloves}" stroke="${p.spaceDark}" stroke-width="2" />
+              </g>
+            </g>
+
+            <!-- ASTRONAUT HELMET & BEARCAT EARS -->
+            <g id="helmetGroup">
+              <!-- Astronaut Helmet Collar Ring -->
+              <ellipse cx="300" cy="252" rx="34" ry="10" fill="${p.suitAccents}" stroke="${p.spaceDark}" stroke-width="2.5" />
+
+              <!-- Spherical Helmet Bubble -->
+              <circle cx="300" cy="212" r="38" fill="${p.suitBody}" stroke="${p.spaceDark}" stroke-width="3" />
+
+              <!-- Custom Bearcat Helmet Ears! (Reinforced Suit Ear Cones) -->
+              <!-- Left Ear -->
+              <path d="M 268,190 L 254,160 L 282,176 Z" fill="${p.suitAccents}" stroke="${p.spaceDark}" stroke-width="2.5" stroke-linejoin="round" />
+              <path d="M 266,186 L 258,166 L 276,178 Z" fill="${p.accentGold}" />
+              <!-- Right Ear -->
+              <path d="M 332,190 L 346,160 L 318,176 Z" fill="${p.suitAccents}" stroke="${p.spaceDark}" stroke-width="2.5" stroke-linejoin="round" />
+              <path d="M 334,186 L 342,166 L 324,178 Z" fill="${p.accentGold}" />
+
+              <!-- Reflective Gold/Cyan Spherical Visor -->
+              <ellipse cx="300" cy="214" rx="27" ry="24" fill="${p.visor}" stroke="${p.spaceDark}" stroke-width="2.5" />
+              
+              <!-- Cute Bearcat Face Silhouette visible inside Visor reflection -->
+              <g opacity="0.85">
+                <!-- Bearcat Nose & Whiskers -->
+                <polygon points="300,218 296,213 304,213" fill="${p.spaceDark}" />
+                <path d="M 296,220 Q 300,224 304,220" stroke="${p.spaceDark}" stroke-width="1.5" fill="none" />
+                <!-- Whiskers -->
+                <line x1="284" y1="216" x2="292" y2="218" stroke="${p.spaceDark}" stroke-width="1.2" stroke-linecap="round" />
+                <line x1="284" y1="222" x2="292" y2="220" stroke="${p.spaceDark}" stroke-width="1.2" stroke-linecap="round" />
+                <line x1="316" y1="216" x2="308" y2="218" stroke="${p.spaceDark}" stroke-width="1.2" stroke-linecap="round" />
+                <line x1="316" y1="222" x2="308" y2="220" stroke="${p.spaceDark}" stroke-width="1.2" stroke-linecap="round" />
+                <!-- Friendly Cat Eyes -->
+                <ellipse cx="291" cy="207" rx="3.5" ry="4" fill="${p.spaceDark}" />
+                <circle cx="292" cy="205" r="1.2" fill="#FFFFFF" />
+                <ellipse cx="309" cy="207" rx="3.5" ry="4" fill="${p.spaceDark}" />
+                <circle cx="310" cy="205" r="1.2" fill="#FFFFFF" />
+              </g>
+
+              <!-- Visor Curved Glass Highlight -->
+              <path d="M 280,200 A 24,20 0 0,1 316,200" stroke="#FFFFFF" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.85" />
+            </g>
+
+          </g>
+        `;
+      } else if (state.motif === 'apollo_crest') {
+        // Apollo SSEP Bearcat Crest
+        motifContentSVG = `
+          <ellipse cx="300" cy="270" rx="195" ry="95" transform="rotate(-18 300 270)" fill="none" stroke="${p.accentGold}" stroke-width="3" stroke-dasharray="10,6" opacity="0.85" />
+          <g transform="translate(180, 180)">
+            <circle cx="0" cy="0" r="30" fill="#E2E2E6" stroke="${p.spaceDark}" stroke-width="2" />
+            <circle cx="-10" cy="-8" r="5" fill="#C2C2C8" opacity="0.7" />
+            <circle cx="8" cy="10" r="7" fill="#C2C2C8" opacity="0.7" />
+            <path d="M0,-30 A30,30 0 0,0 0,30 A22,30 0 0,1 0,-30" fill="${p.bg}" opacity="0.35" />
+          </g>
+          <!-- Bearcat Head Crest -->
+          <g transform="translate(300, 270) scale(1.1)">
+            <circle cx="0" cy="0" r="42" fill="${p.suitBody}" stroke="${p.spaceDark}" stroke-width="3" />
+            <!-- Ears -->
+            <polygon points="-32,-25 -45,-55 -15,-40" fill="${p.suitAccents}" stroke="${p.spaceDark}" stroke-width="2.5" />
+            <polygon points="32,-25 45,-55 15,-40" fill="${p.suitAccents}" stroke="${p.spaceDark}" stroke-width="2.5" />
+            <!-- Visor -->
+            <ellipse cx="0" cy="0" rx="30" ry="24" fill="${p.visor}" stroke="${p.spaceDark}" stroke-width="2" />
+            <text x="0" y="8" font-family="'Cinzel', serif" font-weight="900" font-size="24" fill="${p.spaceDark}" text-anchor="middle">B</text>
+          </g>
+        `;
+      } else if (state.motif === 'telescope_array') {
+        // Space Telescope with Baruch 'B'
+        motifContentSVG = `
+          <line x1="260" y1="290" x2="300" y2="125" stroke="${p.flame}" stroke-width="2.5" stroke-dasharray="6,4" opacity="0.9" />
+          <g transform="translate(260, 300) rotate(-42) scale(1.1)">
+            <ellipse cx="0" cy="-52" rx="12" ry="4" fill="${p.spaceDark}" stroke="${p.suitBody}" stroke-width="2" />
+            <rect x="-14" y="-50" width="28" height="42" fill="${p.suitBody}" stroke="${p.spaceDark}" stroke-width="2" />
+            <text x="0" y="-24" fill="${p.suitAccents}" font-family="'Cinzel', serif" font-size="16" font-weight="800" text-anchor="middle">B</text>
+            <rect x="-18" y="-8" width="36" height="34" rx="2" fill="${p.accentGold}" stroke="${p.spaceDark}" stroke-width="2" />
+            <g transform="translate(-18, -25) rotate(-90)">
+              <rect x="-6" y="-55" width="12" height="50" fill="#3A86FF" stroke="${p.spaceDark}" stroke-width="1.5" rx="1" />
+              <line x1="0" y1="-55" x2="0" y2="-5" stroke="#FFFFFF" stroke-width="1" />
+            </g>
+            <g transform="translate(18, -25) rotate(90)">
+              <rect x="-6" y="-55" width="12" height="50" fill="#3A86FF" stroke="${p.spaceDark}" stroke-width="1.5" rx="1" />
+              <line x1="0" y1="-55" x2="0" y2="-5" stroke="#FFFFFF" stroke-width="1" />
+            </g>
+          </g>
+        `;
+      }
+
+      // 6. Typography: Strictly 'BARUCH COLLEGE' and 'SSEP' (Zero microgravity text)
+      const topTextStr = (state.topText || 'BARUCH COLLEGE').trim();
+      const bottomTextStr = (state.bottomText || 'SSEP').trim();
+      const letterSpacingVal = `${state.letterSpacing}px`;
+
+      const textGroupSVG = `
+        <g id="typographyLayer">
+          <!-- Top Arch: BARUCH COLLEGE (Safely positioned above ISS and stars) -->
+          <path id="topArchPath" d="M 85,260 A 225,225 0 0,1 515,260" fill="none" />
+          <text fill="${p.text}" font-family="'Cinzel', Georgia, serif" font-size="22" font-weight="900" letter-spacing="${letterSpacingVal}">
+            <textPath href="#topArchPath" startOffset="50%" text-anchor="middle">
+              ${topTextStr}
+            </textPath>
+          </text>
+
+          <!-- Bottom Arch / Shield Badge: SSEP (ONLY TEXT) -->
+          <g transform="translate(300, 508)">
+            <!-- Embroidered flight pill badge -->
+            <rect x="-85" y="-19" width="170" height="38" rx="19" fill="${p.spaceDark}" stroke="${p.accentGold}" stroke-width="2.5" />
+            <rect x="-81" y="-15" width="162" height="30" rx="15" fill="${p.suitAccents}" stroke="${p.borderInner}" stroke-width="1" opacity="0.9" />
+            <text x="0" y="7" fill="${p.text}" font-family="'Anton', 'Space Grotesk', sans-serif" font-size="23" font-weight="bold" letter-spacing="3.5px" text-anchor="middle">
+              ${bottomTextStr}
+            </text>
+          </g>
+        </g>
+      `;
+
+      // Full Master SVG Assembly (viewBox 600x600)
+      return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%" height="100%" id="masterPatchSVG">
+          <defs>
+            <!-- Physical Fabric Stitch & Twill Shader Filter -->
+            <filter id="fabricTexture" x="-10%" y="-10%" width="120%" height="120%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" result="noise" />
+              <feColorMatrix type="matrix" values="0.33 0.33 0.33 0 0   0.33 0.33 0.33 0 0   0.33 0.33 0.33 0 0  0 0 0 0.5 0" in="noise" result="coloredNoise"/>
+              <feDisplacementMap in="SourceGraphic" in2="coloredNoise" scale="${stitchFilterScale}" xChannelSelector="R" yChannelSelector="G" result="displaced" />
+              <feBlend mode="multiply" in="displaced" in2="coloredNoise" />
+            </filter>
+
+            <!-- Clip to Outer Patch Shape -->
+            <clipPath id="patchClip">
+              ${borderClipPath}
+            </clipPath>
+
+            <!-- Background Cosmic Gradient -->
+            <linearGradient id="cosmicBgGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="${p.spaceDark}" />
+              <stop offset="60%" stop-color="${p.bg}" />
+              <stop offset="100%" stop-color="${p.spaceDark}" />
+            </linearGradient>
+          </defs>
+
+          <!-- Outer Background Drop Shadow -->
+          <g filter="drop-shadow(0 12px 28px rgba(0,0,0,0.32))">
+            <!-- Clipped Emblem Interior with Fabric Filter -->
+            <g clip-path="url(#patchClip)" filter="url(#fabricTexture)">
+              <!-- Cosmic Twill Cloth Base -->
+              <rect x="0" y="0" width="600" height="600" fill="url(#cosmicBgGrad)" />
+              
+              <!-- Celestial Starfield -->
+              ${starsSVG}
+
+              <!-- Space Station ISS (Positioned high without blocking text) -->
+              ${issSVG}
+
+              <!-- Centerpiece Motif: Bearcat Mascot in Astronaut Suit & Jetpack -->
+              ${motifContentSVG}
+
+              <!-- Earth Horizon & NYC Skyline -->
+              ${earthSVG}
+
+              <!-- Inner Ring Border Accent -->
+              <circle cx="300" cy="300" r="248" fill="none" stroke="${p.borderInner}" stroke-width="2.5" stroke-dasharray="8,4" opacity="0.6" />
+
+              <!-- Strict Typography: BARUCH COLLEGE & SSEP -->
+              ${textGroupSVG}
+            </g>
+
+            <!-- Embroidered Outer Edge / Merrowed Stitch Border -->
+            ${outerBorderPath}
+          </g>
+        </svg>
+      `;
+    }
+
+    // Refresh viewports
+    function updateDisplay() {
+      const svgCode = renderPatchSVG();
+      
+      // Update main workbench
+      const patchDisplay = document.getElementById('patchDisplay');
+      patchDisplay.innerHTML = svgCode;
+
+      // Update in-dashboard small-scale check
+      const miniPatchView = document.getElementById('miniPatchView');
+      miniPatchView.innerHTML = svgCode;
+    }
+
+    // Toast notification helper
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toastText').textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2600);
+    }
+
+    // High-Resolution 1400x1400 PNG Export
+    function exportHighResPNG() {
+      showToast('Generating 1400×1400 PNG...');
+      const svgElement = document.getElementById('masterPatchSVG');
+      const svgData = new XMLSerializer().serializeToString(svgElement);
+      const svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+      const URL = window.URL || window.webkitURL || window;
+      const blobURL = URL.createObjectURL(svgBlob);
+
+      const canvas = document.getElementById('exportCanvas');
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, 1400, 1400);
+
+      const img = new Image();
+      img.onload = function() {
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+        ctx.drawImage(img, 0, 0, 1400, 1400);
+        URL.revokeObjectURL(blobURL);
+
+        const pngURI = canvas.toDataURL('image/png');
+        const downloadLink = document.createElement('a');
+        downloadLink.download = `ssep-baruch-patch-bearcat-${Date.now()}.png`;
+        downloadLink.href = pngURI;
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+        showToast('Patch exported (1400×1400 px)');
+      };
+      img.src = blobURL;
+    }
+
+    // Randomizer
+    function randomizeAll() {
+      const palettes = ['baruch_navy', 'warm_terracotta', 'space_black', 'nasa_retro'];
+      const frames = ['flight_shield', 'circular', 'octagon', 'square_border'];
+      
+      state.seed = Math.floor(Math.random() * 999999);
+      state.paletteKey = palettes[Math.floor(Math.random() * palettes.length)];
+      state.frameShape = frames[Math.floor(Math.random() * frames.length)];
+      state.starDensity = Math.floor(Math.random() * 90) + 40;
+      state.jetpackAngle = Math.floor(Math.random() * 30) - 15;
+      state.motifScale = Math.floor(Math.random() * 30) + 90;
+
+      // Update form elements
+      document.getElementById('paletteSelect').value = state.paletteKey;
+      document.getElementById('frameShapeSelect').value = state.frameShape;
+      document.getElementById('sliderStarDensity').value = state.starDensity;
+      document.getElementById('valStarDensity').textContent = `${state.starDensity} Stars`;
+      document.getElementById('sliderJetpackAngle').value = state.jetpackAngle;
+      document.getElementById('valJetpackAngle').textContent = `${state.jetpackAngle}°`;
+      document.getElementById('sliderMotifScale').value = state.motifScale;
+      document.getElementById('valMotifScale').textContent = `${state.motifScale}%`;
+
+      updateDisplay();
+      showToast('Randomized configuration applied!');
+    }
+
+    // Wire Event Listeners
+    window.addEventListener('DOMContentLoaded', () => {
+      updateDisplay();
+
+      // Motif & Frame
+      document.getElementById('motifSelect').addEventListener('change', (e) => {
+        state.motif = e.target.value;
+        updateDisplay();
+      });
+
+      document.getElementById('frameShapeSelect').addEventListener('change', (e) => {
+        state.frameShape = e.target.value;
+        updateDisplay();
+      });
+
+      // Palette
+      document.getElementById('paletteSelect').addEventListener('change', (e) => {
+        state.paletteKey = e.target.value;
+        updateDisplay();
+      });
+
+      // Text inputs
+      document.getElementById('inputTopText').addEventListener('input', (e) => {
+        state.topText = e.target.value.toUpperCase();
+        updateDisplay();
+      });
+
+      document.getElementById('inputBottomText').addEventListener('input', (e) => {
+        state.bottomText = e.target.value.toUpperCase();
+        updateDisplay();
+      });
+
+      // Sliders
+      document.getElementById('sliderLetterSpacing').addEventListener('input', (e) => {
+        state.letterSpacing = parseFloat(e.target.value);
+        document.getElementById('valLetterSpacing').textContent = `${state.letterSpacing}px`;
+        updateDisplay();
+      });
+
+      document.getElementById('sliderISSPosY').addEventListener('input', (e) => {
+        state.issPosY = parseInt(e.target.value);
+        document.getElementById('valISSPosY').textContent = `${state.issPosY}px`;
+        updateDisplay();
+      });
+
+      document.getElementById('sliderMotifScale').addEventListener('input', (e) => {
+        state.motifScale = parseInt(e.target.value);
+        document.getElementById('valMotifScale').textContent = `${state.motifScale}%`;
+        updateDisplay();
+      });
+
+      document.getElementById('sliderJetpackAngle').addEventListener('input', (e) => {
+        state.jetpackAngle = parseInt(e.target.value);
+        document.getElementById('valJetpackAngle').textContent = `${state.jetpackAngle}°`;
+        updateDisplay();
+      });
+
+      document.getElementById('sliderEarthSize').addEventListener('input', (e) => {
+        state.earthSize = parseInt(e.target.value);
+        document.getElementById('valEarthSize').textContent = `${state.earthSize}%`;
+        updateDisplay();
+      });
+
+      document.getElementById('sliderStarDensity').addEventListener('input', (e) => {
+        state.starDensity = parseInt(e.target.value);
+        document.getElementById('valStarDensity').textContent = `${state.starDensity} Stars`;
+        updateDisplay();
+      });
+
+      document.getElementById('sliderStitchRelief').addEventListener('input', (e) => {
+        state.stitchRelief = parseInt(e.target.value);
+        document.getElementById('valStitchRelief').textContent = `${state.stitchRelief}%`;
+        updateDisplay();
+      });
+
+      // Toggles
+      document.getElementById('toggleSkyline').addEventListener('change', (e) => {
+        state.showSkyline = e.target.checked;
+        updateDisplay();
+      });
+
+      document.getElementById('toggleISS').addEventListener('change', (e) => {
+        state.showISS = e.target.checked;
+        updateDisplay();
+      });
+
+      document.getElementById('toggleMerrowed').addEventListener('change', (e) => {
+        state.merrowedBorder = e.target.checked;
+        updateDisplay();
+      });
+
+      // Buttons
+      document.getElementById('btnRandomize').addEventListener('click', randomizeAll);
+      document.getElementById('btnExportPNG').addEventListener('click', exportHighResPNG);
+
+      // Physical scale switcher
+      const patchDisplay = document.getElementById('patchDisplay');
+      const btnZoomed = document.getElementById('btnViewZoomed');
+      const btnPhysical = document.getElementById('btnViewPhysical');
+
+      btnZoomed.addEventListener('click', () => {
+        btnZoomed.classList.add('active');
+        btnPhysical.classList.remove('active');
+        patchDisplay.classList.remove('physical-size');
+        showToast('Zoomed Studio View');
+      });
+
+      btnPhysical.addEventListener('click', () => {
+        btnPhysical.classList.add('active');
+        btnZoomed.classList.remove('active');
+        patchDisplay.classList.add('physical-size');
+        showToast('True 1:1 Scale (3.5″ × 3.5″)');
+      });
+
+      // Mini Scale Check Buttons
+      const miniButtons = document.querySelectorAll('.mini-btn');
+      const miniFrame = document.getElementById('miniPatchView');
+      const miniSizeLabel = document.getElementById('miniSizeLabel');
+
+      miniButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          miniButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const size = parseInt(btn.dataset.size);
+          miniFrame.style.width = `${size}px`;
+          miniFrame.style.height = `${size}px`;
+          miniSizeLabel.textContent = `${(size/96).toFixed(2)}″ (${size}px)`;
+        });
+      });
+    });
+  </script>
+</body>
+</html>
