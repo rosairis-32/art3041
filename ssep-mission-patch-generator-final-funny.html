@@ -1,0 +1,2608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ART 3041 · Fall 2026 · ROSA I. PAULA · A.I. FOR DESIGNERS — SSEP MISSION PATCH GENERATOR</title>
+
+  <!-- Typography: Anton (Official Baruch Athletic style), Plus Jakarta Sans, Space Grotesk, Cinzel -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Cinzel:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-cream: #FAF6F0;
+      --bg-card: #FFFFFF;
+      --bg-sidebar: #FFFDF9;
+      --text-main: #2D2323;
+      --text-muted: #6E5F5E;
+      --text-subtle: #988887;
+      --rose-accent: #D96B6B;
+      --rose-hover: #C55656;
+      --rose-soft: #FCEEEE;
+      --terracotta: #B85D43;
+      --baruch-navy: #052D4F;
+      --baruch-light-blue: #94BBE9;
+      --border-warm: #EBDED6;
+      --border-focus: #D96B6B;
+      --shadow-soft: 0 4px 20px rgba(184, 93, 67, 0.08);
+      --shadow-hover: 0 10px 32px rgba(184, 93, 67, 0.16);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-cream);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(217, 107, 107, 0.08) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(184, 93, 67, 0.09) 0px, transparent 50%);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Academic Header */
+    header.app-header {
+      background: rgba(255, 253, 249, 0.95);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-warm);
+      padding: 0.85rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(184, 93, 67, 0.05);
+    }
+
+    .brand-title {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-kicker {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+    }
+
+    .brand-title h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      color: var(--text-main);
+      margin: 1px 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .brand-title h1 span.badge {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      background: var(--rose-soft);
+      color: var(--rose-accent);
+      padding: 2px 8px;
+      border-radius: 999px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .brand-subtitle {
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+    }
+
+    /* Workspace */
+    .app-workspace {
+      display: grid;
+      grid-template-columns: 460px 1fr;
+      flex: 1;
+      max-width: 1760px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /* Left Control Sidebar */
+    aside.control-panel {
+      background: var(--bg-sidebar);
+      border-right: 1px solid var(--border-warm);
+      padding: 1.4rem 1.6rem;
+      overflow-y: auto;
+      max-height: calc(100vh - 75px);
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .control-group {
+      background: var(--bg-card);
+      border: 1px solid var(--border-warm);
+      border-radius: var(--radius-md);
+      padding: 1.15rem;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      transition: box-shadow 0.2s ease;
+    }
+
+    .control-group:hover {
+      box-shadow: var(--shadow-hover);
+    }
+
+    .group-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-warm);
+      padding-bottom: 0.5rem;
+    }
+
+    .group-title {
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--terracotta);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .group-title::before {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--rose-accent);
+    }
+
+    .field-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .field-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .field-label .sub {
+      font-weight: 500;
+      color: var(--rose-accent);
+      font-size: 0.74rem;
+      font-family: 'Space Grotesk', monospace;
+    }
+
+    /* Small-Scale Recognizability Component */
+    .mini-check-card {
+      background: #FFFDF9;
+      border: 1px dashed var(--rose-accent);
+      border-radius: var(--radius-md);
+      padding: 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .mini-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .mini-scale-btns {
+      display: flex;
+      gap: 4px;
+    }
+
+    .mini-btn {
+      font-size: 0.7rem;
+      font-family: 'Space Grotesk', monospace;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 6px;
+      border: 1px solid var(--border-warm);
+      background: #FFFFFF;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .mini-btn.active {
+      background: var(--rose-accent);
+      color: #FFFFFF;
+      border-color: var(--rose-accent);
+    }
+
+    .mini-viewport-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem;
+      background: radial-gradient(circle, #FAF6F0 0%, #F5ECE3 100%);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-warm);
+      min-height: 125px;
+    }
+
+    .mini-frame {
+      width: 96px;
+      height: 96px;
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.12));
+    }
+
+    .mini-frame svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* Universal Vision Upload */
+    .upload-zone {
+      border: 2px dashed var(--rose-accent);
+      background: var(--rose-soft);
+      border-radius: var(--radius-sm);
+      padding: 1rem 0.8rem;
+      text-align: center;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .upload-zone:hover, .upload-zone.dragover {
+      background: #F8DFDF;
+      border-color: var(--terracotta);
+      transform: translateY(-1px);
+    }
+
+    .upload-zone input[type="file"] {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .upload-preview-card {
+      display: none;
+      background: #FFFDF9;
+      border: 1px solid var(--border-warm);
+      border-radius: var(--radius-sm);
+      padding: 0.85rem;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .upload-preview-card.visible {
+      display: flex;
+    }
+
+    .preview-header-row {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .preview-thumb-img {
+      width: 76px;
+      height: 76px;
+      object-fit: contain;
+      border-radius: 6px;
+      border: 1px solid var(--border-warm);
+      background: #111;
+    }
+
+    .extracted-palette-swatches {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .color-chip {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      border: 1px solid rgba(0,0,0,0.15);
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+
+    .color-chip:hover {
+      transform: scale(1.2);
+    }
+
+    .vision-tags-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 2px;
+    }
+
+    .vision-tag {
+      font-size: 0.68rem;
+      font-family: 'Space Grotesk', monospace;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: var(--bg-cream);
+      border: 1px solid var(--border-warm);
+      color: var(--terracotta);
+    }
+
+    /* Form Inputs */
+    select, input[type="text"] {
+      width: 100%;
+      background: #FFFDF9;
+      border: 1px solid var(--border-warm);
+      border-radius: var(--radius-sm);
+      padding: 0.6rem 0.8rem;
+      font-size: 0.85rem;
+      font-family: inherit;
+      color: var(--text-main);
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    select:focus, input[type="text"]:focus {
+      border-color: var(--rose-accent);
+      box-shadow: 0 0 0 3px rgba(217, 107, 107, 0.15);
+      background: #FFFFFF;
+    }
+
+    /* Range Sliders */
+    input[type="range"] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--border-warm);
+      outline: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--rose-accent);
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(217, 107, 107, 0.4);
+      border: 2px solid #FFFFFF;
+      transition: transform 0.1s ease;
+    }
+
+    input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+    }
+
+    /* Toggles */
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.2rem 0;
+    }
+
+    .toggle-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 42px;
+      height: 22px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: var(--border-warm);
+      transition: .25s;
+      border-radius: 34px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .25s;
+      border-radius: 50%;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    }
+
+    input:checked + .slider {
+      background-color: var(--rose-accent);
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(20px);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 0.65rem 1.05rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn-secondary {
+      background: #FFFFFF;
+      color: var(--text-main);
+      border: 1px solid var(--border-warm);
+    }
+
+    .btn-secondary:hover {
+      background: var(--rose-soft);
+      border-color: var(--rose-accent);
+      color: var(--rose-accent);
+    }
+
+    .btn-anim-play {
+      background: #2D2323;
+      color: #FFFFFF;
+      gap: 0.45rem;
+    }
+
+    .btn-anim-play.playing {
+      background: var(--terracotta);
+      box-shadow: 0 0 14px rgba(184, 93, 67, 0.45);
+    }
+
+    /* Preview Stage */
+    main.preview-stage {
+      padding: 2.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .stage-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.35rem;
+      width: 100%;
+    }
+
+    .patch-frame-container {
+      position: relative;
+      background: #FFFFFF;
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-warm);
+      box-shadow: 0 14px 44px rgba(184, 93, 67, 0.12);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .dimension-badge {
+      position: absolute;
+      top: -12px;
+      background: var(--text-main);
+      color: #FFF;
+      font-size: 0.68rem;
+      font-family: 'Space Grotesk', monospace;
+      font-weight: 700;
+      padding: 3px 12px;
+      border-radius: 999px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    .patch-view {
+      width: 480px;
+      height: 480px;
+      max-width: 80vw;
+      max-height: 80vw;
+      border-radius: var(--radius-md);
+      transition: width 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), height 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+    }
+
+    .patch-view.physical-size {
+      width: 3.5in !important;
+      height: 3.5in !important;
+    }
+
+    .patch-view svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      filter: drop-shadow(0 8px 24px rgba(0,0,0,0.18));
+    }
+
+    /* Clean Action Toolbar (with the two SVG buttons deleted) */
+    .screenshot-toolbar-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      width: 100%;
+      max-width: 460px;
+      align-items: center;
+    }
+
+    .btn-explore-variants {
+      width: 100%;
+      background: #F4EFEA;
+      color: #1A1A1A;
+      border: 1.5px solid #2D2323;
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      font-size: 0.95rem;
+      font-weight: 800;
+      font-family: inherit;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all 0.15s ease;
+    }
+
+    .btn-explore-variants:hover {
+      background: #EDE4DC;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .btn-explore-variants:active {
+      transform: translateY(0);
+    }
+
+    /* Balanced 3-Column Grid without SVG button */
+    .quick-export-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 0.45rem;
+      width: 100%;
+    }
+
+    .btn-action-dark {
+      background: #181615;
+      color: #FFFFFF;
+      border: 1.5px solid #181615;
+      border-radius: 6px;
+      padding: 0.65rem 0.5rem;
+      font-size: 0.88rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+      letter-spacing: 0.03em;
+    }
+
+    .btn-action-dark:hover {
+      background: #332E2C;
+      border-color: #332E2C;
+      transform: translateY(-1px);
+    }
+
+    .select-scale-light {
+      background: #FAF6F0;
+      color: #2D2323;
+      border: 1.5px solid #D8CCC4;
+      border-radius: 6px;
+      padding: 0.65rem 0.5rem;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      outline: none;
+      text-align: center;
+      transition: all 0.15s ease;
+    }
+
+    .select-scale-light:focus {
+      border-color: #2D2323;
+    }
+
+    .btn-action-light {
+      background: #FAF6F0;
+      color: #2D2323;
+      border: 1.5px solid #2D2323;
+      border-radius: 6px;
+      padding: 0.65rem 0.5rem;
+      font-size: 0.88rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+      letter-spacing: 0.02em;
+    }
+
+    .btn-action-light:hover {
+      background: #F0E6DD;
+      transform: translateY(-1px);
+    }
+
+    /* Animation Export Strip */
+    .anim-export-strip {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #FFFFFF;
+      padding: 0.45rem 0.85rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-warm);
+      box-shadow: var(--shadow-soft);
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .anim-pill-btn {
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-warm);
+      background: #FFFDF9;
+      color: var(--text-main);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all 0.15s ease;
+    }
+
+    .anim-pill-btn:hover {
+      border-color: var(--rose-accent);
+      color: var(--rose-accent);
+      background: var(--rose-soft);
+    }
+
+    .mode-pill {
+      font-size: 0.72rem;
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      background: #FAF6F0;
+      border: 1px solid var(--border-warm);
+      font-weight: 700;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: all 0.15s ease;
+    }
+
+    .mode-pill.active {
+      background: var(--rose-accent);
+      color: #FFFFFF;
+      border-color: var(--rose-accent);
+    }
+
+    /* Modal */
+    .variants-modal-backdrop {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(26, 21, 20, 0.75);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .variants-modal-backdrop.open {
+      display: flex;
+    }
+
+    .variants-modal-card {
+      background: #FFFDF9;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-warm);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      max-width: 980px;
+      width: 100%;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      animation: modalPop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes modalPop {
+      from { transform: scale(0.92); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .variants-modal-header {
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--border-warm);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #FFFFFF;
+    }
+
+    .variants-modal-header h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .variants-grid-container {
+      padding: 1.5rem;
+      overflow-y: auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      background: #FAF6F0;
+    }
+
+    .variant-card-item {
+      background: #FFFFFF;
+      border: 1.5px solid var(--border-warm);
+      border-radius: var(--radius-md);
+      padding: 0.85rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .variant-card-item:hover {
+      border-color: var(--rose-accent);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(184, 93, 67, 0.18);
+    }
+
+    .variant-thumb-svg {
+      width: 160px;
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .variant-thumb-svg svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .variant-card-label {
+      font-size: 0.76rem;
+      font-weight: 800;
+      color: var(--text-main);
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    .variant-card-sub {
+      font-size: 0.68rem;
+      font-family: 'Space Grotesk', monospace;
+      color: var(--terracotta);
+    }
+
+    /* Toast */
+    .toast-msg {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--text-main);
+      color: #FFFFFF;
+      padding: 10px 22px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index: 1200;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toast-msg.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    @media (max-width: 992px) {
+      .app-workspace {
+        grid-template-columns: 1fr;
+      }
+      aside.control-panel {
+        max-height: none;
+        border-right: none;
+        border-bottom: 1px solid var(--border-warm);
+      }
+      .patch-view {
+        width: 330px;
+        height: 330px;
+      }
+      .variants-grid-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Academic Top Banner -->
+  <header class="app-header">
+    <div class="brand-title">
+      <div class="brand-kicker">ART 3041 · Fall 2026</div>
+      <h1>
+        ROSA I. PAULA 
+        <span class="badge">A.I. For Designers</span>
+      </h1>
+      <div class="brand-subtitle">A.I. FOR DESIGNERS — SSEP MISSION PATCH GENERATOR</div>
+    </div>
+    
+    <div class="header-actions">
+      <!-- Live Animation Play/Pause Toggle -->
+      <button id="btnPlayPauseAnim" class="btn btn-anim-play" title="Toggle Motion Animation">
+        <svg id="iconPlay" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        <svg id="iconPause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+        <span id="labelPlayState">Animate Patch</span>
+      </button>
+
+      <button id="btnRandomize" class="btn btn-secondary" title="Randomize across all motifs & frames">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.19"/></svg>
+        Randomize
+      </button>
+    </div>
+  </header>
+
+  <!-- Workspace Container -->
+  <div class="app-workspace">
+
+    <!-- Left Controls Sidebar -->
+    <aside class="control-panel">
+
+      <!-- Small-Scale Recognizability Check -->
+      <div class="mini-check-card">
+        <div class="mini-header">
+          <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; color:var(--terracotta);">Small-Scale Recognizability</span>
+          <div class="mini-scale-btns">
+            <button class="mini-btn" data-size="72">0.75″</button>
+            <button class="mini-btn active" data-size="96">1.0″</button>
+            <button class="mini-btn" data-size="120">1.25″</button>
+          </div>
+        </div>
+        <div class="mini-viewport-container">
+          <div id="miniPatchView" class="mini-frame"></div>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:0.72rem; color:var(--text-subtle); font-family:'Space Grotesk', monospace;">
+          <span>Spacesuit Distance Check</span>
+          <span id="miniSizeLabel">1.0″ (96px)</span>
+        </div>
+      </div>
+
+      <!-- ANIMATION CONTROLS SECTION -->
+      <div class="control-group">
+        <div class="group-header">
+          <span class="group-title">Dynamic Motion &amp; Kinetic Orbits</span>
+          <span class="sub" style="font-size:0.72rem; color:var(--terracotta); font-weight:700;">Live Canvas</span>
+        </div>
+
+        <div class="toggle-row">
+          <span class="toggle-label">Revolving Orbital Pearl &amp; Satellites</span>
+          <label class="switch">
+            <input type="checkbox" id="toggleAnimOrbits" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="toggle-row">
+          <span class="toggle-label">Twinkling Starfield Luminance</span>
+          <label class="switch">
+            <input type="checkbox" id="toggleAnimStars" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="toggle-row">
+          <span class="toggle-label">Text Running Around Arch Edge</span>
+          <label class="switch">
+            <input type="checkbox" id="toggleAnimText" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="toggle-row">
+          <span class="toggle-label">Slow Cosmic Pulse (Visor &amp; Aura)</span>
+          <label class="switch">
+            <input type="checkbox" id="toggleAnimPulse" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="field-row">
+          <label class="field-label" for="sliderAnimSpeed">Motion Velocity / Cycle Speed <span id="valAnimSpeed" class="sub">1.0&times; Normal</span></label>
+          <input type="range" id="sliderAnimSpeed" min="0.3" max="2.5" value="1.0" step="0.1">
+        </div>
+      </div>
+
+      <!-- Universal Vision Synthesizer -->
+      <div class="control-group" id="groupPatchUpload">
+        <div class="group-header">
+          <span class="group-title">Universal Vision Synthesizer</span>
+          <span class="sub" style="font-size:0.72rem; color:var(--terracotta); font-weight:700;">Upload Any Photo</span>
+        </div>
+
+        <div class="upload-zone" id="uploadDropZone">
+          <input type="file" id="patchFileInput" accept="image/*" />
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--terracotta)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <div style="font-size:0.8rem; font-weight:700; color:var(--text-main);">Drop any image or click to upload</div>
+          <div style="font-size:0.72rem; color:var(--text-muted);">Extracts colors, lighting direction, visual mass &amp; narrative elements</div>
+        </div>
+
+        <div id="uploadPreviewCard" class="upload-preview-card">
+          <div class="preview-header-row">
+            <img id="refThumbImg" class="preview-thumb-img" alt="Uploaded Reference" />
+            <div style="flex:1; display:flex; flex-direction:column; gap:3px;">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:0.73rem; font-weight:800; color:var(--terracotta);">SYNTHESIZED ATTRIBUTES</span>
+                <button id="btnApplyRefVariation" class="mini-btn active" style="font-size:0.68rem; padding:2px 7px;">Re-Apply</button>
+              </div>
+              <div id="refAnalysisText" style="font-size:0.71rem; color:var(--text-muted); line-height:1.3;">Ready</div>
+              <div id="extractedSwatches" class="extracted-palette-swatches"></div>
+            </div>
+          </div>
+          <div id="visionTags" class="vision-tags-container"></div>
+        </div>
+      </div>
+
+      <!-- 1. Emblem Shape & Mascot Motif -->
+      <div class="control-group">
+        <div class="group-header">
+          <span class="group-title">1. Emblem Frame &amp; Mascot Motif</span>
+        </div>
+        
+        <div class="field-row">
+          <label class="field-label" for="motifSelect">Mascot &amp; Centerpiece Composition</label>
+          <select id="motifSelect">
+            <option value="bearcat_science" selected>Science Officer Bearcat (Examining Research Logbook)</option>
+            <option value="bearcat_jetpack">Bearcat Mascot in Astronaut Suit &amp; Jetpack</option>
+            <option value="apollo_crest">Apollo SSEP Bearcat Crest</option>
+            <option value="telescope_array">155 Solar Mast &amp; Space Telescope</option>
+          </select>
+        </div>
+
+        <div class="field-row">
+          <label class="field-label" for="frameShapeSelect">Patch Outer Frame Shape</label>
+          <select id="frameShapeSelect">
+            <option value="flight_shield" selected>Starbase Flight Shield (Hexagon)</option>
+            <option value="circular">Circular Flight Crest (Apollo Style)</option>
+            <option value="octagon">Octagonal Mission Seal</option>
+            <option value="square_border">Classic 3.5″ Square Patch Border</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- 2. Typography Rules -->
+      <div class="control-group">
+        <div class="group-header">
+          <span class="group-title">2. Flight Nomenclature (Strict)</span>
+          <span class="sub" style="font-size:0.72rem; color:var(--rose-accent); font-weight:700;">Baruch Athletic Font</span>
+        </div>
+
+        <div class="field-row">
+          <label class="field-label" for="inputTopText">Top Arch Nomenclature</label>
+          <input type="text" id="inputTopText" value="BARUCH COLLEGE" placeholder="Top text">
+        </div>
+
+        <div class="field-row">
+          <label class="field-label" for="inputBottomText">Bottom Arch / Emblem Text</label>
+          <input type="text" id="inputBottomText" value="SSEP" placeholder="Strictly SSEP">
+        </div>
+
+        <div class="field-row">
+          <label class="field-label" for="sliderLetterSpacing">Arch Letter Spacing <span id="valLetterSpacing" class="sub">3.5px</span></label>
+          <input type="range" id="sliderLetterSpacing" min="1" max="10" value="3.5" step="0.5">
+        </div>
+
+        <div class="field-row">
+          <label class="field-label" for="sliderISSPosY">ISS Orbital Clearance <span id="valISSPosY" class="sub">115px</span></label>
+          <input type="range" id="sliderISSPosY" min="90" max="175" value="115" step="1">
+        </div>
+      </div>
+
+      <!-- 3. Parametric Geometry & Lighting -->
+      <div class="control-group">
+        <div class="group-header">
+          <span class="group-title">3. Parametric Geometry &amp; Lighting</span>
+        </div>
+
+        <div class="field-row">
+          <label class="field-label" for="sliderRimLightAngle">Solar Rim-Light Angle <span id="valRimLightAngle" class="sub">45° (Top-Right)</span></label>
+          <input type="range" id="sliderRimLightAngle" min="0" max="360" value="45" step="5">
+        </div>
+
+        <div class="field-row">
+          <label class="field-label" for="sliderRimIntensity">Chiaroscuro / Rim Intensity <span id="valRimIntensity" class="sub">60%</span></label>
+          <input type="range" id="sliderRimIntensity" min="0" max="100" value="60" step="5">
+        </div>
+
+        <div class="field-row">
+          <label class="field-label" for="sliderMotifScale">Bearcat Mascot Scale <span id="valMotifScale" class="sub">100%</span></label>
+          <input type="range" id="sliderMotifScale" min="75" max="135" value="100" step="1">
+        </div>
+
+        <div class="field-row">
+          <label class="field-label" for="sliderJetpackAngle">Gesture / Tilt Angle <span id="valJetpackAngle" class="sub">0°</span></label>
+          <input type="range" id="sliderJetpackAngle" min="-30" max="30" value="0" step="1">
+        </div>
+
+        <div class="field-row">
+          <label class="field-label" for="sliderEarthSize">Earth Horizon Elevation <span id="valEarthSize" class="sub">95%</span></label>
+          <input type="range" id="sliderEarthSize" min="65" max="135" value="95" step="2">
+        </div>
+
+        <div class="field-row">
+          <label class="field-label" for="sliderStarDensity">Cosmic Starfield Density <span id="valStarDensity" class="sub">75 Stars</span></label>
+          <input type="range" id="sliderStarDensity" min="10" max="180" value="75" step="5">
+        </div>
+
+        <div class="toggle-row">
+          <span class="toggle-label">Include NYC Skyline (WTC &amp; ESB)</span>
+          <label class="switch">
+            <input type="checkbox" id="toggleSkyline" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="toggle-row">
+          <span class="toggle-label">Include Orbiting ISS (Unblocked)</span>
+          <label class="switch">
+            <input type="checkbox" id="toggleISS" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- 4. Embroidery Fabric & Palettes -->
+      <div class="control-group">
+        <div class="group-header">
+          <span class="group-title">4. Spacesuit Palette &amp; Thread Fill</span>
+        </div>
+
+        <div class="field-row">
+          <label class="field-label" for="paletteSelect">Embroidery Thread Palette</label>
+          <select id="paletteSelect">
+            <option value="baruch_navy" selected>Official Baruch Athletics (Bearcat Blue &amp; Deep Navy)</option>
+            <option value="warm_terracotta">Warm Blush &amp; Flight Terracotta</option>
+            <option value="space_black">Constructivist Twilight Charcoal</option>
+            <option value="nasa_retro">Apollo Flight Blue, White &amp; Crimson</option>
+            <option value="uploaded_reference" disabled id="optUploadedRef">✦ Reference Image Synthesis (Upload Photo)</option>
+          </select>
+        </div>
+
+        <div class="field-row">
+          <label class="field-label" for="sliderStitchRelief">Fabric Stitch Thread Relief <span id="valStitchRelief" class="sub">65%</span></label>
+          <input type="range" id="sliderStitchRelief" min="0" max="100" value="65" step="5">
+        </div>
+
+        <div class="toggle-row">
+          <span class="toggle-label">Textured Merrowed Border (Outer Thread)</span>
+          <label class="switch">
+            <input type="checkbox" id="toggleMerrowed" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- Right Preview Stage -->
+    <main class="preview-stage">
+      <div class="stage-wrapper">
+
+        <div class="patch-frame-container">
+          <div class="dimension-badge">3.5″ &times; 3.5″ Flight Emblem</div>
+          <div id="patchDisplay" class="patch-view"></div>
+        </div>
+
+        <!-- Balanced Action Toolbar: SVG buttons removed -->
+        <div class="screenshot-toolbar-container">
+          <button id="btnExploreVariants" class="btn-explore-variants" title="Generate and compare a 3x3 matrix of variations">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            Explore Variants (&times;9)
+          </button>
+          
+          <div class="quick-export-row">
+            <button id="btnQuickSVG" class="btn-action-dark" title="Download clean Vector SVG">SVG</button>
+            <button id="btnQuickPNG" class="btn-action-dark" title="Download High-Res PNG at selected scale">PNG</button>
+            <select id="selectScale" class="select-scale-light" title="Resolution Multiplier">
+              <option value="1">1&times; (600px)</option>
+              <option value="2" selected>2&times; (1200px)</option>
+              <option value="3">3&times; (1800px)</option>
+              <option value="4">4&times; (2400px)</option>
+            </select>
+            <button id="btnQuickCopy" class="btn-action-light" title="Copy patch vector data to clipboard">Copy</button>
+          </div>
+        </div>
+
+        <!-- Animated Export Options Bar -->
+        <div class="anim-export-strip">
+          <span style="font-size:0.75rem; font-weight:800; color:var(--terracotta); text-transform:uppercase; letter-spacing:0.05em;">Motion:</span>
+          <button id="btnExportGIF" class="anim-pill-btn" title="Export Animated GIF">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            Export GIF (.gif)
+          </button>
+          <button id="btnExportVideo" class="anim-pill-btn" title="Export High-Definition WebM Animation">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+            Export Video (.webm)
+          </button>
+          <span class="mode-pill active" id="btnViewZoomed">Studio View</span>
+          <span class="mode-pill" id="btnViewPhysical">1:1 Physical</span>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- 3x3 EXPLORE VARIANTS MODAL -->
+  <div id="variantsModal" class="variants-modal-backdrop">
+    <div class="variants-modal-card">
+      <div class="variants-modal-header">
+        <h2>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--terracotta)" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Explore 9 Generative Patch Variants
+        </h2>
+        <button id="btnCloseModal" class="mini-btn" style="font-size:1rem; padding:4px 10px;">&times;</button>
+      </div>
+      <div id="variantsGrid" class="variants-grid-container">
+        <!-- 9 variations dynamically generated here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Off-screen canvases -->
+  <canvas id="exportCanvas" width="1400" height="1400" style="display:none;"></canvas>
+  <canvas id="analysisCanvas" width="128" height="128" style="display:none;"></canvas>
+  <canvas id="animCanvas" width="500" height="500" style="display:none;"></canvas>
+
+  <!-- Interactive Toast Notification -->
+  <div id="toast" class="toast-msg">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#68D391" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    <span id="toastText">Patch updated</span>
+  </div>
+
+  <script>
+    // Official Baruch Colors & Design Palettes
+    // Kitty fur is Baruch Athletics Light Blue: #94BBE9, Accents & outlines: #052D4F
+    const PALETTES = {
+      baruch_navy: {
+        bg: '#052D4F',
+        spaceDark: '#03172A',
+        merrow: '#C8A251',
+        borderInner: '#FFFFFF',
+        accentGold: '#E6BC65',
+        earthOcean: '#0A3B66',
+        earthLand: '#3A6351',
+        skyline: '#D2D8E4',
+        suitBody: '#F5F7FA',
+        suitAccents: '#052D4F',
+        mascotFur: '#94BBE9',      // Official Baruch Athletics Blue from logo
+        mascotDarkFur: '#052D4F',  // Official Baruch Navy
+        mascotHighlight: '#BBD6F6',
+        suitGloves: '#052D4F',
+        visor: '#FFB703',
+        flame: '#F48C06',
+        text: '#FFFFFF',
+        rimHighlight: '#BBD6F6'
+      },
+      warm_terracotta: {
+        bg: '#251B1D',
+        spaceDark: '#171112',
+        merrow: '#D96B6B',
+        borderInner: '#FAF6F0',
+        accentGold: '#F3C58B',
+        earthOcean: '#412C38',
+        earthLand: '#8F584C',
+        skyline: '#E7D5CD',
+        suitBody: '#FFFDF9',
+        suitAccents: '#B85D43',
+        mascotFur: '#94BBE9',      // Official Baruch Mascot Blue maintained
+        mascotDarkFur: '#1F2A38',
+        mascotHighlight: '#C5DCFA',
+        suitGloves: '#D96B6B',
+        visor: '#F3C58B',
+        flame: '#E87A5D',
+        text: '#FFFDF9',
+        rimHighlight: '#FFD7BA'
+      },
+      space_black: {
+        bg: '#141416',
+        spaceDark: '#0A0A0C',
+        merrow: '#E2E2E6',
+        borderInner: '#C52828',
+        accentGold: '#DFAC46',
+        earthOcean: '#202838',
+        earthLand: '#3F4E4F',
+        skyline: '#D6D8DE',
+        suitBody: '#EAEAEA',
+        suitAccents: '#052D4F',
+        mascotFur: '#94BBE9',      // Official Baruch Mascot Blue
+        mascotDarkFur: '#052D4F',
+        mascotHighlight: '#BBD6F6',
+        suitGloves: '#333338',
+        visor: '#DFAC46',
+        flame: '#E85D04',
+        text: '#FFFFFF',
+        rimHighlight: '#FFF3B0'
+      },
+      nasa_retro: {
+        bg: '#0B2046',
+        spaceDark: '#050F22',
+        merrow: '#C8102E',
+        borderInner: '#FFFFFF',
+        accentGold: '#FFC72C',
+        earthOcean: '#184E77',
+        earthLand: '#52B788',
+        skyline: '#E0E7EE',
+        suitBody: '#FFFFFF',
+        suitAccents: '#052D4F',
+        mascotFur: '#94BBE9',      // Official Baruch Mascot Blue
+        mascotDarkFur: '#052D4F',
+        mascotHighlight: '#BBD6F6',
+        suitGloves: '#C8102E',
+        visor: '#00A3E0',
+        flame: '#FF6B35',
+        text: '#FFFFFF',
+        rimHighlight: '#FFED4A'
+      },
+      uploaded_reference: null
+    };
+
+    // State management
+    const state = {
+      seed: 512,
+      motif: 'bearcat_science',
+      frameShape: 'flight_shield',
+      paletteKey: 'baruch_navy',
+      topText: 'BARUCH COLLEGE',
+      bottomText: 'SSEP',
+      letterSpacing: 3.5,
+      issPosY: 115,
+      motifScale: 100,
+      jetpackAngle: 0,
+      earthSize: 95,
+      starDensity: 75,
+      showSkyline: true,
+      showISS: true,
+      stitchRelief: 65,
+      merrowedBorder: true,
+      physicalScale: false,
+      miniSize: 96,
+      rimLightAngle: 45,
+      rimIntensity: 60,
+      showOrbitalHoop: true,
+      
+      // Animation parameters
+      isAnimated: false,
+      animSpeed: 1.0,
+      animTime: 0,
+      animOrbits: true,
+      animStars: true,
+      animText: true,
+      animPulse: true
+    };
+
+    function mulberry32(a) {
+      return function() {
+        let t = a += 0x6D2B79F5;
+        t = Math.imul(t ^ t >>> 15, t | 1);
+        t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+        return ((t ^ t >>> 14) >>> 0) / 4294967296;
+      }
+    }
+
+    function rgbToHex(r, g, b) {
+      return "#" + [r, g, b].map(x => {
+        const hex = Math.round(Math.max(0, Math.min(255, x))).toString(16);
+        return hex.length === 1 ? "0" + hex : hex;
+      }).join("");
+    }
+
+    function getLuminance(r, g, b) {
+      return (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+    }
+
+    // Master SVG Renderer
+    function renderPatchSVG(forExport = false, animPhase = 0) {
+      const p = PALETTES[state.paletteKey] || PALETTES.baruch_navy;
+      const rand = mulberry32(state.seed);
+      const stitchFilterScale = (state.stitchRelief / 100) * 2.6;
+      const mascotFur = p.mascotFur || '#94BBE9';
+      const mascotDark = p.mascotDarkFur || '#052D4F';
+      const mascotHi = p.mascotHighlight || '#BBD6F6';
+
+      // 1. Frame Geometry
+      let borderClipPath = '';
+      let outerBorderPath = '';
+
+      if (state.frameShape === 'circular') {
+        borderClipPath = `<circle cx="300" cy="300" r="275" />`;
+        outerBorderPath = `<circle id="Merrowed_Border" cx="300" cy="300" r="275" fill="none" stroke="${p.merrow}" stroke-width="${state.merrowedBorder ? 18 : 6}" stroke-dasharray="${state.merrowedBorder ? '2.5,1.5' : 'none'}" />`;
+      } else if (state.frameShape === 'octagon') {
+        const pts = "190,26 410,26 574,190 574,410 410,574 190,574 26,410 26,190";
+        borderClipPath = `<polygon points="${pts}" />`;
+        outerBorderPath = `<polygon id="Merrowed_Border" points="${pts}" fill="none" stroke="${p.merrow}" stroke-width="${state.merrowedBorder ? 18 : 6}" stroke-linejoin="round" />`;
+      } else if (state.frameShape === 'square_border') {
+        borderClipPath = `<rect x="25" y="25" width="550" height="550" rx="30" />`;
+        outerBorderPath = `<rect id="Merrowed_Border" x="25" y="25" width="550" height="550" rx="30" fill="none" stroke="${p.merrow}" stroke-width="${state.merrowedBorder ? 20 : 6}" />`;
+      } else {
+        const pts = "300,22 560,150 560,450 300,578 40,450 40,150";
+        borderClipPath = `<polygon points="${pts}" />`;
+        outerBorderPath = `<polygon id="Merrowed_Border" points="${pts}" fill="none" stroke="${p.merrow}" stroke-width="${state.merrowedBorder ? 18 : 6}" stroke-linejoin="round" stroke-linecap="round" />`;
+      }
+
+      // 2. Cosmic Starfield
+      let starsSVG = '';
+      for (let i = 0; i < state.starDensity; i++) {
+        const sx = 35 + rand() * 530;
+        const sy = 35 + rand() * 410;
+        const sr = 0.8 + rand() * 2.1;
+        let baseOpacity = 0.35 + rand() * 0.65;
+        
+        if (state.isAnimated && state.animStars && !forExport) {
+          const twinkle = Math.sin(animPhase * 3.5 + i * 1.35) * 0.35;
+          baseOpacity = Math.max(0.15, Math.min(1.0, baseOpacity + twinkle));
+        }
+
+        const opacityStr = baseOpacity.toFixed(2);
+        if (i % 6 === 0) {
+          starsSVG += `
+            <g transform="translate(${sx.toFixed(1)}, ${sy.toFixed(1)})" opacity="${opacityStr}">
+              <path d="M-6,0 Q0,0 0,-6 Q0,0 6,0 Q0,0 0,6 Q0,0 -6,0 Z" fill="${p.accentGold}" />
+              <circle cx="0" cy="0" r="1.2" fill="#FFFFFF" />
+            </g>`;
+        } else {
+          starsSVG += `<circle cx="${sx.toFixed(1)}" cy="${sy.toFixed(1)}" r="${sr.toFixed(1)}" fill="#FFFFFF" opacity="${opacityStr}" />`;
+        }
+      }
+
+      // 3. Earth Horizon & Skyline
+      const earthHorizonY = 610 - (state.earthSize * 0.95);
+      const earthRadius = 380 + (state.earthSize * 1.8);
+      let pulseScale = 1.0;
+      let pulseGlow = 0.45;
+      if (state.isAnimated && state.animPulse && !forExport) {
+        pulseScale = 1.0 + Math.sin(animPhase * 2) * 0.015;
+        pulseGlow = 0.45 + Math.sin(animPhase * 2.5) * 0.2;
+      }
+
+      let skylineSVG = '';
+      if (state.showSkyline) {
+        skylineSVG = `
+          <g id="NYC_Skyline" transform="translate(300, ${earthHorizonY + 6}) scale(0.95) translate(-300, 0)">
+            <path d="M 80,0 
+                     L 125,0 L 125,-35 L 142,-35 L 142,-50 L 150,-50 L 150,-95 L 153,-95 L 153,-145 L 155,-145 L 155,-170 L 156,-170 L 156,-95 L 162,-95 L 162,-50 L 176,-50 L 176,-30 L 200,-30 
+                     L 220,-30 L 220,-75 L 240,-75 L 240,-110 L 255,-110 L 255,-40 L 275,-40
+                     L 290,-40 L 290,-65 L 320,-65 L 320,-115 L 330,-115 L 330,-140 L 338,-140 L 338,-190 L 340,-190 L 340,-225 L 342,-225 L 342,-190 L 345,-190 L 345,-140 L 355,-140 L 355,-115 L 365,-115 L 365,-60 L 390,-60
+                     L 410,-60 L 410,-45 L 435,-45 L 435,-85 L 450,-85 L 450,-35 L 480,-35 L 520,0 Z" 
+                  fill="${p.skyline}" stroke="${p.spaceDark}" stroke-width="2.2" opacity="0.95" />
+            <line x1="154" y1="-140" x2="154" y2="-55" stroke="${p.spaceDark}" stroke-width="1.8" />
+            <line x1="341" y1="-185" x2="341" y2="-65" stroke="${p.spaceDark}" stroke-width="1.8" />
+          </g>
+        `;
+      }
+
+      const earthSVG = `
+        <g id="Earth_Horizon" transform="translate(300, ${earthHorizonY + earthRadius}) scale(${pulseScale}) translate(-300, -${earthHorizonY + earthRadius})">
+          <circle cx="300" cy="${earthHorizonY + earthRadius}" r="${earthRadius}" fill="${p.earthOcean}" stroke="${p.borderInner}" stroke-width="3.5" />
+          <path d="M 120,${earthHorizonY + 30} Q 220,${earthHorizonY - 10} 340,${earthHorizonY + 25} Q 460,${earthHorizonY + 40} 500,${earthHorizonY + 90} Q 300,${earthHorizonY + 120} 120,${earthHorizonY + 30} Z" fill="${p.earthLand}" opacity="0.85" />
+          <circle cx="300" cy="${earthHorizonY + earthRadius}" r="${earthRadius + 3}" fill="none" stroke="#64DFDF" stroke-width="4.5" opacity="${pulseGlow.toFixed(2)}" />
+          ${skylineSVG}
+        </g>
+      `;
+
+      // 4. Directional Solar Rim-Light & Kinetic Revolving Pearl Orbit
+      const rad = (state.rimLightAngle * Math.PI) / 180;
+      const lx = 300 + Math.cos(rad) * 230;
+      const ly = 270 - Math.sin(rad) * 230;
+      const rimAlpha = (state.rimIntensity / 100).toFixed(2);
+      const rimHighlightColor = p.rimHighlight || p.accentGold;
+
+      let hoopRotationAngle = state.rimLightAngle - 45;
+      let satelliteOrbitAngle = 0;
+      if (state.isAnimated && state.animOrbits && !forExport) {
+        hoopRotationAngle += (animPhase * 25);
+        satelliteOrbitAngle = (animPhase * 70);
+      }
+
+      let orbitalHoopSVG = '';
+      if (state.showOrbitalHoop) {
+        const satX = (Math.cos(satelliteOrbitAngle * Math.PI / 180) * 145).toFixed(1);
+        const satY = (Math.sin(satelliteOrbitAngle * Math.PI / 180) * 58).toFixed(1);
+
+        orbitalHoopSVG = `
+          <g id="Orbital_Pearl_Hoop" transform="translate(300, 275) rotate(${hoopRotationAngle.toFixed(1)})">
+            <ellipse cx="0" cy="0" rx="145" ry="58" fill="none" stroke="${p.accentGold}" stroke-width="2" stroke-dasharray="6,4" opacity="0.85" />
+            <g transform="translate(${satX}, ${satY})">
+              <circle cx="0" cy="0" r="5.5" fill="#FFFFFF" stroke="${p.spaceDark}" stroke-width="1.5" />
+              <circle cx="-1" cy="-1" r="2" fill="${p.accentGold}" />
+            </g>
+          </g>
+        `;
+      }
+
+      // 5. ISS Space Station
+      let issSVG = '';
+      if (state.showISS) {
+        let issFloat = 0;
+        if (state.isAnimated && !forExport) {
+          issFloat = Math.sin(animPhase * 2) * 3;
+        }
+
+        issSVG = `
+          <g id="ISS_Space_Station" transform="translate(300, ${(state.issPosY + issFloat).toFixed(1)}) scale(0.85)">
+            <rect x="-42" y="-3" width="84" height="6" fill="${p.suitBody}" stroke="${p.spaceDark}" stroke-width="1.5" />
+            <rect x="-12" y="-9" width="24" height="18" rx="3" fill="${p.borderInner}" stroke="${p.spaceDark}" stroke-width="1.5" />
+            <circle cx="0" cy="0" r="4" fill="${p.accentGold}" />
+            <line x1="0" y1="-9" x2="0" y2="-17" stroke="${p.suitBody}" stroke-width="2" />
+            <circle cx="0" cy="-18" r="2.5" fill="${p.merrow}" />
+            
+            <g transform="translate(-36, 0)">
+              <rect x="-24" y="-20" width="22" height="40" fill="${p.accentGold}" stroke="${p.spaceDark}" stroke-width="1.5" rx="1.5" />
+              <line x1="-24" y1="-10" x2="-2" y2="-10" stroke="${p.spaceDark}" stroke-width="1" />
+              <line x1="-24" y1="0" x2="-2" y2="0" stroke="${p.spaceDark}" stroke-width="1" />
+              <line x1="-24" y1="10" x2="-2" y2="10" stroke="${p.spaceDark}" stroke-width="1" />
+              <line x1="-13" y1="-20" x2="-13" y2="20" stroke="${p.spaceDark}" stroke-width="1" />
+            </g>
+            <g transform="translate(38, 0)">
+              <rect x="2" y="-20" width="22" height="40" fill="${p.accentGold}" stroke="${p.spaceDark}" stroke-width="1.5" rx="1.5" />
+              <line x1="2" y1="-10" x2="24" y2="-10" stroke="${p.spaceDark}" stroke-width="1" />
+              <line x1="2" y1="0" x2="24" y2="0" stroke="${p.spaceDark}" stroke-width="1" />
+              <line x1="2" y1="10" x2="24" y2="10" stroke="${p.spaceDark}" stroke-width="1" />
+              <line x1="13" y1="-20" x2="13" y2="20" stroke="${p.spaceDark}" stroke-width="1" />
+            </g>
+            <text x="0" y="22" fill="${p.text}" font-family="'Anton', 'Space Grotesk', sans-serif" font-size="10" font-weight="bold" letter-spacing="2" text-anchor="middle">ISS</text>
+          </g>
+        `;
+      }
+
+      // 6. Mascot / Kitty Motif - Rendered with Official Bearcat Blue (#94BBE9) and Navy (#052D4F)
+      let motifContentSVG = '';
+      const motifScaleFactor = state.motifScale / 100;
+      let floatY = 0;
+      if (state.isAnimated && !forExport) {
+        floatY = Math.sin(animPhase * 2.2) * 4;
+      }
+
+      if (state.motif === 'bearcat_science') {
+        motifContentSVG = `
+          <g id="Mascot_Bearcat_ScienceOfficer">
+            ${orbitalHoopSVG}
+            <g transform="translate(300, ${(280 + floatY).toFixed(1)}) rotate(${state.jetpackAngle}) scale(${motifScaleFactor}) translate(-300, -280)">
+              <!-- Spacesuit Torso -->
+              <path d="M 265,248 C 260,285 270,325 300,325 C 330,325 340,285 335,248 Z" fill="${p.suitBody}" stroke="${p.spaceDark}" stroke-width="3" stroke-linejoin="round" />
+              <rect x="284" y="260" width="32" height="34" rx="4" fill="${mascotDark}" stroke="${p.spaceDark}" stroke-width="2" />
+              <text x="300" y="284" font-family="'Anton', sans-serif" font-weight="900" font-size="17" fill="${mascotFur}" text-anchor="middle">B</text>
+
+              <!-- Legs -->
+              <path d="M 272,310 L 262,350 L 285,358 L 292,318 Z" fill="${p.suitBody}" stroke="${p.spaceDark}" stroke-width="2.5" />
+              <ellipse cx="274" cy="354" rx="14" ry="7" fill="${mascotDark}" stroke="${p.spaceDark}" stroke-width="2" />
+              <path d="M 308,312 L 316,352 L 340,344 L 328,310 Z" fill="${p.suitBody}" stroke="${p.spaceDark}" stroke-width="2.5" />
+              <ellipse cx="328" cy="347" rx="14" ry="7" fill="${mascotDark}" stroke="${p.spaceDark}" stroke-width="2" />
+
+              <!-- Left Arm Holding Research Logbook -->
+              <g id="Arm_Science_Logbook">
+                <path d="M 268,252 Q 244,270 236,295 L 255,302 Q 262,282 278,266 Z" fill="${p.suitBody}" stroke="${p.spaceDark}" stroke-width="2.5" />
+                <!-- Kitty Paw in Official Blue -->
+                <circle cx="236" cy="296" r="11" fill="${mascotFur}" stroke="${mascotDark}" stroke-width="2" />
+                <path d="M 230,295 L 234,297 M 235,291 L 237,296 M 241,293 L 240,298" stroke="${mascotDark}" stroke-width="1.8" stroke-linecap="round"/>
+
+                <g transform="translate(222, 290) rotate(-16)">
+                  <rect x="-3" y="-3" width="56" height="66" rx="4" fill="${p.spaceDark}" />
+                  <rect x="0" y="0" width="50" height="60" rx="2" fill="#FFFFFF" stroke="${p.spaceDark}" stroke-width="1.5" />
+                  <rect x="15" y="-6" width="20" height="8" rx="2" fill="${mascotFur}" stroke="${mascotDark}" stroke-width="1.5" />
+                  <line x1="6" y1="8" x2="25" y2="8" stroke="${mascotDark}" stroke-width="2" />
+                  <line x1="6" y1="14" x2="44" y2="14" stroke="#444" stroke-width="1.5" />
+                  <line x1="6" y1="20" x2="38" y2="20" stroke="#666" stroke-width="1.2" />
+                  <line x1="6" y1="26" x2="42" y2="26" stroke="#666" stroke-width="1.2" />
+                  <circle cx="36" cy="42" r="7" fill="${mascotDark}" />
+                  <text x="36" y="47" font-family="'Anton', sans-serif" font-size="8" font-weight="900" fill="${mascotFur}" text-anchor="middle">B</text>
+                  <line x1="6" y1="36" x2="25" y2="36" stroke="#777" stroke-width="1.2" />
+                  <line x1="6" y1="42" x2="23" y2="42" stroke="#777" stroke-width="1.2" />
+                  <line x1="6" y1="48" x2="44" y2="48" stroke="#777" stroke-width="1.2" />
+                </g>
+              </g>
+
+              <!-- Right Arm -->
+              <g id="Arm_Right_Grip">
+                <path d="M 334,252 Q 346,275 320,305 L 305,296 Q 328,272 324,258 Z" fill="${p.suitBody}" stroke="${p.spaceDark}" stroke-width="2.5" />
+                <!-- Kitty Paw in Official Blue -->
+                <circle cx="282" cy="308" r="10" fill="${mascotFur}" stroke="${mascotDark}" stroke-width="2" />
+                <line x1="281" y1="304" x2="286" y2="307" stroke="${mascotDark}" stroke-width="1.6" stroke-linecap="round" />
+              </g>
+
+              <!-- Bearcat / Kitty Head & Ears in Official Logo Blue -->
+              <g id="Helmet_Science_Bearcat">
+                <ellipse cx="300" cy="248" rx="33" ry="10" fill="${mascotDark}" stroke="${p.spaceDark}" stroke-width="2.5" />
+                
+                <!-- Bearcat Ears (Athletic Logo Blue & Navy Shadow) -->
+                <path d="M 268,186 L 250,152 L 284,170 Z" fill="${mascotFur}" stroke="${mascotDark}" stroke-width="2.8" stroke-linejoin="round" />
+                <path d="M 264,180 L 255,158 L 278,172 Z" fill="${mascotDark}" />
+                <path d="M 332,186 L 350,152 L 316,170 Z" fill="${mascotFur}" stroke="${mascotDark}" stroke-width="2.8" stroke-linejoin="round" />
+                <path d="M 336,180 L 345,158 L 322,172 Z" fill="${mascotDark}" />
+
+                <!-- Helmet Ring & Head Base -->
+                <circle cx="300" cy="208" r="38" fill="${p.suitBody}" stroke="${p.spaceDark}" stroke-width="3" />
+
+                <!-- Visor Interior showing the Official Blue Kitty Face -->
+                <ellipse cx="298" cy="214" rx="28" ry="24" fill="${mascotFur}" stroke="${mascotDark}" stroke-width="2.5" />
+                
+                <!-- Fur cheeks tufts in official blue -->
+                <path d="M 270,214 L 265,218 L 271,222 L 266,226 L 274,228 Z" fill="${mascotFur}" stroke="${mascotDark}" stroke-width="1.2"/>
+                <path d="M 326,214 L 331,218 L 325,222 L 330,226 L 322,228 Z" fill="${mascotFur}" stroke="${mascotDark}" stroke-width="1.2"/>
+                
+                <!-- Forehead Athletic Mask Tuft -->
+                <path d="M 292,192 L 298,185 L 304,192 L 308,187 L 312,198 L 284,198 Z" fill="${mascotDark}" opacity="0.95"/>
+
+                <!-- Kitty Face Features: Baruch Feline Eyes, Snout & Fangs -->
+                <g>
+                  <!-- Baruch Athletic Angled Eyes -->
+                  <polygon points="284,206 295,209 288,213" fill="#FFFFFF" stroke="${mascotDark}" stroke-width="1.2" />
+                  <polygon points="288,208 293,209 289,211" fill="${mascotDark}" />
+                  <polygon points="312,206 301,209 308,213" fill="#FFFFFF" stroke="${mascotDark}" stroke-width="1.2" />
+                  <polygon points="308,208 303,209 307,211" fill="${mascotDark}" />
+
+                  <!-- Snout & Nose -->
+                  <polygon points="298,215 294,218 302,218" fill="${mascotDark}" />
+                  <!-- Feline Muzzle & Whiskers -->
+                  <path d="M 294,220 Q 298,223 302,220" stroke="${mascotDark}" stroke-width="1.8" fill="none" stroke-linecap="round" />
+                  <path d="M 298,218 L 298,221" stroke="${mascotDark}" stroke-width="1.5" />
+                  <!-- Characteristic Baruch Bearcat Saber Teeth / Fangs -->
+                  <polygon points="293,220 295,220 294,225" fill="#FFFFFF" stroke="${mascotDark}" stroke-width="0.8" />
+                  <polygon points="301,220 303,220 302,225" fill="#FFFFFF" stroke="${mascotDark}" stroke-width="0.8" />
+
+                  <!-- Whisker lines -->
+                  <line x1="280" y1="218" x2="288" y2="219" stroke="${mascotDark}" stroke-width="1.4" stroke-linecap="round" />
+                  <line x1="279" y1="223" x2="288" y2="222" stroke="${mascotDark}" stroke-width="1.4" stroke-linecap="round" />
+                  <line x1="316" y1="218" x2="308" y2="219" stroke="${mascotDark}" stroke-width="1.4" stroke-linecap="round" />
+                  <line x1="317" y1="223" x2="308" y2="222" stroke="${mascotDark}" stroke-width="1.4" stroke-linecap="round" />
+                </g>
+
+                <!-- Visor Reflection Arc -->
+                <path d="M 276,196 A 25,21 0 0,1 320,196" stroke="#FFFFFF" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.75" />
+                <!-- Rim Lighting -->
+                <path d="M 270,172 A 38,38 0 0,1 338,198" fill="none" stroke="${rimHighlightColor}" stroke-width="4.5" stroke-linecap="round" opacity="${rimAlpha}" />
+              </g>
+            </g>
+          </g>
+        `;
+      } else if (state.motif === 'bearcat_jetpack') {
+        let flameFlicker = 1.0;
+        if (state.isAnimated && !forExport) {
+          flameFlicker = 0.85 + Math.sin(animPhase * 8) * 0.25;
+        }
+
+        motifContentSVG = `
+          <g id="Mascot_Bearcat_Jetpack">
+            ${orbitalHoopSVG}
+            <path d="M 230,${earthHorizonY} C 210,380 230,280 280,210" fill="none" stroke="${p.flame}" stroke-width="4" stroke-dasharray="8,6" opacity="0.85" />
+            <path d="M 230,${earthHorizonY} C 210,380 230,280 280,210" fill="none" stroke="#FFF" stroke-width="1.5" opacity="0.9" />
+
+            <g transform="translate(300, ${(275 + floatY).toFixed(1)}) rotate(${state.jetpackAngle}) scale(${motifScaleFactor}) translate(-300, -275)">
+              <!-- Jetpack Thruster -->
+              <g id="Jetpack_Unit" transform="translate(242, 260)">
+                <polygon points="4,32 -2,44 10,44" fill="${mascotDark}" stroke="${p.spaceDark}" stroke-width="1.5" />
+                <polygon points="26,32 20,44 32,44" fill="${mascotDark}" stroke="${p.spaceDark}" stroke-width="1.5" />
+                <g transform="scale(1, ${flameFlicker.toFixed(2)})">
+                  <path d="M -2,44 Q 4,68 4,80 Q 4,68 10,44 Z" fill="${p.flame}" />
+                  <path d="M 0,44 Q 4,58 4,68 Q 4,58 8,44 Z" fill="#FFE066" />
+                  <path d="M 20,44 Q 26,68 26,80 Q 26,68 32,44 Z" fill="${p.flame}" />
+                  <path d="M 22,44 Q 26,58 26,68 Q 26,58 30,44 Z" fill="#FFE066" />
+                </g>
+                <rect x="0" y="0" width="30" height="34" rx="6" fill="${mascotDark}" stroke="${p.spaceDark}" stroke-width="2.5" />
+                <rect x="4" y="4" width="9" height="26" rx="3" fill="${p.suitBody}" stroke="${p.spaceDark}" stroke-width="1.5" />
+                <rect x="17" y="4" width="9" height="26" rx="3" fill="${p.suitBody}" stroke="${p.spaceDark}" stroke-width="1.5" />
+                <circle cx="15" cy="17" r="2.5" fill="${p.accentGold}" />
+              </g>
+
+              <!-- Kitty Spacesuit Tail (Blue Fur Tip) -->
+              <g id="Spacesuit_Tail">
+                <path d="M 260,315 Q 220,335 210,290 Q 205,270 218,265 Q 226,275 228,295 Q 235,320 265,305 Z" fill="${p.suitBody}" stroke="${p.spaceDark}" stroke-width="2.5" stroke-linejoin="round" />
+                <path d="M 214,295 Q 225,290 226,303" stroke="${mascotFur}" stroke-width="3" fill="none" />
+                <path d="M 225,315 Q 235,310 240,320" stroke="${mascotDark}" stroke-width="3" fill="none" />
+              </g>
+
+              <!-- Suit Body -->
+              <g id="Suit_Body">
+                <path d="M 270,305 L 260,345 L 285,355 L 290,315 Z" fill="${p.suitBody}" stroke="${p.spaceDark}" stroke-width="2.5" stroke-linejoin="round" />
+                <ellipse cx="272" cy="350" rx="14" ry="7" fill="${mascotDark}" stroke="${p.spaceDark}" stroke-width="2" />
+                <path d="M 305,310 L 315,350 L 340,340 L 325,305 Z" fill="${p.suitBody}" stroke="${p.spaceDark}" stroke-width="2.5" stroke-linejoin="round" />
+                <ellipse cx="328" cy="345" rx="14" ry="7" fill="${mascotDark}" stroke="${p.spaceDark}" stroke-width="2" />
+                <path d="M 265,250 C 260,285 270,320 300,320 C 330,320 340,285 335,250 Z" fill="${p.suitBody}" stroke="${p.spaceDark}" stroke-width="3" stroke-linejoin="round" />
+                <rect x="282" y="260" width="36" height="34" rx="4" fill="${mascotDark}" stroke="${p.spaceDark}" stroke-width="2" />
+                <rect x="286" y="264" width="28" height="20" rx="2" fill="${p.bg}" />
+                <text x="300" y="282" font-family="'Anton', sans-serif" font-weight="900" font-size="16" fill="${mascotFur}" text-anchor="middle">B</text>
+
+                <!-- Paws in Official Blue -->
+                <g id="Arm_Left">
+                  <path d="M 266,252 Q 240,240 235,215 Q 245,210 255,225 Q 262,235 275,255 Z" fill="${p.suitBody}" stroke="${p.spaceDark}" stroke-width="2.5" />
+                  <circle cx="236" cy="214" r="11" fill="${mascotFur}" stroke="${mascotDark}" stroke-width="2" />
+                  <path d="M 230,205 L 232,209 M 235,203 L 236,208 M 241,205 L 240,210" stroke="${mascotDark}" stroke-width="2" stroke-linecap="round" />
+                </g>
+
+                <g id="Arm_Right">
+                  <path d="M 334,252 Q 355,265 360,285 Q 348,292 342,280 Q 338,270 330,262 Z" fill="${p.suitBody}" stroke="${p.spaceDark}" stroke-width="2.5" />
+                  <circle cx="358" cy="286" r="10" fill="${mascotFur}" stroke="${mascotDark}" stroke-width="2" />
+                </g>
+              </g>
+
+              <!-- Kitty Astronaut Helmet & Blue Fur Mask -->
+              <g id="Helmet_Bearcat">
+                <ellipse cx="300" cy="252" rx="34" ry="10" fill="${mascotDark}" stroke="${p.spaceDark}" stroke-width="2.5" />
+                
+                <!-- Kitty Ears in Official Blue & Navy -->
+                <path d="M 268,190 L 250,156 L 284,174 Z" fill="${mascotFur}" stroke="${mascotDark}" stroke-width="2.8" stroke-linejoin="round" />
+                <path d="M 264,184 L 255,162 L 278,176 Z" fill="${mascotDark}" />
+                <path d="M 332,190 L 350,156 L 316,174 Z" fill="${mascotFur}" stroke="${mascotDark}" stroke-width="2.8" stroke-linejoin="round" />
+                <path d="M 336,184 L 345,162 L 322,176 Z" fill="${mascotDark}" />
+
+                <circle cx="300" cy="212" r="38" fill="${p.suitBody}" stroke="${p.spaceDark}" stroke-width="3" />
+
+                <!-- Official Blue Face Inside Visor -->
+                <ellipse cx="300" cy="214" rx="28" ry="24" fill="${mascotFur}" stroke="${mascotDark}" stroke-width="2.5" />
+                <path d="M 292,194 L 300,186 L 308,194 Z" fill="${mascotDark}" />
+
+                <!-- Baruch Athletics Cat Eyes & Fangs -->
+                <polygon points="286,207 296,210 290,214" fill="#FFFFFF" stroke="${mascotDark}" stroke-width="1.2" />
+                <polygon points="290,209 294,210 291,212" fill="${mascotDark}" />
+                <polygon points="314,207 304,210 310,214" fill="#FFFFFF" stroke="${mascotDark}" stroke-width="1.2" />
+                <polygon points="310,209 306,210 309,212" fill="${mascotDark}" />
+
+                <polygon points="300,216 296,219 304,219" fill="${mascotDark}" />
+                <path d="M 296,221 Q 300,224 304,221" stroke="${mascotDark}" stroke-width="1.8" fill="none" />
+                <polygon points="295,221 297,221 296,225" fill="#FFFFFF" stroke="${mascotDark}" stroke-width="0.8" />
+                <polygon points="303,221 305,221 304,225" fill="#FFFFFF" stroke="${mascotDark}" stroke-width="0.8" />
+
+                <!-- Whiskers -->
+                <line x1="282" y1="218" x2="290" y2="219" stroke="${mascotDark}" stroke-width="1.4" stroke-linecap="round" />
+                <line x1="282" y1="223" x2="290" y2="222" stroke="${mascotDark}" stroke-width="1.4" stroke-linecap="round" />
+                <line x1="318" y1="218" x2="310" y2="219" stroke="${mascotDark}" stroke-width="1.4" stroke-linecap="round" />
+                <line x1="318" y1="223" x2="310" y2="222" stroke="${mascotDark}" stroke-width="1.4" stroke-linecap="round" />
+
+                <path d="M 280,200 A 24,20 0 0,1 316,200" stroke="#FFFFFF" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.85" />
+                <path d="M 270,180 A 38,38 0 0,1 338,198" fill="none" stroke="${rimHighlightColor}" stroke-width="4.5" stroke-linecap="round" opacity="${rimAlpha}" />
+              </g>
+            </g>
+          </g>
+        `;
+      } else if (state.motif === 'apollo_crest') {
+        motifContentSVG = `
+          <g id="Mascot_Apollo_Crest">
+            ${orbitalHoopSVG}
+            <ellipse cx="300" cy="270" rx="195" ry="95" transform="rotate(-18 300 270)" fill="none" stroke="${p.accentGold}" stroke-width="3" stroke-dasharray="10,6" opacity="0.85" />
+            <g transform="translate(180, 180)">
+              <circle cx="0" cy="0" r="30" fill="#E2E2E6" stroke="${p.spaceDark}" stroke-width="2" />
+              <circle cx="-10" cy="-8" r="5" fill="#C2C2C8" opacity="0.7" />
+              <circle cx="8" cy="10" r="7" fill="#C2C2C8" opacity="0.7" />
+              <path d="M0,-30 A30,30 0 0,0 0,30 A22,30 0 0,1 0,-30" fill="${p.bg}" opacity="0.35" />
+            </g>
+            <g transform="translate(300, ${(270 + floatY).toFixed(1)}) scale(1.1)">
+              <!-- Bearcat Crest Head in Official Blue & Navy -->
+              <circle cx="0" cy="0" r="42" fill="${mascotFur}" stroke="${mascotDark}" stroke-width="3" />
+              <polygon points="-32,-25 -48,-58 -15,-40" fill="${mascotFur}" stroke="${mascotDark}" stroke-width="2.5" />
+              <polygon points="-28,-28 -42,-50 -20,-38" fill="${mascotDark}" />
+              <polygon points="32,-25 48,-58 15,-40" fill="${mascotFur}" stroke="${mascotDark}" stroke-width="2.5" />
+              <polygon points="28,-28 42,-50 20,-38" fill="${mascotDark}" />
+              
+              <ellipse cx="0" cy="2" rx="28" ry="22" fill="${mascotDark}" stroke="${p.borderInner}" stroke-width="1.5" />
+              <text x="0" y="11" font-family="'Anton', sans-serif" font-weight="900" font-size="28" fill="${mascotFur}" text-anchor="middle">B</text>
+              <path d="M -28,-30 A 42,42 0 0,1 36,-15" fill="none" stroke="${rimHighlightColor}" stroke-width="4.5" stroke-linecap="round" opacity="${rimAlpha}" />
+            </g>
+          </g>
+        `;
+      } else if (state.motif === 'telescope_array') {
+        motifContentSVG = `
+          <g id="Mascot_Telescope_Array">
+            ${orbitalHoopSVG}
+            <line x1="260" y1="290" x2="300" y2="125" stroke="${p.flame}" stroke-width="2.5" stroke-dasharray="6,4" opacity="0.9" />
+            <g transform="translate(260, ${(300 + floatY).toFixed(1)}) rotate(-42) scale(1.1)">
+              <ellipse cx="0" cy="-52" rx="12" ry="4" fill="${mascotDark}" stroke="${p.suitBody}" stroke-width="2" />
+              <rect x="-14" y="-50" width="28" height="42" fill="${p.suitBody}" stroke="${p.spaceDark}" stroke-width="2" />
+              <text x="0" y="-22" fill="${mascotFur}" font-family="'Anton', sans-serif" font-size="20" font-weight="900" text-anchor="middle">B</text>
+              <rect x="-18" y="-8" width="36" height="34" rx="2" fill="${mascotDark}" stroke="${p.spaceDark}" stroke-width="2" />
+              <g transform="translate(-18, -25) rotate(-90)">
+                <rect x="-6" y="-55" width="12" height="50" fill="${mascotFur}" stroke="${mascotDark}" stroke-width="1.5" rx="1" />
+                <line x1="0" y1="-55" x2="0" y2="-5" stroke="#FFFFFF" stroke-width="1" />
+              </g>
+              <g transform="translate(18, -25) rotate(90)">
+                <rect x="-6" y="-55" width="12" height="50" fill="${mascotFur}" stroke="${mascotDark}" stroke-width="1.5" rx="1" />
+                <line x1="0" y1="-55" x2="0" y2="-5" stroke="#FFFFFF" stroke-width="1" />
+              </g>
+            </g>
+          </g>
+        `;
+      }
+
+      // 7. Typography (BARUCH COLLEGE & SSEP) - Using Official Logo's Athletic Type ('Anton', 'Space Grotesk')
+      const topTextStr = (state.topText || 'BARUCH COLLEGE').trim();
+      const bottomTextStr = (state.bottomText || 'SSEP').trim();
+      const letterSpacingVal = `${state.letterSpacing}px`;
+
+      let startOffsetVal = "50%";
+      if (state.isAnimated && state.animText && !forExport) {
+        const offsetShift = Math.sin(animPhase * 1.8) * 8;
+        startOffsetVal = `${(50 + offsetShift).toFixed(1)}%`;
+      }
+
+      const textGroupSVG = `
+        <g id="Typography_Layers">
+          <path id="topArchPath" d="M 82,265 A 228,228 0 0,1 518,265" fill="none" />
+          <!-- Athletic Bold Lettering matching official Baruch Bearcats brand -->
+          <text fill="${p.text}" font-family="'Anton', 'Space Grotesk', sans-serif" font-size="27" font-weight="bold" letter-spacing="${letterSpacingVal}">
+            <textPath href="#topArchPath" startOffset="${startOffsetVal}" text-anchor="middle">
+              ${topTextStr}
+            </textPath>
+          </text>
+
+          <g id="Bottom_SSEP_Badge" transform="translate(300, 508)">
+            <rect x="-88" y="-20" width="176" height="40" rx="20" fill="${p.spaceDark}" stroke="${mascotFur}" stroke-width="2.5" />
+            <rect x="-84" y="-16" width="168" height="32" rx="16" fill="${mascotDark}" stroke="${p.borderInner}" stroke-width="1" opacity="0.95" />
+            <text x="0" y="8" fill="#FFFFFF" font-family="'Anton', 'Space Grotesk', sans-serif" font-size="24" font-weight="bold" letter-spacing="4px" text-anchor="middle">
+              ${bottomTextStr}
+            </text>
+          </g>
+        </g>
+      `;
+
+      return `
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 600 600" width="100%" height="100%" id="masterPatchSVG" xml:space="preserve">
+  <defs>
+    <filter id="fabricTexture" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" result="noise" />
+      <feColorMatrix type="matrix" values="0.33 0.33 0.33 0 0   0.33 0.33 0.33 0 0   0.33 0.33 0.33 0 0  0 0 0 0.5 0" in="noise" result="coloredNoise"/>
+      <feDisplacementMap in="SourceGraphic" in2="coloredNoise" scale="${stitchFilterScale}" xChannelSelector="R" yChannelSelector="G" result="displaced" />
+      <feBlend mode="multiply" in="displaced" in2="coloredNoise" />
+    </filter>
+
+    <clipPath id="patchClip">
+      ${borderClipPath}
+    </clipPath>
+
+    <linearGradient id="cosmicBgGrad" x1="${(100 - (state.rimLightAngle/3.6)).toFixed(1)}%" y1="${((state.rimLightAngle/3.6)).toFixed(1)}%" x2="${(state.rimLightAngle/3.6).toFixed(1)}%" y2="${(100 - (state.rimLightAngle/3.6)).toFixed(1)}%">
+      <stop offset="0%" stop-color="${p.spaceDark}" />
+      <stop offset="50%" stop-color="${p.bg}" />
+      <stop offset="100%" stop-color="${p.spaceDark}" />
+    </linearGradient>
+  </defs>
+
+  <g id="Emblem_Container">
+    <g clip-path="url(#patchClip)" ${forExport ? '' : 'filter="url(#fabricTexture)"'}>
+      <rect id="Patch_Twill_Background" x="0" y="0" width="600" height="600" fill="url(#cosmicBgGrad)" />
+      <circle cx="${lx.toFixed(1)}" cy="${ly.toFixed(1)}" r="280" fill="${rimHighlightColor}" opacity="${(rimAlpha * 0.18).toFixed(2)}" />
+      <g id="Cosmic_Starfield">${starsSVG}</g>
+      ${issSVG}
+      ${motifContentSVG}
+      ${earthSVG}
+      <circle id="Inner_Accent_Ring" cx="300" cy="300" r="248" fill="none" stroke="${p.borderInner}" stroke-width="2.5" stroke-dasharray="8,4" opacity="0.6" />
+      ${textGroupSVG}
+    </g>
+    ${outerBorderPath}
+  </g>
+</svg>`.trim();
+    }
+
+    function updateDisplay() {
+      const svgCode = renderPatchSVG(false, state.animTime);
+      document.getElementById('patchDisplay').innerHTML = svgCode;
+      document.getElementById('miniPatchView').innerHTML = svgCode;
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toastText').textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => { toast.classList.remove('show'); }, 2600);
+    }
+
+    // Animation Loop Engine
+    let animRequestFrameId = null;
+    let lastTimestamp = 0;
+
+    function animLoop(timestamp) {
+      if (!lastTimestamp) lastTimestamp = timestamp;
+      const dt = (timestamp - lastTimestamp) / 1000;
+      lastTimestamp = timestamp;
+
+      state.animTime += dt * state.animSpeed;
+      updateDisplay();
+
+      if (state.isAnimated) {
+        animRequestFrameId = requestAnimationFrame(animLoop);
+      }
+    }
+
+    function toggleAnimation() {
+      state.isAnimated = !state.isAnimated;
+      const btn = document.getElementById('btnPlayPauseAnim');
+      const iconPlay = document.getElementById('iconPlay');
+      const iconPause = document.getElementById('iconPause');
+      const label = document.getElementById('labelPlayState');
+
+      if (state.isAnimated) {
+        btn.classList.add('playing');
+        iconPlay.style.display = 'none';
+        iconPause.style.display = 'inline-block';
+        label.textContent = 'Pause Motion';
+        lastTimestamp = 0;
+        animRequestFrameId = requestAnimationFrame(animLoop);
+        showToast('Motion Animation Active (Revolving Orbits & Stars)');
+      } else {
+        btn.classList.remove('playing');
+        iconPlay.style.display = 'inline-block';
+        iconPause.style.display = 'none';
+        label.textContent = 'Animate Patch';
+        if (animRequestFrameId) cancelAnimationFrame(animRequestFrameId);
+        updateDisplay();
+        showToast('Motion Paused');
+      }
+    }
+
+    // Export Vector SVG
+    function exportSVG() {
+      showToast('Exporting Vector SVG...');
+      const svgString = renderPatchSVG(true, 0);
+      const blob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+      const downloadLink = document.createElement('a');
+      downloadLink.download = `ssep-baruch-patch-${state.motif}-${Date.now()}.svg`;
+      downloadLink.href = URL.createObjectURL(blob);
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+      URL.revokeObjectURL(downloadLink.href);
+      showToast('SVG Downloaded!');
+    }
+
+    // Export PNG at Selected Resolution
+    function exportPNGWithScale() {
+      const scaleMultiplier = parseInt(document.getElementById('selectScale').value) || 2;
+      const baseDim = 600;
+      const targetDim = baseDim * scaleMultiplier;
+
+      showToast(`Generating ${targetDim}×${targetDim}px PNG (${scaleMultiplier}×)...`);
+      const svgString = renderPatchSVG(true, 0);
+      const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+      const blobURL = URL.createObjectURL(svgBlob);
+
+      const canvas = document.getElementById('exportCanvas');
+      canvas.width = targetDim;
+      canvas.height = targetDim;
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, targetDim, targetDim);
+
+      const img = new Image();
+      img.onload = function() {
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+        ctx.drawImage(img, 0, 0, targetDim, targetDim);
+        URL.revokeObjectURL(blobURL);
+
+        const pngURI = canvas.toDataURL('image/png');
+        const downloadLink = document.createElement('a');
+        downloadLink.download = `ssep-baruch-patch-${scaleMultiplier}x-${Date.now()}.png`;
+        downloadLink.href = pngURI;
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+        showToast(`PNG (${targetDim}×${targetDim}) exported!`);
+      };
+      img.src = blobURL;
+    }
+
+    // Direct Clipboard Copy
+    async function copyToClipboard() {
+      const svgString = renderPatchSVG(true, 0);
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(svgString);
+          showToast('Copied Patch Vector to Clipboard!');
+        } else {
+          const textArea = document.createElement("textarea");
+          textArea.value = svgString;
+          textArea.style.position = "fixed";
+          textArea.style.opacity = "0";
+          document.body.appendChild(textArea);
+          textArea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textArea);
+          showToast('Copied to Clipboard!');
+        }
+      } catch (err) {
+        showToast('Unable to copy directly to clipboard.');
+      }
+    }
+
+    // 3x3 Matrix Variations Generator
+    function openExploreVariantsModal() {
+      const modal = document.getElementById('variantsModal');
+      const grid = document.getElementById('variantsGrid');
+      grid.innerHTML = '';
+
+      const motifs = ['bearcat_science', 'bearcat_jetpack', 'apollo_crest', 'telescope_array'];
+      const frames = ['flight_shield', 'circular', 'octagon', 'square_border'];
+      const palettes = ['baruch_navy', 'warm_terracotta', 'space_black', 'nasa_retro'];
+      if (PALETTES.uploaded_reference) palettes.push('uploaded_reference');
+
+      for (let i = 0; i < 9; i++) {
+        const variantSeed = (state.seed + 101 * (i + 1)) % 999999;
+        const vMotif = motifs[i % motifs.length];
+        const vFrame = frames[(i + 1) % frames.length];
+        const vPalette = palettes[i % palettes.length];
+        const vEarth = 80 + ((i * 12) % 40);
+        const vRim = (45 + i * 40) % 360;
+
+        const backup = { ...state };
+        state.seed = variantSeed;
+        state.motif = vMotif;
+        state.frameShape = vFrame;
+        state.paletteKey = vPalette;
+        state.earthSize = vEarth;
+        state.rimLightAngle = vRim;
+
+        const thumbSVG = renderPatchSVG(false, 0);
+        Object.assign(state, backup);
+
+        const card = document.createElement('div');
+        card.className = 'variant-card-item';
+        card.innerHTML = `
+          <div class="variant-thumb-svg">${thumbSVG}</div>
+          <div class="variant-card-label">${vMotif.replace(/_/g, ' ').toUpperCase()}</div>
+          <div class="variant-card-sub">${vFrame.replace(/_/g, ' ')} · ${vPalette.replace(/_/g, ' ')}</div>
+        `;
+
+        card.addEventListener('click', () => {
+          state.seed = variantSeed;
+          state.motif = vMotif;
+          state.frameShape = vFrame;
+          state.paletteKey = vPalette;
+          state.earthSize = vEarth;
+          state.rimLightAngle = vRim;
+
+          document.getElementById('motifSelect').value = state.motif;
+          document.getElementById('frameShapeSelect').value = state.frameShape;
+          document.getElementById('paletteSelect').value = state.paletteKey;
+          document.getElementById('sliderEarthSize').value = state.earthSize;
+          document.getElementById('sliderRimLightAngle').value = state.rimLightAngle;
+
+          updateDisplay();
+          modal.classList.remove('open');
+          showToast(`Applied Variant: ${vMotif.replace(/_/g, ' ')}`);
+        });
+
+        grid.appendChild(card);
+      }
+
+      modal.classList.add('open');
+    }
+
+    // Video Export (WebM)
+    async function exportVideoWebM() {
+      showToast('Recording WebM Animation (3s loop)...');
+      const canvas = document.getElementById('animCanvas');
+      canvas.width = 600;
+      canvas.height = 600;
+      const ctx = canvas.getContext('2d');
+
+      const stream = canvas.captureStream(30);
+      let mediaRecorder;
+      try {
+        mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm; codecs=vp9' });
+      } catch (e) {
+        mediaRecorder = new MediaRecorder(stream);
+      }
+
+      const recordedChunks = [];
+      mediaRecorder.ondataavailable = (e) => {
+        if (e.data.size > 0) recordedChunks.push(e.data);
+      };
+
+      mediaRecorder.onstop = () => {
+        const blob = new Blob(recordedChunks, { type: 'video/webm' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `ssep-patch-animation-${Date.now()}.webm`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast('WebM Video Exported Successfully!');
+      };
+
+      mediaRecorder.start();
+
+      const totalFrames = 90;
+      let currentFrame = 0;
+
+      function renderNextFrame() {
+        if (currentFrame >= totalFrames) {
+          mediaRecorder.stop();
+          return;
+        }
+
+        const animPhase = (currentFrame / totalFrames) * (Math.PI * 2);
+        const svgString = renderPatchSVG(false, animPhase);
+        const blob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const img = new Image();
+
+        img.onload = () => {
+          ctx.clearRect(0, 0, 600, 600);
+          ctx.drawImage(img, 0, 0, 600, 600);
+          URL.revokeObjectURL(url);
+          currentFrame++;
+          requestAnimationFrame(renderNextFrame);
+        };
+        img.src = url;
+      }
+
+      renderNextFrame();
+    }
+
+    // GIF Export
+    function exportAnimatedGIF() {
+      showToast('Synthesizing Animated GIF (18 frames)...');
+      const canvas = document.getElementById('animCanvas');
+      canvas.width = 320;
+      canvas.height = 320;
+      const ctx = canvas.getContext('2d');
+
+      const totalFrames = 18;
+      const frames = [];
+      let currentFrame = 0;
+
+      function captureFrame() {
+        if (currentFrame >= totalFrames) {
+          compileAndDownloadGIF(frames, 320, 320, 100);
+          return;
+        }
+
+        const animPhase = (currentFrame / totalFrames) * (Math.PI * 2);
+        const svgString = renderPatchSVG(false, animPhase);
+        const blob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const img = new Image();
+
+        img.onload = () => {
+          ctx.clearRect(0, 0, 320, 320);
+          ctx.drawImage(img, 0, 0, 320, 320);
+          URL.revokeObjectURL(url);
+
+          const imgData = ctx.getImageData(0, 0, 320, 320);
+          frames.push(imgData);
+          currentFrame++;
+          captureFrame();
+        };
+        img.src = url;
+      }
+
+      captureFrame();
+    }
+
+    function compileAndDownloadGIF(frames, width, height, delayMs) {
+      showToast('Encoding GIF89a file...');
+      const palette = [];
+      const pMap = {};
+      const firstData = frames[0].data;
+
+      for (let i = 0; i < firstData.length; i += 16) {
+        const r = firstData[i] & 0xF8;
+        const g = firstData[i + 1] & 0xF8;
+        const b = firstData[i + 2] & 0xF8;
+        const key = (r << 16) | (g << 8) | b;
+        if (!pMap[key] && palette.length < 256) {
+          pMap[key] = palette.length;
+          palette.push({ r: firstData[i], g: firstData[i + 1], b: firstData[i + 2] });
+        }
+      }
+
+      while (palette.length < 256) palette.push({ r: 0, g: 0, b: 0 });
+
+      function findClosest(r, g, b) {
+        let bestDist = Infinity;
+        let bestIdx = 0;
+        for (let i = 0; i < palette.length; i++) {
+          const d = (r - palette[i].r)**2 + (g - palette[i].g)**2 + (b - palette[i].b)**2;
+          if (d < bestDist) {
+            bestDist = d;
+            bestIdx = i;
+            if (d === 0) break;
+          }
+        }
+        return bestIdx;
+      }
+
+      const out = [];
+      out.push(0x47, 0x49, 0x46, 0x38, 0x39, 0x61);
+      out.push(width & 0xFF, (width >> 8) & 0xFF);
+      out.push(height & 0xFF, (height >> 8) & 0xFF);
+      out.push(0xF7, 0x00, 0x00);
+
+      for (let i = 0; i < 256; i++) {
+        out.push(palette[i].r, palette[i].g, palette[i].b);
+      }
+
+      out.push(0x21, 0xFF, 0x0B);
+      "NETSCAPE2.0".split('').forEach(c => out.push(c.charCodeAt(0)));
+      out.push(0x03, 0x01, 0x00, 0x00, 0x00);
+
+      const delayUnits = Math.max(1, Math.round(delayMs / 10));
+
+      frames.forEach((frame) => {
+        out.push(0x21, 0xF9, 0x04, 0x00);
+        out.push(delayUnits & 0xFF, (delayUnits >> 8) & 0xFF);
+        out.push(0x00, 0x00);
+
+        out.push(0x2C, 0x00, 0x00, 0x00, 0x00);
+        out.push(width & 0xFF, (width >> 8) & 0xFF);
+        out.push(height & 0xFF, (height >> 8) & 0xFF);
+        out.push(0x00);
+
+        const lzwMinCodeSize = 8;
+        out.push(lzwMinCodeSize);
+
+        const pixels = [];
+        const d = frame.data;
+        for (let i = 0; i < d.length; i += 4) {
+          pixels.push(findClosest(d[i], d[i + 1], d[i + 2]));
+        }
+
+        let pIdx = 0;
+        const clearCode = 1 << lzwMinCodeSize;
+        const eoiCode = clearCode + 1;
+
+        while (pIdx < pixels.length) {
+          const blockSize = Math.min(254, pixels.length - pIdx);
+          out.push(blockSize + 1);
+          out.push(clearCode & 0xFF);
+          for (let b = 0; b < blockSize; b++) {
+            out.push(pixels[pIdx++]);
+          }
+        }
+        out.push(0x01, eoiCode & 0xFF);
+        out.push(0x00);
+      });
+
+      out.push(0x3B);
+
+      const blob = new Blob([new Uint8Array(out)], { type: 'image/gif' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `ssep-patch-animated-${Date.now()}.gif`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast('GIF downloaded successfully!');
+    }
+
+    // Image Upload Feature
+    function processUploadedImage(file) {
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+          const thumb = document.getElementById('refThumbImg');
+          thumb.src = e.target.result;
+          document.getElementById('uploadPreviewCard').classList.add('visible');
+
+          const cvs = document.getElementById('analysisCanvas');
+          const ctx = cvs.getContext('2d');
+          const w = 128;
+          const h = 128;
+          cvs.width = w;
+          cvs.height = h;
+          ctx.clearRect(0, 0, w, h);
+          ctx.drawImage(img, 0, 0, w, h);
+
+          const imgData = ctx.getImageData(0, 0, w, h).data;
+          const samples = [];
+          let lumSum = 0;
+          let minLum = 1, maxLum = 0;
+          let lightWeightX = 0, lightWeightY = 0, lightWeightTotal = 0;
+          let qTopLeft = 0, qTopRight = 0, qBottomLeft = 0, qBottomRight = 0;
+          let bookLikeBrightPatch = 0;
+
+          for (let y = 0; y < h; y += 2) {
+            for (let x = 0; x < w; x += 2) {
+              const idx = (y * w + x) * 4;
+              const r = imgData[idx];
+              const g = imgData[idx + 1];
+              const b = imgData[idx + 2];
+              const a = imgData[idx + 3];
+              if (a < 30) continue;
+
+              const lum = getLuminance(r, g, b);
+              lumSum += lum;
+              if (lum < minLum) minLum = lum;
+              if (lum > maxLum) maxLum = lum;
+
+              samples.push({ r, g, b, lum, x, y });
+
+              const weight = Math.pow(lum, 2.2);
+              lightWeightX += x * weight;
+              lightWeightY += y * weight;
+              lightWeightTotal += weight;
+
+              if (x < w/2 && y < h/2) qTopLeft += lum;
+              else if (x >= w/2 && y < h/2) qTopRight += lum;
+              else if (x < w/2 && y >= h/2) qBottomLeft += lum;
+              else qBottomRight += lum;
+
+              if (y > h * 0.45 && x < w * 0.65 && lum > 0.72) bookLikeBrightPatch++;
+            }
+          }
+
+          if (samples.length === 0) return;
+
+          const avgLightX = lightWeightTotal > 0 ? (lightWeightX / lightWeightTotal) : w/2;
+          const avgLightY = lightWeightTotal > 0 ? (lightWeightY / lightWeightTotal) : h/2;
+          const dx = avgLightX - (w/2);
+          const dy = (h/2) - avgLightY;
+          let angleDeg = Math.round((Math.atan2(dy, dx) * 180 / Math.PI));
+          if (angleDeg < 0) angleDeg += 360;
+
+          state.rimLightAngle = angleDeg;
+          document.getElementById('sliderRimLightAngle').value = state.rimLightAngle;
+          document.getElementById('valRimLightAngle').textContent = `${state.rimLightAngle}°`;
+
+          const contrastRatio = maxLum - minLum;
+          state.rimIntensity = Math.min(95, Math.max(25, Math.round(contrastRatio * 100)));
+          document.getElementById('sliderRimIntensity').value = state.rimIntensity;
+          document.getElementById('valRimIntensity').textContent = `${state.rimIntensity}%`;
+
+          let synthesizedMotif = 'bearcat_science';
+          let detectedTags = [];
+
+          if (bookLikeBrightPatch > 35) {
+            synthesizedMotif = 'bearcat_science';
+            detectedTags.push('Study Document');
+            detectedTags.push('Science Officer');
+          } else if (qTopRight > qBottomLeft * 1.5 || qTopLeft > qBottomRight * 1.5) {
+            synthesizedMotif = 'bearcat_jetpack';
+            detectedTags.push('Ascent Vector');
+          } else {
+            synthesizedMotif = 'apollo_crest';
+            detectedTags.push('Apollo Seal');
+          }
+
+          state.motif = synthesizedMotif;
+          document.getElementById('motifSelect').value = state.motif;
+
+          samples.sort((a, b) => a.lum - b.lum);
+          const darkTone = samples[Math.floor(samples.length * 0.06)];
+          const shadowTone = samples[Math.floor(samples.length * 0.22)];
+          const midTone = samples[Math.floor(samples.length * 0.50)];
+          const richAccent = samples[Math.floor(samples.length * 0.74)];
+          const lightHighlight = samples[Math.floor(samples.length * 0.94)];
+
+          const synthesizedPalette = {
+            bg: rgbToHex(darkTone.r, darkTone.g, darkTone.b),
+            spaceDark: rgbToHex(Math.max(0, darkTone.r - 20), Math.max(0, darkTone.g - 20), Math.max(0, darkTone.b - 20)),
+            merrow: rgbToHex(richAccent.r, richAccent.g, richAccent.b),
+            borderInner: rgbToHex(lightHighlight.r, lightHighlight.g, lightHighlight.b),
+            accentGold: rgbToHex(richAccent.r, richAccent.g, richAccent.b),
+            earthOcean: rgbToHex(shadowTone.r, shadowTone.g, shadowTone.b),
+            earthLand: rgbToHex(midTone.r, midTone.g, midTone.b),
+            skyline: rgbToHex(lightHighlight.r * 0.82, lightHighlight.g * 0.82, lightHighlight.b * 0.82),
+            suitBody: rgbToHex(lightHighlight.r, lightHighlight.g, lightHighlight.b),
+            suitAccents: rgbToHex(shadowTone.r, shadowTone.g, shadowTone.b),
+            mascotFur: '#94BBE9',      // Preserves Baruch Athletics Blue
+            mascotDarkFur: '#052D4F',
+            mascotHighlight: '#BBD6F6',
+            suitGloves: rgbToHex(richAccent.r, richAccent.g, richAccent.b),
+            visor: rgbToHex(richAccent.r, richAccent.g, richAccent.b),
+            flame: rgbToHex(richAccent.r, richAccent.g, richAccent.b),
+            text: rgbToHex(lightHighlight.r, lightHighlight.g, lightHighlight.b),
+            rimHighlight: rgbToHex(Math.min(255, lightHighlight.r + 15), Math.min(255, lightHighlight.g + 15), Math.min(255, richAccent.b + 10))
+          };
+
+          PALETTES.uploaded_reference = synthesizedPalette;
+          state.paletteKey = 'uploaded_reference';
+
+          const opt = document.getElementById('optUploadedRef');
+          opt.disabled = false;
+          opt.textContent = "✦ Reference Image Synthesis (Active)";
+          document.getElementById('paletteSelect').value = 'uploaded_reference';
+
+          const swatchesContainer = document.getElementById('extractedSwatches');
+          swatchesContainer.innerHTML = '';
+          [synthesizedPalette.bg, synthesizedPalette.merrow, synthesizedPalette.accentGold, synthesizedPalette.earthOcean, synthesizedPalette.text].forEach(hex => {
+            const chip = document.createElement('div');
+            chip.className = 'color-chip';
+            chip.style.backgroundColor = hex;
+            swatchesContainer.appendChild(chip);
+          });
+
+          const tagsContainer = document.getElementById('visionTags');
+          tagsContainer.innerHTML = '';
+          detectedTags.forEach(tag => {
+            const span = document.createElement('span');
+            span.className = 'vision-tag';
+            span.textContent = tag;
+            tagsContainer.appendChild(span);
+          });
+
+          document.getElementById('refAnalysisText').textContent = 
+            `Angle: ${state.rimLightAngle}° · Contrast: ${state.rimIntensity}% · Motif: ${synthesizedMotif.replace(/_/g, ' ')}`;
+
+          updateDisplay();
+          showToast(`Synthesized attributes applied!`);
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function randomizeAll() {
+      const motifs = ['bearcat_science', 'bearcat_jetpack', 'apollo_crest', 'telescope_array'];
+      const frames = ['flight_shield', 'circular', 'octagon', 'square_border'];
+      const palettes = ['baruch_navy', 'warm_terracotta', 'space_black', 'nasa_retro'];
+      if (PALETTES.uploaded_reference) palettes.push('uploaded_reference');
+
+      state.seed = Math.floor(Math.random() * 999999);
+      state.motif = motifs[Math.floor(Math.random() * motifs.length)];
+      state.frameShape = frames[Math.floor(Math.random() * frames.length)];
+      state.paletteKey = palettes[Math.floor(Math.random() * palettes.length)];
+      state.rimLightAngle = Math.floor(Math.random() * 360);
+      state.rimIntensity = Math.floor(Math.random() * 50) + 40;
+      state.starDensity = Math.floor(Math.random() * 110) + 35;
+      state.jetpackAngle = Math.floor(Math.random() * 30) - 15;
+      state.motifScale = Math.floor(Math.random() * 30) + 85;
+      state.earthSize = Math.floor(Math.random() * 45) + 75;
+      state.letterSpacing = (Math.random() * 3.5 + 2.0).toFixed(1);
+
+      document.getElementById('motifSelect').value = state.motif;
+      document.getElementById('frameShapeSelect').value = state.frameShape;
+      document.getElementById('paletteSelect').value = state.paletteKey;
+      document.getElementById('sliderRimLightAngle').value = state.rimLightAngle;
+      document.getElementById('valRimLightAngle').textContent = `${state.rimLightAngle}°`;
+      document.getElementById('sliderStarDensity').value = state.starDensity;
+      document.getElementById('valStarDensity').textContent = `${state.starDensity} Stars`;
+      document.getElementById('sliderMotifScale').value = state.motifScale;
+      document.getElementById('valMotifScale').textContent = `${state.motifScale}%`;
+      document.getElementById('sliderEarthSize').value = state.earthSize;
+      document.getElementById('valEarthSize').textContent = `${state.earthSize}%`;
+
+      updateDisplay();
+      showToast(`Randomized: ${state.motif.replace(/_/g, ' ')}`);
+    }
+
+    // Initialize Event Listeners
+    window.addEventListener('DOMContentLoaded', () => {
+      updateDisplay();
+
+      // Variants & Quick Export Row
+      document.getElementById('btnExploreVariants').addEventListener('click', openExploreVariantsModal);
+      document.getElementById('btnCloseModal').addEventListener('click', () => {
+        document.getElementById('variantsModal').classList.remove('open');
+      });
+      document.getElementById('btnQuickSVG').addEventListener('click', exportSVG);
+      document.getElementById('btnQuickPNG').addEventListener('click', exportPNGWithScale);
+      document.getElementById('btnQuickCopy').addEventListener('click', copyToClipboard);
+
+      // Animation & Media Exports
+      document.getElementById('btnPlayPauseAnim').addEventListener('click', toggleAnimation);
+      document.getElementById('btnExportVideo').addEventListener('click', exportVideoWebM);
+      document.getElementById('btnExportGIF').addEventListener('click', exportAnimatedGIF);
+
+      document.getElementById('sliderAnimSpeed').addEventListener('input', (e) => {
+        state.animSpeed = parseFloat(e.target.value);
+        document.getElementById('valAnimSpeed').textContent = `${state.animSpeed.toFixed(1)}× Speed`;
+      });
+
+      document.getElementById('toggleAnimOrbits').addEventListener('change', (e) => { state.animOrbits = e.target.checked; });
+      document.getElementById('toggleAnimStars').addEventListener('change', (e) => { state.animStars = e.target.checked; });
+      document.getElementById('toggleAnimText').addEventListener('change', (e) => { state.animText = e.target.checked; });
+      document.getElementById('toggleAnimPulse').addEventListener('change', (e) => { state.animPulse = e.target.checked; });
+
+      // Core parameters
+      document.getElementById('motifSelect').addEventListener('change', (e) => { state.motif = e.target.value; updateDisplay(); });
+      document.getElementById('frameShapeSelect').addEventListener('change', (e) => { state.frameShape = e.target.value; updateDisplay(); });
+      document.getElementById('paletteSelect').addEventListener('change', (e) => { state.paletteKey = e.target.value; updateDisplay(); });
+      document.getElementById('inputTopText').addEventListener('input', (e) => { state.topText = e.target.value.toUpperCase(); updateDisplay(); });
+      document.getElementById('inputBottomText').addEventListener('input', (e) => { state.bottomText = e.target.value.toUpperCase(); updateDisplay(); });
+      document.getElementById('sliderLetterSpacing').addEventListener('input', (e) => {
+        state.letterSpacing = parseFloat(e.target.value);
+        document.getElementById('valLetterSpacing').textContent = `${state.letterSpacing}px`;
+        updateDisplay();
+      });
+      document.getElementById('sliderISSPosY').addEventListener('input', (e) => {
+        state.issPosY = parseInt(e.target.value);
+        document.getElementById('valISSPosY').textContent = `${state.issPosY}px`;
+        updateDisplay();
+      });
+      document.getElementById('sliderRimLightAngle').addEventListener('input', (e) => {
+        state.rimLightAngle = parseInt(e.target.value);
+        document.getElementById('valRimLightAngle').textContent = `${state.rimLightAngle}°`;
+        updateDisplay();
+      });
+      document.getElementById('sliderRimIntensity').addEventListener('input', (e) => {
+        state.rimIntensity = parseInt(e.target.value);
+        document.getElementById('valRimIntensity').textContent = `${state.rimIntensity}%`;
+        updateDisplay();
+      });
+      document.getElementById('sliderMotifScale').addEventListener('input', (e) => {
+        state.motifScale = parseInt(e.target.value);
+        document.getElementById('valMotifScale').textContent = `${state.motifScale}%`;
+        updateDisplay();
+      });
+      document.getElementById('sliderJetpackAngle').addEventListener('input', (e) => {
+        state.jetpackAngle = parseInt(e.target.value);
+        document.getElementById('valJetpackAngle').textContent = `${state.jetpackAngle}°`;
+        updateDisplay();
+      });
+      document.getElementById('sliderEarthSize').addEventListener('input', (e) => {
+        state.earthSize = parseInt(e.target.value);
+        document.getElementById('valEarthSize').textContent = `${state.earthSize}%`;
+        updateDisplay();
+      });
+      document.getElementById('sliderStarDensity').addEventListener('input', (e) => {
+        state.starDensity = parseInt(e.target.value);
+        document.getElementById('valStarDensity').textContent = `${state.starDensity} Stars`;
+        updateDisplay();
+      });
+      document.getElementById('sliderStitchRelief').addEventListener('input', (e) => {
+        state.stitchRelief = parseInt(e.target.value);
+        document.getElementById('valStitchRelief').textContent = `${state.stitchRelief}%`;
+        updateDisplay();
+      });
+
+      document.getElementById('toggleSkyline').addEventListener('change', (e) => { state.showSkyline = e.target.checked; updateDisplay(); });
+      document.getElementById('toggleISS').addEventListener('change', (e) => { state.showISS = e.target.checked; updateDisplay(); });
+      document.getElementById('toggleMerrowed').addEventListener('change', (e) => { state.merrowedBorder = e.target.checked; updateDisplay(); });
+
+      document.getElementById('btnRandomize').addEventListener('click', randomizeAll);
+
+      // Upload Zone
+      const fileInput = document.getElementById('patchFileInput');
+      const dropZone = document.getElementById('uploadDropZone');
+
+      fileInput.addEventListener('change', (e) => {
+        if (e.target.files && e.target.files[0]) processUploadedImage(e.target.files[0]);
+      });
+      dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
+      dropZone.addEventListener('dragleave', () => { dropZone.classList.remove('dragover'); });
+      dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('dragover');
+        if (e.dataTransfer.files && e.dataTransfer.files[0]) processUploadedImage(e.dataTransfer.files[0]);
+      });
+
+      document.getElementById('btnApplyRefVariation').addEventListener('click', () => {
+        if (PALETTES.uploaded_reference) {
+          state.paletteKey = 'uploaded_reference';
+          document.getElementById('paletteSelect').value = 'uploaded_reference';
+          updateDisplay();
+          showToast('Re-applied synthesized variation!');
+        }
+      });
+
+      // View Scale
+      const patchDisplay = document.getElementById('patchDisplay');
+      const btnZoomed = document.getElementById('btnViewZoomed');
+      const btnPhysical = document.getElementById('btnViewPhysical');
+
+      btnZoomed.addEventListener('click', () => {
+        btnZoomed.classList.add('active');
+        btnPhysical.classList.remove('active');
+        patchDisplay.classList.remove('physical-size');
+        showToast('Zoomed Studio View');
+      });
+
+      btnPhysical.addEventListener('click', () => {
+        btnPhysical.classList.add('active');
+        btnZoomed.classList.remove('active');
+        patchDisplay.classList.add('physical-size');
+        showToast('True 1:1 Scale (3.5″ × 3.5″)');
+      });
+
+      // Mini Scale
+      const miniButtons = document.querySelectorAll('.mini-btn');
+      const miniFrame = document.getElementById('miniPatchView');
+      const miniSizeLabel = document.getElementById('miniSizeLabel');
+
+      miniButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (!btn.dataset.size) return;
+          miniButtons.forEach(b => { if (b.dataset.size) b.classList.remove('active'); });
+          btn.classList.add('active');
+          const size = parseInt(btn.dataset.size);
+          miniFrame.style.width = `${size}px`;
+          miniFrame.style.height = `${size}px`;
+          miniSizeLabel.textContent = `${(size/96).toFixed(2)}″ (${size}px)`;
+        });
+      });
+    });
+  </script>
+</body>
+</html>

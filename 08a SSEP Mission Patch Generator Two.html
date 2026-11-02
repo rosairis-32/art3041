@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ART 3041 · Fall 2026 · ROSA I. PAULA · ARTIST STATEMENT & GENERATORS</title>
+
+  <!-- Typography matching course aesthetic -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-cream: #FAF6F0;
+      --bg-card: #FFFFFF;
+      --bg-sidebar: #FFFDF9;
+      --text-main: #2D2323;
+      --text-muted: #6E5F5E;
+      --text-subtle: #988887;
+      --rose-accent: #D96B6B;
+      --rose-hover: #C55656;
+      --rose-soft: #FCEEEE;
+      --terracotta: #B85D43;
+      --baruch-navy: #052D4F;
+      --border-warm: #EBDED6;
+      --shadow-soft: 0 4px 20px rgba(184, 93, 67, 0.08);
+      --shadow-hover: 0 12px 36px rgba(184, 93, 67, 0.16);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-cream);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(217, 107, 107, 0.08) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(184, 93, 67, 0.09) 0px, transparent 50%);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Academic Sticky Header */
+    header.app-header {
+      background: rgba(255, 253, 249, 0.95);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-warm);
+      padding: 0.85rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(184, 93, 67, 0.05);
+    }
+
+    .brand-title {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-kicker {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+    }
+
+    .brand-title h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      color: var(--text-main);
+      margin: 1px 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .brand-title h1 span.badge {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      background: var(--rose-soft);
+      color: var(--rose-accent);
+      padding: 2px 8px;
+      border-radius: 999px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .brand-subtitle {
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .nav-link {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--text-muted);
+      padding: 0.4rem 0.8rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--rose-accent);
+      border-color: var(--border-warm);
+      background: #FFFDF9;
+    }
+
+    /* Editorial Showcase Container */
+    main.document-workspace {
+      flex: 1;
+      max-width: 980px;
+      width: 100%;
+      margin: 2.5rem auto 4rem auto;
+      padding: 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .editorial-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-warm);
+      border-radius: var(--radius-lg);
+      padding: 2.75rem 3rem;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+    }
+
+    .statement-header {
+      border-bottom: 1px solid var(--border-warm);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .section-tag {
+      font-family: 'Space Grotesk', monospace;
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .section-tag::before {
+      content: "";
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--rose-accent);
+    }
+
+    .statement-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.95rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      color: var(--text-main);
+      line-height: 1.25;
+    }
+
+    .statement-meta {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      display: flex;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .statement-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    /* Prose Styling */
+    .statement-body {
+      display: flex;
+      flex-direction: column;
+      gap: 1.4rem;
+      font-size: 1.05rem;
+      color: #382C2C;
+      line-height: 1.8;
+    }
+
+    .statement-body p:first-of-type::first-letter {
+      font-family: 'Cinzel', serif;
+      font-size: 3.4rem;
+      line-height: 0.8;
+      float: left;
+      margin-right: 0.75rem;
+      margin-top: 0.2rem;
+      color: var(--terracotta);
+      font-weight: 900;
+    }
+
+    .callout-quote {
+      margin: 1rem 0;
+      padding: 1.25rem 1.6rem;
+      background: var(--bg-cream);
+      border-left: 3px solid var(--rose-accent);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-style: italic;
+      color: var(--text-main);
+      font-size: 1.02rem;
+    }
+
+    /* Interactive Generator Launcher Grid */
+    .generators-section {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .section-heading-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-bottom: 1px solid var(--border-warm);
+      padding-bottom: 0.65rem;
+    }
+
+    .section-heading-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .generator-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .generator-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-warm);
+      border-radius: var(--radius-md);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .generator-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--border-warm);
+      transition: background 0.2s ease;
+    }
+
+    .generator-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--rose-accent);
+    }
+
+    .generator-card:hover::before {
+      background: var(--rose-accent);
+    }
+
+    .generator-card.funny:hover::before {
+      background: var(--terracotta);
+    }
+
+    .card-top {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .card-kicker {
+      font-family: 'Space Grotesk', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+    }
+
+    .card-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.35;
+    }
+
+    .card-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 0.25rem;
+    }
+
+    .card-tag {
+      font-size: 0.68rem;
+      font-family: 'Space Grotesk', monospace;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: var(--bg-cream);
+      border: 1px solid var(--border-warm);
+      color: var(--text-muted);
+    }
+
+    .btn-card-launch {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.15rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 800;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      letter-spacing: 0.02em;
+      border: 1.5px solid var(--text-main);
+      background: #181615;
+      color: #FFFFFF;
+      transition: all 0.2s ease;
+    }
+
+    .generator-card:hover .btn-card-launch {
+      background: var(--rose-accent);
+      border-color: var(--rose-accent);
+    }
+
+    .generator-card.funny:hover .btn-card-launch {
+      background: var(--terracotta);
+      border-color: var(--terracotta);
+    }
+
+    /* Footer */
+    footer.app-footer {
+      border-top: 1px solid var(--border-warm);
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-subtle);
+      font-family: 'Space Grotesk', sans-serif;
+      background: rgba(255, 253, 249, 0.6);
+    }
+
+    @media (max-width: 768px) {
+      .editorial-card {
+        padding: 2rem 1.5rem;
+      }
+      .generator-grid {
+        grid-template-columns: 1fr;
+      }
+      .statement-title {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Academic Top Banner -->
+  <header class="app-header">
+    <div class="brand-title">
+      <div class="brand-kicker">ART 3041 · Fall 2026</div>
+      <h1>
+        ROSA I. PAULA 
+        <span class="badge">A.I. For Designers</span>
+      </h1>
+      <div class="brand-subtitle">Project Showcase &amp; Artist Statement</div>
+    </div>
+
+    <nav class="header-nav">
+      <a href="#statement" class="nav-link">Statement</a>
+      <a href="#generators" class="nav-link">Generator Tools</a>
+    </nav>
+  </header>
+
+  <!-- Editorial Main Area -->
+  <main class="document-workspace">
+
+    <!-- Statement Article Card -->
+    <article class="editorial-card" id="statement">
+      <header class="statement-header">
+        <div class="section-tag">Course Workload · Assignment Dossier</div>
+        <h2 class="statement-title">Bridging Vector Design, Mascots, &amp; Microgravity Through Generative Code</h2>
+        <div class="statement-meta">
+          <span><strong>Course:</strong> ART 3041: A.I. for Designers</span>
+          <span><strong>Author:</strong> Rosa I. Paula</span>
+          <span><strong>Term:</strong> Fall 2026</span>
+        </div>
+      </header>
+
+      <section class="statement-body">
+        <p>
+          I directed Gemini to build a custom, browser-based generator—a tool to bridge vector design directly with code. At first, the drafts felt stiff and overly masculine, weighed down by a clunky interface that leaned far too hard into generic AI aesthetics. But during class, a fellow student sparked a shift, inspiring a complete visual change in the dashboard.
+        </p>
+
+        <p>
+          The motifs themselves drew life from our classroom exercises and the spirit of the Bearcat mascot. My favorite remains the design with the certified page; it carries the weight and pride of official documents. In one iteration somehow I created a version where the bearcat looks as aggressive as the actual logo. I keep this one in mind if I decide to submit to the competition.
+        </p>
+
+        <div class="callout-quote">
+          “Ultimately, I made this patch to celebrate equal access to exploration. By launching our Bearcat into orbit, the design declares that groundbreaking discovery belongs to every curious mind, lifting Baruch’s civic roots straight into the cosmos.”
+        </div>
+
+        <p>
+          I plan to keep refining the patch. Working with AI has become an exciting part of the process, giving me a clearer, sharper way to translate how I think and communicate.
+        </p>
+      </section>
+    </article>
+
+    <!-- Embedded Generator Tools Grid -->
+    <section class="generators-section" id="generators">
+      <div class="section-heading-row">
+        <h3 class="section-heading-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--terracotta)" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+          </svg>
+          Interactive Generative Systems
+        </h3>
+        <span style="font-family:'Space Grotesk', monospace; font-size:0.75rem; color:var(--text-subtle);">Direct Links to Work</span>
+      </div>
+
+      <div class="generator-grid">
+        <!-- Generator 1: Mission Patch Generator (Standard Edition) -->
+        <a href="ssep-mission-patch-generator-final.html" class="generator-card" target="_blank" rel="noopener noreferrer">
+          <div class="card-top">
+            <span class="card-kicker">Tool 01 · Primary Edition</span>
+            <h4 class="card-title">SSEP Mission Patch Generator</h4>
+            <p class="card-desc">
+              The refined browser workspace featuring parametric embroidery relief, dynamic orbit kinematics, computer-vision image synthesis, and high-resolution export pipelines.
+            </p>
+            <div class="card-tags">
+              <span class="card-tag">Parametric SVG</span>
+              <span class="card-tag">Vision API</span>
+              <span class="card-tag">Kinetic Orbits</span>
+            </div>
+          </div>
+          <div class="btn-card-launch">
+            Launch Generator
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </div>
+        </a>
+
+        <!-- Generator 2: Mascot Edition (Competition / Baruch Athletic Cut) -->
+        <a href="ssep-mission-patch-generator-final-funny.html" class="generator-card funny" target="_blank" rel="noopener noreferrer">
+          <div class="card-top">
+            <span class="card-kicker">Tool 02 · Competition Edition</span>
+            <h4 class="card-title">SSEP Bearcat Mascot Variant</h4>
+            <p class="card-desc">
+              The bold athletic variant featuring the aggressive Baruch feline logo styling, official Athletic Blue (#94BBE9), custom typography, and the certified science logbook motif.
+            </p>
+            <div class="card-tags">
+              <span class="card-tag">Official Bearcat</span>
+              <span class="card-tag">Baruch Athletics</span>
+              <span class="card-tag">Anton Typography</span>
+            </div>
+          </div>
+          <div class="btn-card-launch">
+            Launch Mascot Variant
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </div>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="app-footer">
+    Baruch College · Department of Fine &amp; Performing Arts · ART 3041: A.I. for Designers · Fall 2026
+  </footer>
+
+</body>
+</html>
