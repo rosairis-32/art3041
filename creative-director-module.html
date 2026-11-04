@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creative Director Pt. 1: Style Guide — Tommy Hilfiger Spring 2027</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #faf7f2;
+      --paper: #ffffff;
+      --primary: #9b2c3a;
+      --primary-soft: #fbf0f1;
+      --navy: #152438;
+      --text: #2c2926;
+      --muted: #6f6760;
+      --border: #e8e2d8;
+      --terracotta: #c46d5e;
+      --buttercup: #f3dc86;
+      --sage: #759379;
+      --card-shadow: 0 4px 20px rgba(44, 41, 38, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.65;
+      padding: 3rem 1.5rem 6rem;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      margin-bottom: 2.5rem;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .nav-back:hover {
+      color: var(--primary);
+      transform: translateX(-3px);
+    }
+
+    header {
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.75rem;
+      border-radius: 9999px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      border: 1px solid rgba(155, 44, 58, 0.2);
+      margin-bottom: 1.2rem;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.1rem, 5vw, 3rem);
+      font-weight: 600;
+      line-height: 1.25;
+      color: var(--navy);
+      margin-bottom: 0.6rem;
+      letter-spacing: -0.01em;
+    }
+
+    .subtitle {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.25rem;
+      color: var(--terracotta);
+      margin-bottom: 1.5rem;
+    }
+
+    .metadata-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.75rem;
+      font-size: 0.88rem;
+      color: var(--muted);
+      padding: 1rem 1.25rem;
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: var(--card-shadow);
+    }
+
+    .metadata-bar span strong {
+      color: var(--navy);
+      font-weight: 600;
+    }
+
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2.25rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--card-shadow);
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.45rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    h2::before {
+      content: "";
+      display: inline-block;
+      width: 4px;
+      height: 1.1em;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+
+    p {
+      color: #433e3a;
+      font-size: 0.96rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .capsule-group {
+      margin-top: 1.5rem;
+    }
+
+    .group-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--primary);
+      margin-bottom: 0.85rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .piece-list {
+      list-style: none;
+      display: grid;
+      gap: 0.85rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .piece-item {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      background: #fdfcfb;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      font-size: 0.92rem;
+    }
+
+    .piece-num {
+      color: var(--primary);
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .piece-desc strong {
+      color: var(--navy);
+    }
+
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+
+    .swatch {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--paper);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+
+    .swatch-color {
+      height: 75px;
+      width: 100%;
+    }
+
+    .swatch-info {
+      padding: 0.7rem 0.8rem;
+      font-size: 0.78rem;
+    }
+
+    .swatch-name {
+      font-weight: 600;
+      color: var(--navy);
+      display: block;
+      margin-bottom: 0.15rem;
+    }
+
+    .swatch-hex {
+      font-family: monospace;
+      color: var(--muted);
+    }
+
+    .type-spec-list {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1.2rem;
+    }
+
+    .type-spec-item {
+      padding: 1.1rem 1.35rem;
+      border-radius: 10px;
+      background: #fdfcfb;
+      border: 1px solid var(--border);
+    }
+
+    .type-role {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--primary);
+      margin-bottom: 0.3rem;
+    }
+
+    .type-font {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 0.25rem;
+    }
+
+    .logomark-box {
+      border: 1px dashed #d1c8bd;
+      padding: 1.6rem;
+      border-radius: 12px;
+      background: #fbf9f6;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .logo-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      width: fit-content;
+      background: var(--navy);
+      color: #ffffff;
+      padding: 0.55rem 1.15rem;
+      border-radius: 6px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      font-size: 0.85rem;
+    }
+
+    .flag-icon {
+      display: inline-block;
+      width: 17px;
+      height: 12px;
+      background: linear-gradient(to right, #ffffff 50%, var(--primary) 50%);
+      border: 1px solid rgba(255,255,255,0.4);
+    }
+
+    .quadrant-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1.35rem;
+    }
+
+    .quad-box {
+      background: #fdfcfb;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.35rem;
+    }
+
+    .quad-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.75rem;
+    }
+
+    .quad-box ul {
+      padding-left: 1.15rem;
+      font-size: 0.88rem;
+      color: var(--muted);
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    footer {
+      text-align: center;
+      padding-top: 2.5rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      margin-top: 3.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="nav-back">&larr; Back to Index</a>
+
+    <header>
+      <div class="tag">ART 3041 &middot; Crea(i)tive Director &middot; Fall 2026</div>
+      <h1>Creative Director Pt. 1: Style Guide</h1>
+      <div class="subtitle">Tommy Hilfiger Spring 2027 &mdash; &ldquo;Modern Prep / NYC Re-Archived&rdquo;</div>
+      <div class="metadata-bar">
+        <span><strong>Brand:</strong> Tommy Hilfiger (Womenswear)</span>
+        <span><strong>Deliverable:</strong> 15-Piece Capsule &amp; Style Guide</span>
+        <span><strong>Environment:</strong> NYC Launch</span>
+      </div>
+    </header>
+
+    <!-- 01 Concept -->
+    <section class="card">
+      <h2>01 / Campaign Concept &amp; Narrative</h2>
+      <p>
+        <strong>&ldquo;NEW HERITAGE / NYC 27&rdquo;</strong> reinterprets Tommy Hilfiger&rsquo;s collegiate East Coast vocabulary through an elevated, effortless feminine lens designed specifically for New York City living.
+      </p>
+      <p>
+        Synthesizing the sun-bleached coastal ease of the <strong>Spring 2006 Women&rsquo;s Runway</strong> with the bold, graphic momentum of the <strong>Spring 2027 Runway Campaign</strong>, this wardrobe pairs tailored trousers, breezy unbuttoned shirting, flowing tiered poplin skirts, and fine-gauge knitwear for transit speed and street elegance.
+      </p>
+    </section>
+
+    <!-- 02 15-Piece Capsule Wardrobe -->
+    <section class="card">
+      <h2>02 / 15-Piece Capsule Wardrobe (Womenswear)</h2>
+      <p>A modular 15-piece system pairing soft tailoring, breezy femininity, and iconic prep details:</p>
+
+      <div class="capsule-group">
+        <div class="group-title">Tops &amp; Soft Layering (6 Pieces)</div>
+        <ul class="piece-list">
+          <li class="piece-item">
+            <span class="piece-num">01</span>
+            <div class="piece-desc"><strong>The Off-the-Shoulder Cable Knit V-Neck:</strong> Slouchy off-white fine cable knit with an open relaxed neckline edged in navy and archival crimson tipping.</div>
+          </li>
+          <li class="piece-item">
+            <span class="piece-num">02</span>
+            <div class="piece-desc"><strong>The Cropped Tie-Front Oxford Shirt:</strong> Crisp candy blue-and-white striped poplin shirt cropped at the natural waist with an integrated self-tie bow.</div>
+          </li>
+          <li class="piece-item">
+            <span class="piece-num">03</span>
+            <div class="piece-desc"><strong>The Ribbed Baby Polo:</strong> Fitted short-sleeve knit in soft buttercup yellow with mother-of-pearl buttons and micro flag embroidery.</div>
+          </li>
+          <li class="piece-item">
+            <span class="piece-num">04</span>
+            <div class="piece-desc"><strong>The Fluid Silk-Cotton Rugby:</strong> Lightweight, drape-heavy long-sleeve rugby jersey in colorblocked sage, terracotta, and chalk white with a slit placket.</div>
+          </li>
+          <li class="piece-item">
+            <span class="piece-num">05</span>
+            <div class="piece-desc"><strong>The Sleeveless V-Neck Cricket Vest:</strong> Cream textured cotton vest with contrast striped rib hem, styled worn solo or layered over shirting.</div>
+          </li>
+          <li class="piece-item">
+            <span class="piece-num">06</span>
+            <div class="piece-desc"><strong>The Shrunken Twill Club Blazer:</strong> Softly tailored unstructured blazer in washed navy cotton-linen with white contrast piped lapels.</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="capsule-group">
+        <div class="group-title">Skirts, Bottoms &amp; Dresses (5 Pieces)</div>
+        <ul class="piece-list">
+          <li class="piece-item">
+            <span class="piece-num">07</span>
+            <div class="piece-desc"><strong>The Tiered Drop-Waist Midi Skirt:</strong> Flowing chalk-white cotton poplin tiered skirt with archival varsity multi-stripe ribbon hem detailing.</div>
+          </li>
+          <li class="piece-item">
+            <span class="piece-num">08</span>
+            <div class="piece-desc"><strong>The Fluid Terracotta Pleated Trouser:</strong> High-waisted wide-leg trousers in washed clay linen-twill with subtle double front pleats.</div>
+          </li>
+          <li class="piece-item">
+            <span class="piece-num">09</span>
+            <div class="piece-desc"><strong>The Botanical Watercolor A-Line Skirt:</strong> Pleated knee-length skirt in Tommy&rsquo;s archival Spring 2006 floral watercolor print on a light ecru ground.</div>
+          </li>
+          <li class="piece-item">
+            <span class="piece-num">10</span>
+            <div class="piece-desc"><strong>The High-Rise Chino Walking Short:</strong> High-rise tailored bermuda short in crisp sand chino twill with a matching webbed D-ring belt.</div>
+          </li>
+          <li class="piece-item">
+            <span class="piece-num">11</span>
+            <div class="piece-desc"><strong>The Halter Tennis Shift Dress:</strong> Minimalist chalk-white pique knit A-line shift dress with a navy-tipped polo collar and low scooped back.</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="capsule-group">
+        <div class="group-title">Outerwear, Footwear &amp; Accessories (4 Pieces)</div>
+        <ul class="piece-list">
+          <li class="piece-item">
+            <span class="piece-num">12</span>
+            <div class="piece-desc"><strong>The Cropped Blouson Windbreaker:</strong> Optic white lightweight nylon shell with gathered sleeves and heritage tricolor waist ribbing.</div>
+          </li>
+          <li class="piece-item">
+            <span class="piece-num">13</span>
+            <div class="piece-desc"><strong>The Two-Tone Slingback Penny Loafer:</strong> Cream and cordovan burgundy polished calfskin loafer with a slender low block heel and gold penny coin accent.</div>
+          </li>
+          <li class="piece-item">
+            <span class="piece-num">14</span>
+            <div class="piece-desc"><strong>The Canvas Market Bucket Bag:</strong> Structured ecru canvas tote with natural tan leather trim, gold hardware, and nautical striped drawstring lining.</div>
+          </li>
+          <li class="piece-item">
+            <span class="piece-num">15</span>
+            <div class="piece-desc"><strong>The Silk Regatta Hair / Neck Scarf:</strong> Square silk twill scarf in archival crest and pastel diagonal stripe motifs.</div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 03 Color Palette -->
+    <section class="card">
+      <h2>03 / Brand Campaign Color Palette</h2>
+      <p>Sun-washed coastal warmth paired with refined archival prep tones:</p>
+      
+      <div class="palette-grid">
+        <div class="swatch">
+          <div class="swatch-color" style="background-color: #152438;"></div>
+          <div class="swatch-info">
+            <span class="swatch-name">Heritage Navy</span>
+            <span class="swatch-hex">#152438</span>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background-color: #F8F9FA; border-bottom: 1px solid var(--border);"></div>
+          <div class="swatch-info">
+            <span class="swatch-name">Chalk White</span>
+            <span class="swatch-hex">#F8F9FA</span>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background-color: #9B2C3A;"></div>
+          <div class="swatch-info">
+            <span class="swatch-name">Archival Crimson</span>
+            <span class="swatch-hex">#9B2C3A</span>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background-color: #C46D5E;"></div>
+          <div class="swatch-info">
+            <span class="swatch-name">Terracotta Clay</span>
+            <span class="swatch-hex">#C46D5E</span>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background-color: #F3DC86;"></div>
+          <div class="swatch-info">
+            <span class="swatch-name">Buttercup Yellow</span>
+            <span class="swatch-hex">#F3DC86</span>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background-color: #759379;"></div>
+          <div class="swatch-info">
+            <span class="swatch-name">Ivy Sage</span>
+            <span class="swatch-hex">#759379</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 Typography -->
+    <section class="card">
+      <h2>04 / Brand Campaign Typography</h2>
+      <div class="type-spec-list">
+        <div class="type-spec-item">
+          <div class="type-role">Display &amp; Campaign Headlines</div>
+          <div class="type-font" style="font-family: 'Playfair Display', serif; font-size: 1.3rem;">Playfair Display / Garamond Premier</div>
+          <p style="margin: 0; font-size: 0.88rem; color: var(--muted);">Graceful, high-fashion editorial serif with expressive italics for lookbooks and billboards.</p>
+        </div>
+        <div class="type-spec-item">
+          <div class="type-role">Subheadings &amp; Product Names</div>
+          <div class="type-font" style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600;">Plus Jakarta Sans / Futura Medium</div>
+          <p style="margin: 0; font-size: 0.88rem; color: var(--muted);">Crisp geometric sans-serif balancing modern clarity with understated elegance.</p>
+        </div>
+        <div class="type-spec-item">
+          <div class="type-role">Body Copy &amp; Specifications</div>
+          <div class="type-font" style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.95rem;">Plus Jakarta Sans Regular</div>
+          <p style="margin: 0; font-size: 0.88rem; color: var(--muted);">Clean, legible, and balanced typography suited for digital and print formats.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 Logomark -->
+    <section class="card">
+      <h2>05 / Logomark Concept</h2>
+      <div class="logomark-box">
+        <div class="logo-badge">
+          <span class="flag-icon"></span>
+          <span>TOMMY HILFIGER &middot; NYC 27</span>
+        </div>
+        <p style="margin-top: 0.5rem; font-size: 0.92rem;">
+          <strong>Concept:</strong> <em>&ldquo;TH &rsquo;27 / THE REGATTA SHIELD&rdquo;</em><br>
+          A delicate monoline crest that encloses the iconic red-and-white split flag within an arched heritage cartouche. Refined for soft-touch embossed hangtags, gold engraved buttons, slingback footbeds, and polished editorial ads.
+        </p>
+      </div>
+    </section>
+
+    <!-- 06 Moodboard Blueprint -->
+    <section class="card">
+      <h2>06 / Moodboard Direction (20+ Image Blueprint)</h2>
+      <p>
+        Curated as a 1920&times;1080 cinematic collage reflecting Johnny Vandal&rsquo;s <em>&ldquo;The Art of the Fashion Mood Board&rdquo;</em> mise-en-sc&egrave;ne framework:
+      </p>
+
+      <div class="quadrant-grid">
+        <div class="quad-box">
+          <div class="quad-title">Quadrant 1: Runway Archive (5)</div>
+          <ul>
+            <li>Model in terracotta linen trousers with unbuttoned blue striped shirt (Spring 2006)</li>
+            <li>Airy drop-waist pleated tennis midi skirt swinging mid-stride</li>
+            <li>Off-the-shoulder navy v-neck knit paired with chalk-white pleats</li>
+            <li>Yellow tailored jacket worn over botanical floral knee-length skirt</li>
+            <li>Close-up detail of contrast tipped collars and mother-of-pearl buttons</li>
+          </ul>
+        </div>
+
+        <div class="quad-box">
+          <div class="quad-title">Quadrant 2: Spring 2027 Graphic DNA (5)</div>
+          <ul>
+            <li>Cropped nautical bandeau layered under an open utility bomber</li>
+            <li>High-waisted leather-trimmed track pant with bold racing stripes</li>
+            <li>Cropped white ripstop windbreaker with tricolor ribbed waistband</li>
+            <li>Fluid diagonal-stripe silk slip dress layered over a white baby tee</li>
+            <li>Denim and leather paneled A-line mini skirt with brass hardware</li>
+          </ul>
+        </div>
+
+        <div class="quad-box">
+          <div class="quad-title">Quadrant 3: NYC Architectural Texture (5)</div>
+          <ul>
+            <li>Morning light streaming across Grand Central's vaulted marble windows</li>
+            <li>Wrought-iron townhouse stoop on the Upper East Side in early spring</li>
+            <li>Vintage mosaic tile subway signage on the Lexington Avenue line</li>
+            <li>Sunlight catching glass high-rises against blue downtown skies</li>
+            <li>Central Park Bethesda Terrace arches framed by budding magnolia trees</li>
+          </ul>
+        </div>
+
+        <div class="quad-box">
+          <div class="quad-title">Quadrant 4: Textiles &amp; Details (5)</div>
+          <ul>
+            <li>Breezy sky blue cotton poplin stripe with natural fold wrinkles</li>
+            <li>Sun-bleached terracotta linen weave showing slub texture</li>
+            <li>Buttercup yellow fine-gauge piqué cotton knit swatch</li>
+            <li>Polished cream and burgundy calfskin leather grain</li>
+            <li>Silk twill scarf drape with hand-rolled hem edge</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>ART 3041 &middot; A.I. for Designers &middot; Fall 2026</p>
+    </footer>
+  </div>
+</body>
+</html>

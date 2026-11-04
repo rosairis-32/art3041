@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creative Director Pt. 1: Style Guide — Mood Board</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Cormorant Garamond & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['"Inter"', 'sans-serif'],
+          },
+          colors: {
+            thNavy: '#0c1b33',
+            thRed: '#c1272d',
+            thCream: '#fbf9f5',
+            thStone: '#f0ece1',
+            thMuted: '#6b7280'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Smooth custom scrollbars and backdrop blur transitions */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #fbf9f5;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #c5beaf;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #0c1b33;
+    }
+    .editorial-badge {
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-size: 0.65rem;
+    }
+    /* Masonry grid column balancing */
+    .masonry-grid {
+      columns: 1;
+      column-gap: 1.5rem;
+    }
+    @media (min-width: 640px) {
+      .masonry-grid { columns: 2; }
+    }
+    @media (min-width: 1024px) {
+      .masonry-grid { columns: 3; }
+    }
+    @media (min-width: 1280px) {
+      .masonry-grid { columns: 4; }
+    }
+    .masonry-item {
+      break-inside: avoid;
+      margin-bottom: 1.5rem;
+    }
+  </style>
+</head>
+<body class="bg-thCream text-[#1c1917] font-sans antialiased selection:bg-thNavy selection:text-white min-h-screen flex flex-col justify-between">
+
+  <!-- TOP RUNWAY BANNER -->
+  <div class="w-full bg-thNavy text-white py-2 px-4 text-center text-xs tracking-widest uppercase border-b border-[#1f2937]/30 flex justify-between items-center">
+    <span class="hidden sm:inline-block opacity-75">Tommy Hilfiger Archive & Modern Runway Synthesis</span>
+    <span class="mx-auto sm:mx-0 font-medium">Creative Director Pt. 1: Style Guide</span>
+    <span class="hidden sm:inline-block opacity-75" id="headerDateDisplay">Academic Session</span>
+  </div>
+
+  <!-- MAIN HEADER / EDITORIAL COVER -->
+  <header class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-10 pb-6 border-b border-[#e5dfd5]">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6">
+      <div>
+        <div class="flex items-center gap-2 mb-2">
+          <span class="h-2 w-6 bg-thRed inline-block rounded-xs"></span>
+          <span class="editorial-badge text-thNavy font-bold">Visual Research Dossier</span>
+        </div>
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-serif font-medium tracking-tight text-thNavy">
+          Creative Director Pt. 1: Style Guide
+        </h1>
+        <p class="mt-2 text-base sm:text-lg text-thMuted max-w-2xl font-light">
+          An exploratory mood board synthesizing heritage preppy tailoring with high-octane modern collegiate, racer sportswear, and Americana deconstruction.
+        </p>
+      </div>
+
+      <!-- Action Trigger Buttons -->
+      <div class="flex flex-wrap items-center gap-3">
+        <button id="openUploadBtn" class="inline-flex items-center gap-2 px-5 py-2.5 bg-thNavy text-white hover:bg-[#1a2d4f] rounded-full text-xs font-semibold uppercase tracking-wider transition-all shadow-sm">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+          </svg>
+          Upload Mood Image
+        </button>
+
+        <button id="toggleEditProfileBtn" class="inline-flex items-center gap-2 px-4 py-2.5 border border-[#c9c1b1] bg-white/70 hover:bg-white text-thNavy rounded-full text-xs font-semibold uppercase tracking-wider transition-all">
+          <svg class="w-4 h-4 text-thRed" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+          </svg>
+          <span id="editBtnLabel">Edit Details</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- METADATA CARD (Profile / Course DOE) -->
+    <div id="metadataDisplay" class="bg-white/80 backdrop-blur-sm border border-[#e5ded4] rounded-2xl p-5 shadow-sm transition-all duration-300">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 divide-y sm:divide-y-0 sm:divide-x divide-[#eee7dc]">
+        
+        <!-- Student Name -->
+        <div class="pt-2 sm:pt-0 sm:px-3 first:pl-0">
+          <span class="block editorial-badge text-thMuted uppercase font-semibold">Creative Director / Student</span>
+          <span id="dispName" class="text-base font-serif font-bold text-thNavy">Jane Doe</span>
+          <span id="dispRole" class="block text-xs text-thMuted">Lead Visual Stylist</span>
+        </div>
+
+        <!-- Course DOE -->
+        <div class="pt-2 sm:pt-0 sm:px-3">
+          <span class="block editorial-badge text-thMuted uppercase font-semibold">Course DOE & Program</span>
+          <span id="dispCourse" class="text-base font-serif font-bold text-thNavy">FASH-410: Creative Direction</span>
+          <span id="dispTerm" class="block text-xs text-thMuted">Spring Runway Studio</span>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="pt-2 sm:pt-0 sm:px-3">
+          <span class="block editorial-badge text-thMuted uppercase font-semibold">Contact Information</span>
+          <a id="dispEmail" href="mailto:director@fashionstudio.edu" class="text-xs text-thNavy hover:text-thRed block truncate font-medium">director@fashionstudio.edu</a>
+          <span id="dispPhone" class="text-xs text-thMuted block">+1 (555) 382-9012</span>
+        </div>
+
+        <!-- Project Reference & Links -->
+        <div class="pt-2 sm:pt-0 sm:px-3">
+          <span class="block editorial-badge text-thMuted uppercase font-semibold">Campaign Reference</span>
+          <a id="dispPortfolio" href="https://wwd.com" target="_blank" class="text-xs text-thRed hover:underline truncate block font-medium">WWD Tommy Runway & Archive</a>
+          <span class="text-xs text-thMuted block" id="dispStatus">Status: Pt. 1 Style Guide Locked</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- INLINE METADATA EDIT FORM (Collapsible) -->
+    <div id="metadataEditForm" class="hidden mt-4 bg-white border border-thNavy/20 rounded-2xl p-6 shadow-md">
+      <div class="flex items-center justify-between pb-4 mb-4 border-b border-[#eee]">
+        <h3 class="font-serif text-lg font-bold text-thNavy">Edit Project Dossier & Student Information</h3>
+        <span class="text-xs text-thMuted">Changes are stored locally in your browser</span>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
+        <div>
+          <label class="block font-medium text-thNavy mb-1">Your Full Name</label>
+          <input type="text" id="inputName" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-thNavy" placeholder="e.g. Alex Morgan">
+        </div>
+        <div>
+          <label class="block font-medium text-thNavy mb-1">Course Title / DOE Code</label>
+          <input type="text" id="inputCourse" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-thNavy" placeholder="e.g. DOE Fashion Styling & Direction">
+        </div>
+        <div>
+          <label class="block font-medium text-thNavy mb-1">Email Address</label>
+          <input type="email" id="inputEmail" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-thNavy" placeholder="e.g. student@school.edu">
+        </div>
+        <div>
+          <label class="block font-medium text-thNavy mb-1">Phone Number</label>
+          <input type="text" id="inputPhone" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-thNavy" placeholder="e.g. +1 (555) 019-2834">
+        </div>
+        <div>
+          <label class="block font-medium text-thNavy mb-1">Portfolio / Campaign URL</label>
+          <input type="text" id="inputPortfolio" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-thNavy" placeholder="e.g. https://portfolio.com or WWD link">
+        </div>
+        <div>
+          <label class="block font-medium text-thNavy mb-1">Project Phase / Subtitle</label>
+          <input type="text" id="inputRole" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-thNavy" placeholder="e.g. Lead Creative Director">
+        </div>
+      </div>
+      <div class="mt-5 flex justify-end gap-3">
+        <button id="cancelEditProfileBtn" class="px-4 py-2 border border-gray-300 rounded-lg text-xs font-medium hover:bg-gray-50">Cancel</button>
+        <button id="saveProfileBtn" class="px-5 py-2 bg-thNavy text-white rounded-lg text-xs font-semibold hover:bg-[#1a2d4f]">Save Information</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- FILTER CONTROLS & BOARD STATISTICS -->
+  <main class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 flex-grow">
+    
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-[#e5ded4]/60">
+      <!-- Filter tabs -->
+      <div class="flex flex-wrap items-center gap-2" id="filterContainer">
+        <button data-filter="all" class="filter-tab active px-4 py-2 rounded-full text-xs font-medium tracking-wide transition-all bg-thNavy text-white">
+          All Inspiration (<span id="countAll">0</span>)
+        </button>
+        <button data-filter="firstview" class="filter-tab px-4 py-2 rounded-full text-xs font-medium tracking-wide transition-all bg-white/60 text-thNavy hover:bg-white border border-[#e5ded4]">
+          FirstView Archive Preppy (<span id="countArchive">0</span>)
+        </button>
+        <button data-filter="spring-runway" class="filter-tab px-4 py-2 rounded-full text-xs font-medium tracking-wide transition-all bg-white/60 text-thNavy hover:bg-white border border-[#e5ded4]">
+          Spring Runway & TommyXGigi (<span id="countSpring">0</span>)
+        </button>
+        <button data-filter="custom" class="filter-tab px-4 py-2 rounded-full text-xs font-medium tracking-wide transition-all bg-white/60 text-thNavy hover:bg-white border border-[#e5ded4]">
+          Custom Uploads (<span id="countCustom">0</span>)
+        </button>
+      </div>
+
+      <!-- Quick board controls -->
+      <div class="flex items-center gap-3 self-end sm:self-auto text-xs">
+        <button id="resetDefaultsBtn" class="text-thMuted hover:text-thRed underline transition-colors" title="Restores standard moodboard sample dataset">
+          Reset to Curated Defaults
+        </button>
+        <span class="text-gray-300">|</span>
+        <button id="quickUploadTrigger" class="text-thNavy font-semibold hover:underline flex items-center gap-1">
+          <span>+ Add Look</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- MOODBOARD MASONRY GALLERY -->
+    <div id="moodboardGrid" class="masonry-grid mt-8">
+      <!-- Cards dynamically generated here via JS -->
+    </div>
+
+    <!-- EMPTY STATE IF ALL DELETED -->
+    <div id="emptyState" class="hidden text-center py-20 px-4 border-2 border-dashed border-[#dcd4c7] rounded-3xl my-8">
+      <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-thStone flex items-center justify-center text-thNavy">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+        </svg>
+      </div>
+      <h3 class="font-serif text-2xl font-bold text-thNavy mb-1">Your Moodboard Is Clear</h3>
+      <p class="text-thMuted text-sm max-w-md mx-auto mb-6">Upload research photos, runway stills, and campaign swatches to construct your style guide.</p>
+      <div class="flex justify-center gap-3">
+        <button onclick="openUploadModal()" class="px-5 py-2.5 bg-thNavy text-white rounded-full text-xs font-semibold uppercase tracking-wider hover:bg-[#1a2d4f]">
+          Upload Look
+        </button>
+        <button onclick="restoreDefaultBoard()" class="px-5 py-2.5 bg-white border border-gray-300 text-thNavy rounded-full text-xs font-semibold uppercase tracking-wider hover:bg-gray-50">
+          Restore Curated Looks
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- UPLOAD MODAL -->
+  <div id="uploadModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white w-full max-w-xl rounded-3xl p-6 sm:p-8 shadow-2xl relative transition-all border border-[#f0ece1]">
+      
+      <!-- Close button -->
+      <button id="closeUploadModalBtn" class="absolute top-5 right-5 text-gray-400 hover:text-thNavy p-1 rounded-full hover:bg-gray-100">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+
+      <div class="mb-5">
+        <span class="editorial-badge text-thRed font-bold">Style Guide Acquisition</span>
+        <h2 class="font-serif text-2xl sm:text-3xl font-bold text-thNavy mt-1">Add Image to Moodboard</h2>
+        <p class="text-xs text-thMuted">Import campaign scans, color stories, or silhouette captures.</p>
+      </div>
+
+      <!-- Upload Options: File Drag & Drop OR Direct URL -->
+      <form id="uploadForm" class="space-y-4">
+        
+        <!-- Drag & Drop / File Input Box -->
+        <div id="dropZone" class="border-2 border-dashed border-[#c5beaf] hover:border-thNavy rounded-2xl p-6 text-center cursor-pointer transition-colors bg-thCream/60">
+          <input type="file" id="fileInput" accept="image/*" class="hidden">
+          <div class="flex flex-col items-center justify-center">
+            <svg class="w-10 h-10 text-thNavy/60 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+            </svg>
+            <p class="text-sm font-medium text-thNavy">Click to select photo or drag & drop</p>
+            <p class="text-[11px] text-thMuted mt-1">PNG, JPG, WebP supported</p>
+          </div>
+          <div id="filePreviewWrap" class="hidden mt-3 relative inline-block">
+            <img id="filePreviewImg" src="" alt="Preview" class="h-28 w-auto rounded-xl object-cover shadow-md mx-auto">
+            <button type="button" id="clearFileBtn" class="absolute -top-2 -right-2 bg-thRed text-white rounded-full p-1 shadow hover:bg-red-700">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 text-xs text-thMuted">
+          <div class="flex-grow h-px bg-gray-200"></div>
+          <span>OR PASTE IMAGE URL</span>
+          <div class="flex-grow h-px bg-gray-200"></div>
+        </div>
+
+        <!-- URL Input -->
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-thNavy mb-1">Image Web Address</label>
+          <input type="url" id="inputImageUrl" placeholder="https://images.unsplash.com/... or runway photo link" class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-thNavy">
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <!-- Category / Section -->
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-thNavy mb-1">Collection Category</label>
+            <select id="inputCategory" class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-thNavy bg-white">
+              <option value="spring-runway">Spring Runway / Modern TommyXGigi</option>
+              <option value="firstview">FirstView / Archive Preppy Runway</option>
+              <option value="custom">General Mood & Textile Study</option>
+            </select>
+          </div>
+
+          <!-- Look Title / Silhouettes -->
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-thNavy mb-1">Look Title / Garment</label>
+            <input type="text" id="inputTitle" placeholder="e.g. Patchwork Silk Dress, Cropped Bomber" required class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-thNavy">
+          </div>
+        </div>
+
+        <!-- Design Notes & Aesthetic Details -->
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-thNavy mb-1">Creative Director Notes & Stylistic Accents</label>
+          <textarea id="inputDescription" rows="2" placeholder="e.g. Deconstructed striped rugby, stars and stripes motif, Americana palette, oversized lapel." class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:border-thNavy"></textarea>
+        </div>
+
+        <div class="pt-2 flex justify-end gap-3">
+          <button type="button" id="modalCancelBtn" class="px-5 py-2.5 border border-gray-300 rounded-full text-xs font-semibold uppercase tracking-wider hover:bg-gray-100">Cancel</button>
+          <button type="submit" class="px-6 py-2.5 bg-thNavy hover:bg-[#1a2d4f] text-white rounded-full text-xs font-semibold uppercase tracking-wider shadow">Add to Moodboard</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- EXPANDED LIGHTBOX MODAL -->
+  <div id="lightboxModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="max-w-5xl w-full max-h-[90vh] flex flex-col md:flex-row bg-[#0f172a] rounded-3xl overflow-hidden border border-white/10 shadow-2xl relative">
+      <!-- Close button -->
+      <button id="closeLightboxBtn" class="absolute top-4 right-4 z-10 text-white/70 hover:text-white bg-black/40 rounded-full p-2 backdrop-blur-sm">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+
+      <!-- Lightbox Image -->
+      <div class="md:w-3/5 bg-black flex items-center justify-center p-2 sm:p-6 overflow-hidden">
+        <img id="lightboxImg" src="" alt="High resolution runway view" class="max-h-[75vh] w-auto max-w-full object-contain rounded-xl shadow-2xl">
+      </div>
+
+      <!-- Lightbox Meta -->
+      <div class="md:w-2/5 p-6 sm:p-8 flex flex-col justify-between text-white bg-[#111827]">
+        <div>
+          <div class="flex items-center gap-2 mb-3">
+            <span id="lightboxCategory" class="px-2.5 py-1 bg-thRed text-white text-[10px] font-bold rounded-full uppercase tracking-wider">Runway</span>
+            <span id="lightboxDate" class="text-xs text-gray-400">Archival</span>
+          </div>
+          <h2 id="lightboxTitle" class="font-serif text-3xl font-bold mb-3 tracking-tight">Look Title</h2>
+          <div class="w-12 h-0.5 bg-white/20 mb-4"></div>
+          <p id="lightboxDesc" class="text-sm text-gray-300 font-light leading-relaxed">
+            Detailed styling notes.
+          </p>
+        </div>
+
+        <div class="pt-6 mt-6 border-t border-white/10 flex items-center justify-between">
+          <div>
+            <span class="block text-[10px] uppercase tracking-widest text-gray-400">Moodboard Reference</span>
+            <span class="text-xs text-gray-300">Style Guide Dossier Pt. 1</span>
+          </div>
+          <button id="lightboxDeleteBtn" class="text-xs text-red-400 hover:text-red-300 flex items-center gap-1.5 transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+            Remove from Board
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION BOX -->
+  <div id="toastNotification" class="fixed bottom-6 right-6 z-50 bg-thNavy text-white text-xs px-4 py-3 rounded-2xl shadow-xl flex items-center gap-3 transform translate-y-24 opacity-0 transition-all duration-300 border border-white/10">
+    <span id="toastIcon" class="w-2 h-2 rounded-full bg-emerald-400"></span>
+    <span id="toastMsg">Operation successful</span>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-[#e5ded4] bg-white/60 py-8 px-4 sm:px-6 lg:px-8 mt-12 text-xs text-thMuted">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
+      <div>
+        <span class="font-serif font-bold text-thNavy text-sm">Creative Director Pt. 1: Style Guide</span>
+        <p class="mt-0.5 text-thMuted">Course DOE Project • Moodboard & Visual Research Document</p>
+      </div>
+      <div class="flex items-center gap-6">
+        <span id="footerProfileName" class="font-medium text-thNavy">Jane Doe</span>
+        <span class="text-gray-300">•</span>
+        <span>Ready for GitHub Pages Deployment</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- APPLICATION LOGIC -->
+  <script>
+    /* =========================================================================
+       DEFAULT INITIAL DATASET (REFLECTING THE PROVIDED TOMMY HILFIGER CAMPAIGNS)
+       ========================================================================= */
+    const DEFAULT_MOOD_ITEMS = [
+      {
+        id: 'th-arch-01',
+        title: 'Heritage Red Blazer & Prep Trouser',
+        category: 'firstview',
+        description: 'FirstView archive runway look: Structured crimson tailored sports coat over a casual polo and relaxed-fit trousers. Quintessential Ivy prep meets modern American ease.',
+        image: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=900&q=80',
+        dateAdded: 'Archive FirstView'
+      },
+      {
+        id: 'th-arch-02',
+        title: 'Pastel Patchwork Tailored Jacket',
+        category: 'firstview',
+        description: 'Soft pastel madras patchwork blazer balanced with muted sand chinos. Eclectic Ivy League heritage color blocking from 2000s archival collections.',
+        image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=900&q=80',
+        dateAdded: 'Archive FirstView'
+      },
+      {
+        id: 'th-arch-03',
+        title: 'Breton Knit & Striped Casualwear',
+        category: 'firstview',
+        description: 'Off-the-shoulder nautical striped sailor knit with knee-length neutral shorts. Seaside coastal American aesthetic.',
+        image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80',
+        dateAdded: 'Archive FirstView'
+      },
+      {
+        id: 'th-arch-04',
+        title: 'Oversized Trench & Relaxed Lounge Pant',
+        category: 'firstview',
+        description: 'Sand linen loose-tailored overcoat paired with relaxed pyjama-stripe trousers and layered shirting. Effortless ease.',
+        image: 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=900&q=80',
+        dateAdded: 'Archive FirstView'
+      },
+      {
+        id: 'th-run-01',
+        title: 'Cropped Athletic Knit & Flag Striped Mini',
+        category: 'spring-runway',
+        description: 'Spring runway TommyXGigi highlight: Ochre cropped athletic polo combined with high-waisted color-blocked striped knit skirt and western belt hardware.',
+        image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=900&q=80',
+        dateAdded: 'Spring Runway'
+      },
+      {
+        id: 'th-run-02',
+        title: 'Americana Patchwork Stars & Chiffon Gown',
+        category: 'spring-runway',
+        description: 'Floor-skimming sheer bohemian patchwork slip gown featuring vintage bandanna prints, Americana star fields, and mixed checks.',
+        image: 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=900&q=80',
+        dateAdded: 'Spring Runway'
+      },
+      {
+        id: 'th-run-03',
+        title: 'Satin Varsity Bomber & Badge Denim',
+        category: 'spring-runway',
+        description: 'Crimson satin collegiate bomber jacket with athletic rib-knit striping, styled over emblem-covered vintage washed denim jeans.',
+        image: 'https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=900&q=80',
+        dateAdded: 'Spring Runway'
+      },
+      {
+        id: 'th-run-04',
+        title: 'Deconstructed Flag Crop Hoodie & Boxers',
+        category: 'spring-runway',
+        description: 'Graphic chevron cutoff hoodie styled with star-and-stripe printed boxer shorts. Streetwear crossover runway styling with moto boots.',
+        image: 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80',
+        dateAdded: 'Spring Runway'
+      },
+      {
+        id: 'th-run-05',
+        title: 'Full Denim Duster Coat with Moto Accents',
+        category: 'spring-runway',
+        description: 'Floor-length vintage wash belted denim trench layered over micro denim shorts, framed with black double-buckle leather boots.',
+        image: 'https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&w=900&q=80',
+        dateAdded: 'Spring Runway'
+      },
+      {
+        id: 'th-run-06',
+        title: 'High-Gloss Vinyl Pant & Racer Crop Top',
+        category: 'spring-runway',
+        description: 'Bold red, white, and navy geometric knit halter crop paired with slick black high-shine vinyl trousers and heavy silver buckle belt.',
+        image: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80',
+        dateAdded: 'Spring Runway'
+      }
+    ];
+
+    const DEFAULT_PROFILE = {
+      name: "Jane Doe",
+      course: "Course DOE: Creative Direction Pt. 1",
+      email: "jane.doe@fashiondirectors.edu",
+      phone: "+1 (555) 789-2341",
+      portfolio: "https://wwd.com/fashion-news/shows-reviews/gallery/tommy-hilfiger-rtw-spring-2017-10782108/",
+      role: "Lead Visual Stylist & Director"
+    };
+
+    // State Variables
+    let moodItems = [];
+    let currentFilter = 'all';
+    let profileData = {};
+    let activeLightboxId = null;
+    let uploadedFileDataUrl = null;
+
+    /* =========================================================================
+       INITIALIZATION & STORAGE
+       ========================================================================= */
+    window.addEventListener('DOMContentLoaded', () => {
+      loadProfileData();
+      loadMoodboardData();
+      setupEventListeners();
+      setupDragDrop();
+      updateFilterCounts();
+      renderMoodboard();
+      
+      // Update year dynamically
+      const yr = new Date().getFullYear();
+      document.getElementById('headerDateDisplay').textContent = `Academic Session • ${yr}`;
+    });
+
+    function loadProfileData() {
+      try {
+        const saved = localStorage.getItem('th_styleguide_profile');
+        profileData = saved ? JSON.parse(saved) : { ...DEFAULT_PROFILE };
+      } catch (e) {
+        profileData = { ...DEFAULT_PROFILE };
+      }
+      renderProfileData();
+    }
+
+    function renderProfileData() {
+      document.getElementById('dispName').textContent = profileData.name || "Jane Doe";
+      document.getElementById('dispCourse').textContent = profileData.course || "Course DOE";
+      document.getElementById('dispEmail').textContent = profileData.email || "email@fashion.edu";
+      document.getElementById('dispEmail').href = `mailto:${profileData.email || ''}`;
+      document.getElementById('dispPhone').textContent = profileData.phone || "+1 (555) 000-0000";
+      document.getElementById('dispPortfolio').href = profileData.portfolio || "#";
+      document.getElementById('dispRole').textContent = profileData.role || "Lead Creative Director";
+      document.getElementById('footerProfileName').textContent = profileData.name || "Jane Doe";
+
+      // Fill form values
+      document.getElementById('inputName').value = profileData.name || '';
+      document.getElementById('inputCourse').value = profileData.course || '';
+      document.getElementById('inputEmail').value = profileData.email || '';
+      document.getElementById('inputPhone').value = profileData.phone || '';
+      document.getElementById('inputPortfolio').value = profileData.portfolio || '';
+      document.getElementById('inputRole').value = profileData.role || '';
+    }
+
+    function saveProfileData() {
+      profileData = {
+        name: document.getElementById('inputName').value.trim() || "Jane Doe",
+        course: document.getElementById('inputCourse').value.trim() || "Course DOE",
+        email: document.getElementById('inputEmail').value.trim() || "director@fashion.edu",
+        phone: document.getElementById('inputPhone').value.trim() || "",
+        portfolio: document.getElementById('inputPortfolio').value.trim() || "#",
+        role: document.getElementById('inputRole').value.trim() || "Creative Director"
+      };
+      localStorage.setItem('th_styleguide_profile', JSON.stringify(profileData));
+      renderProfileData();
+      toggleProfileEdit(false);
+      showToast("Dossier details updated successfully");
+    }
+
+    function loadMoodboardData() {
+      try {
+        const saved = localStorage.getItem('th_styleguide_moodboard');
+        moodItems = saved ? JSON.parse(saved) : [...DEFAULT_MOOD_ITEMS];
+      } catch (e) {
+        moodItems = [...DEFAULT_MOOD_ITEMS];
+      }
+    }
+
+    function saveMoodboardData() {
+      try {
+        localStorage.setItem('th_styleguide_moodboard', JSON.stringify(moodItems));
+      } catch (e) {
+        console.warn('Storage quota exceeded or private mode, state will remain in memory.', e);
+      }
+      updateFilterCounts();
+      renderMoodboard();
+    }
+
+    function restoreDefaultBoard() {
+      moodItems = [...DEFAULT_MOOD_ITEMS];
+      saveMoodboardData();
+      showToast("Reset mood board to curated runway archives");
+    }
+
+    /* =========================================================================
+       RENDERING MOODBOARD
+       ========================================================================= */
+    function renderMoodboard() {
+      const container = document.getElementById('moodboardGrid');
+      const emptyState = document.getElementById('emptyState');
+      container.innerHTML = '';
+
+      const filtered = moodItems.filter(item => {
+        if (currentFilter === 'all') return true;
+        return item.category === currentFilter;
+      });
+
+      if (filtered.length === 0) {
+        emptyState.classList.remove('hidden');
+        container.classList.add('hidden');
+      } else {
+        emptyState.classList.add('hidden');
+        container.classList.remove('hidden');
+
+        filtered.forEach(item => {
+          const card = document.createElement('div');
+          card.className = "masonry-item group relative bg-white rounded-2xl overflow-hidden border border-[#eae3d7] shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1";
+
+          let badgeColor = "bg-thNavy text-white";
+          let categoryLabel = "Mood Study";
+          if (item.category === 'firstview') {
+            badgeColor = "bg-[#8b263e] text-white";
+            categoryLabel = "FirstView Archive";
+          } else if (item.category === 'spring-runway') {
+            badgeColor = "bg-thNavy text-white";
+            categoryLabel = "Spring Runway";
+          } else if (item.category === 'custom') {
+            badgeColor = "bg-emerald-800 text-white";
+            categoryLabel = "Custom Upload";
+          }
+
+          card.innerHTML = `
+            <div class="relative overflow-hidden cursor-pointer bg-stone-100" onclick="openLightbox('${item.id}')">
+              <img 
+                src="${item.image}" 
+                alt="${escapeHtml(item.title)}"
+                loading="lazy"
+                onerror="this.onerror=null; this.src='https://placehold.co/600x800/0c1b33/ffffff?text=${encodeURIComponent(item.title)}'"
+                class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                <span class="text-white text-xs font-medium flex items-center gap-1.5">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+                  Click to Expand
+                </span>
+              </div>
+            </div>
+
+            <!-- Header and Details inside card -->
+            <div class="p-4 sm:p-5">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="editorial-badge px-2 py-0.5 rounded-full ${badgeColor}">
+                  ${categoryLabel}
+                </span>
+                
+                <!-- Quick Remove Button -->
+                <button 
+                  onclick="deleteMoodItem('${item.id}', event)" 
+                  title="Remove image from board"
+                  class="text-gray-400 hover:text-thRed p-1 rounded-full hover:bg-red-50 transition-colors"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                  </svg>
+                </button>
+              </div>
+
+              <h3 class="font-serif font-bold text-lg text-thNavy group-hover:text-thRed transition-colors leading-tight mb-2">
+                ${escapeHtml(item.title)}
+              </h3>
+
+              <p class="text-xs text-thMuted font-light leading-relaxed line-clamp-3">
+                ${escapeHtml(item.description || "Archival runway study for style guide development.")}
+              </p>
+            </div>
+          `;
+          container.appendChild(card);
+        });
+      }
+    }
+
+    function updateFilterCounts() {
+      document.getElementById('countAll').textContent = moodItems.length;
+      document.getElementById('countArchive').textContent = moodItems.filter(i => i.category === 'firstview').length;
+      document.getElementById('countSpring').textContent = moodItems.filter(i => i.category === 'spring-runway').length;
+      document.getElementById('countCustom').textContent = moodItems.filter(i => i.category === 'custom').length;
+    }
+
+    /* =========================================================================
+       EVENT LISTENERS & MODAL INTERACTIONS
+       ========================================================================= */
+    function setupEventListeners() {
+      // Profile form toggling
+      document.getElementById('toggleEditProfileBtn').addEventListener('click', () => {
+        const form = document.getElementById('metadataEditForm');
+        const isHidden = form.classList.contains('hidden');
+        toggleProfileEdit(isHidden);
+      });
+      document.getElementById('cancelEditProfileBtn').addEventListener('click', () => toggleProfileEdit(false));
+      document.getElementById('saveProfileBtn').addEventListener('click', saveProfileData);
+
+      // Reset defaults
+      document.getElementById('resetDefaultsBtn').addEventListener('click', () => {
+        restoreDefaultBoard();
+      });
+
+      // Filter tabs
+      document.querySelectorAll('.filter-tab').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          document.querySelectorAll('.filter-tab').forEach(b => {
+            b.classList.remove('active', 'bg-thNavy', 'text-white');
+            b.classList.add('bg-white/60', 'text-thNavy', 'border', 'border-[#e5ded4]');
+          });
+          const target = e.currentTarget;
+          target.classList.add('active', 'bg-thNavy', 'text-white');
+          target.classList.remove('bg-white/60', 'border');
+          currentFilter = target.getAttribute('data-filter');
+          renderMoodboard();
+        });
+      });
+
+      // Upload Modal
+      document.getElementById('openUploadBtn').addEventListener('click', openUploadModal);
+      document.getElementById('quickUploadTrigger').addEventListener('click', openUploadModal);
+      document.getElementById('closeUploadModalBtn').addEventListener('click', closeUploadModal);
+      document.getElementById('modalCancelBtn').addEventListener('click', closeUploadModal);
+
+      // Lightbox Close
+      document.getElementById('closeLightboxBtn').addEventListener('click', closeLightbox);
+      document.getElementById('lightboxModal').addEventListener('click', (e) => {
+        if (e.target.id === 'lightboxModal') closeLightbox();
+      });
+
+      // Lightbox Delete Action
+      document.getElementById('lightboxDeleteBtn').addEventListener('click', () => {
+        if (activeLightboxId) {
+          deleteMoodItem(activeLightboxId);
+          closeLightbox();
+        }
+      });
+
+      // Upload Form Submit
+      document.getElementById('uploadForm').addEventListener('submit', handleUploadSubmit);
+    }
+
+    function toggleProfileEdit(show) {
+      const form = document.getElementById('metadataEditForm');
+      const label = document.getElementById('editBtnLabel');
+      if (show) {
+        form.classList.remove('hidden');
+        label.textContent = "Close Editor";
+      } else {
+        form.classList.add('hidden');
+        label.textContent = "Edit Details";
+      }
+    }
+
+    function openUploadModal() {
+      document.getElementById('uploadForm').reset();
+      clearFilePreview();
+      document.getElementById('uploadModal').classList.remove('hidden');
+    }
+
+    function closeUploadModal() {
+      document.getElementById('uploadModal').classList.add('hidden');
+      clearFilePreview();
+    }
+
+    /* =========================================================================
+       FILE HANDLING & DRAG-AND-DROP
+       ========================================================================= */
+    function setupDragDrop() {
+      const dropZone = document.getElementById('dropZone');
+      const fileInput = document.getElementById('fileInput');
+      const clearBtn = document.getElementById('clearFileBtn');
+
+      dropZone.addEventListener('click', () => fileInput.click());
+
+      dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('border-thNavy', 'bg-stone-100');
+      });
+
+      dropZone.addEventListener('dragleave', () => {
+        dropZone.classList.remove('border-thNavy', 'bg-stone-100');
+      });
+
+      dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('border-thNavy', 'bg-stone-100');
+        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+          processFile(e.dataTransfer.files[0]);
+        }
+      });
+
+      fileInput.addEventListener('change', (e) => {
+        if (e.target.files && e.target.files[0]) {
+          processFile(e.target.files[0]);
+        }
+      });
+
+      clearBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        clearFilePreview();
+      });
+    }
+
+    function processFile(file) {
+      if (!file.type.match('image.*')) {
+        showToast("Please upload a valid image file", true);
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        uploadedFileDataUrl = e.target.result;
+        document.getElementById('filePreviewImg').src = uploadedFileDataUrl;
+        document.getElementById('filePreviewWrap').classList.remove('hidden');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function clearFilePreview() {
+      uploadedFileDataUrl = null;
+      document.getElementById('fileInput').value = '';
+      document.getElementById('filePreviewImg').src = '';
+      document.getElementById('filePreviewWrap').classList.add('hidden');
+    }
+
+    function handleUploadSubmit(e) {
+      e.preventDefault();
+      const title = document.getElementById('inputTitle').value.trim();
+      const category = document.getElementById('inputCategory').value;
+      const description = document.getElementById('inputDescription').value.trim();
+      const url = document.getElementById('inputImageUrl').value.trim();
+
+      const imageSource = uploadedFileDataUrl || url;
+
+      if (!imageSource) {
+        showToast("Please select a local image or provide a valid URL", true);
+        return;
+      }
+
+      const newItem = {
+        id: 'mood-' + Date.now(),
+        title: title || 'Custom Silhouette Look',
+        category: category,
+        description: description || 'Creative Director visual note added to style guide.',
+        image: imageSource,
+        dateAdded: new Date().toLocaleDateString()
+      };
+
+      // Add to front of array
+      moodItems.unshift(newItem);
+      saveMoodboardData();
+      closeUploadModal();
+      showToast(`Added "${newItem.title}" to board`);
+    }
+
+    /* =========================================================================
+       DELETION LOGIC
+       ========================================================================= */
+    function deleteMoodItem(id, event) {
+      if (event) event.stopPropagation();
+      
+      const item = moodItems.find(i => i.id === id);
+      const title = item ? item.title : 'this look';
+
+      // Inline removal confirmation using friendly message box/toast pattern
+      moodItems = moodItems.filter(i => i.id !== id);
+      saveMoodboardData();
+      showToast(`Removed "${title}" from moodboard`);
+    }
+
+    /* =========================================================================
+       LIGHTBOX LOGIC
+       ========================================================================= */
+    function openLightbox(id) {
+      const item = moodItems.find(i => i.id === id);
+      if (!item) return;
+
+      activeLightboxId = id;
+      document.getElementById('lightboxImg').src = item.image;
+      document.getElementById('lightboxTitle').textContent = item.title;
+      document.getElementById('lightboxDesc').textContent = item.description || "Archival study reference.";
+      
+      let catText = "Mood Study";
+      if (item.category === 'firstview') catText = "FirstView Archive";
+      if (item.category === 'spring-runway') catText = "Spring Runway";
+      if (item.category === 'custom') catText = "Custom Upload";
+      document.getElementById('lightboxCategory').textContent = catText;
+      document.getElementById('lightboxDate').textContent = item.dateAdded || "Reference Look";
+
+      document.getElementById('lightboxModal').classList.remove('hidden');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightboxModal').classList.add('hidden');
+      activeLightboxId = null;
+    }
+
+    /* =========================================================================
+       UTILITIES & NOTIFICATIONS
+       ========================================================================= */
+    function showToast(message, isError = false) {
+      const toast = document.getElementById('toastNotification');
+      const msg = document.getElementById('toastMsg');
+      const icon = document.getElementById('toastIcon');
+
+      msg.textContent = message;
+      icon.className = isError ? "w-2 h-2 rounded-full bg-red-400" : "w-2 h-2 rounded-full bg-emerald-400";
+
+      toast.classList.remove('translate-y-24', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        toast.classList.add('translate-y-24', 'opacity-0');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 3200);
+    }
+
+    function escapeHtml(string) {
+      if (!string) return '';
+      return String(string)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+  </script>
+</body>
+</html>
